@@ -1,5 +1,6 @@
 package view;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 import controller.UtilizadorController;
 
@@ -8,12 +9,13 @@ public class Menu {
     private Scanner sc = new Scanner(System.in);
     private UtilizadorController controller = new UtilizadorController();
 
-    public void start() {
+    public void start() throws SQLException {
 
         int opcao;
 
         do {
             System.out.println("\n===== MENU =====");
+            System.out.println("2 - Login");
             System.out.println("1 - Registar utilizador");
             System.out.println("0 - Sair");
             System.out.print("Opção: ");
@@ -21,6 +23,11 @@ public class Menu {
             sc.nextLine();
 
             switch (opcao) {
+
+                case 2:
+                    controller.Login(sc);
+                    break;
+
                 case 1:
                     controller.registar(sc);
                     break;

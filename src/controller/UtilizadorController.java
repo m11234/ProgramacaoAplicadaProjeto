@@ -1,6 +1,7 @@
 package controller;
 
 
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.regex.Pattern; //importação para a validação do email
 
@@ -57,4 +58,28 @@ public class UtilizadorController {
             System.out.println("Erro no registo.");
         }
     }
-}
+
+    public void Login(Scanner sc) throws SQLException {
+        boolean sucesso = false;
+
+        while (!sucesso) {
+        System.out.println("\n--- Login  ---");
+
+        System.out.println("\n--- Inserir username  ---");
+        String username = sc.nextLine();
+
+        System.out.println("\n--- Inserir password  ---");
+        String password = sc.nextLine();
+
+        Utilizador u = new Utilizador(username,password);
+
+        sucesso = dao.Login(u);
+
+        if (sucesso) {
+            System.out.println("Login com sucesso");
+        } else {
+            System.out.println("Erro");
+        }
+
+    }
+} }

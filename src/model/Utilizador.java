@@ -15,9 +15,15 @@ public class Utilizador {
         this.email = email;
     }
 
+    public Utilizador(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     // getters
     public String getNome() { return nome; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
     public String getEmail() { return email; }
 }
+

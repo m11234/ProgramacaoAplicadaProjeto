@@ -1,16 +1,15 @@
 package model.db;
-import java.io.FileNotFoundException;
-import java.sql.*;
-import java.util.Properties;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 public class DBConnection {
 
-    private static  Connection conn;
-    private static Statement st;
-
-    public static void connection() {
+    public static Connection getconn() {
         try {
             Properties props = new Properties();
             props.load(new FileInputStream("config/properties"));
@@ -21,31 +20,14 @@ public class DBConnection {
             String driver = props.getProperty("db.driver");
 
             Class.forName(driver);
-            conn = DriverManager.getConnection(url,user,pass);
-            st = conn.createStatement();
+            return DriverManager.getConnection(url, user, pass);
 
-            System.out.println("Ligacao a base de dados executada com sucesso");
-
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Ficheiro nao encontrado");
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            System.out.println("Erros a carregar os dados do ficheiro");
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro a carregar ficheiro de propriedades", e);
         } catch (ClassNotFoundException e) {
-            System.out.println("Ficheiro do driver nao encontrado");
-            throw new RuntimeException(e);
+            throw new RuntimeException("Driver JDBC não encontrado", e);
         } catch (SQLException e) {
-            System.out.println("Erro a conectar");
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro a conectar à BD", e);
         }
     }
-    public static Connection getConn() {
-        return conn;
-    }
-    public static Statement getSt() {
-        return st;
-    }
-
 }

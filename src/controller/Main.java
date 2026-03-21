@@ -3,12 +3,12 @@ package controller;
 import model.db.DBConnection;
 import view.Menu;
 
+import java.sql.SQLException;
+
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws SQLException {
 
-    DBConnection.connection();
-
-    if (DBConnection.getConn() == null) {
+    if (DBConnection.getconn() == null) {
       System.out.println("Erro na ligação à BD.");
       return;
     }
