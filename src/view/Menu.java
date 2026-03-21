@@ -3,11 +3,13 @@ package view;
 import java.sql.SQLException;
 import java.util.Scanner;
 import controller.UtilizadorController;
+import model.Utilizador;
 
 public class Menu {
 
     private Scanner sc = new Scanner(System.in);
     private UtilizadorController controller = new UtilizadorController();
+    private Utilizador userLogado = null;
 
     public void start() throws SQLException {
 
@@ -15,6 +17,8 @@ public class Menu {
 
         do {
             System.out.println("\n===== MENU =====");
+            System.out.println("4- Alterar Dados");
+            System.out.println("3 - Consultar dados");
             System.out.println("2 - Login");
             System.out.println("1 - Registar utilizador");
             System.out.println("0 - Sair");
@@ -24,8 +28,23 @@ public class Menu {
 
             switch (opcao) {
 
+                case 4:
+                    if (userLogado != null){
+                        controller.atualizarDados(sc,userLogado);
+                    } else {
+                        System.out.println("Fazer login primeiro!!!");
+                    }break;
+
+                case 3:
+                    if (userLogado != null){
+                        controller.ConsultarDados(userLogado);
+                    } else {
+                        System.out.println("Fazer login primeiro!!!");
+                    }break;
+
+
                 case 2:
-                    controller.Login(sc);
+                    userLogado = controller.Login(sc);
                     break;
 
                 case 1:

@@ -7,6 +7,7 @@ import java.util.regex.Pattern; //importação para a validação do email
 
 import model.Utilizador;
 import model.dao.UtilizadoresDAO;
+
 public class UtilizadorController {
 
     private UtilizadoresDAO dao = new UtilizadoresDAO();
@@ -15,7 +16,6 @@ public class UtilizadorController {
     //email
     private static final String EMAIL_REGEX = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]{2,}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
-
 
 
     public void registar(Scanner sc) {
@@ -59,27 +59,107 @@ public class UtilizadorController {
         }
     }
 
-    public void Login(Scanner sc) throws SQLException {
-        boolean sucesso = false;
+    public Utilizador Login(Scanner sc) throws SQLException {
+        Utilizador logado = null;
 
-        while (!sucesso) {
-        System.out.println("\n--- Login  ---");
+        while (logado == null) {
+            System.out.println("\n--- Login ---");
+            System.out.print("Username: ");
+            String username = sc.nextLine();
+            System.out.print("Password: ");
+            String password = sc.nextLine();
 
-        System.out.println("\n--- Inserir username  ---");
-        String username = sc.nextLine();
+            Utilizador u = new Utilizador(username, password);
+            logado = dao.Login(u);
 
-        System.out.println("\n--- Inserir password  ---");
-        String password = sc.nextLine();
-
-        Utilizador u = new Utilizador(username,password);
-
-        sucesso = dao.Login(u);
-
-        if (sucesso) {
-            System.out.println("Login com sucesso");
-        } else {
-            System.out.println("Erro");
+            if (logado != null) {
+                System.out.println("Login com sucesso: " + logado.getUsername());
+            } else {
+                System.out.println("Erro: username ou password inválidos");
+            }
         }
 
+        return logado; // agora tens o currentUser
     }
-} }
+
+    public Utilizador ConsultarDados(Utilizador logado) {
+        Utilizador u = dao.ConsultarDados(logado);
+
+        if (u != null & u.getEstado()){
+            System.out.println("\n Dados Utilizador");
+            System.out.println("Nome:" + u.getNome());
+            System.out.println("Email:" + u.getEmail());
+            System.out.println("username:" + u.getUsername());
+        } else {
+            System.out.println("Nao foi posssivel encontrar os dados");
+        }
+
+
+        return u;
+    }
+
+    public void atualizarDados(Scanner sc, Utilizador logado) throws SQLException {
+        int atualizar;
+        boolean atualizadoComSucesso = false;
+        System.out.println("\n--- Atualizar Dados ---");
+        System.out.println("1 - Atualizar password");
+        System.out.println("2 - Atualizar email");
+        System.out.print("Escolha: ");
+        atualizar = sc.nextInt();
+        sc.nextLine();
+
+        String novaPassword = logado.getPassword();
+        String novoEmail = logado.getEmail();
+
+        switch (atualizar) {
+            case 1:
+                System.out.print("Inserir nova password: ");
+                novaPassword = sc.nextLine();
+                break;
+
+            case 2:
+                boolean emailValido = false;
+                while (!emailValido) {
+                    System.out.print("Inserir novo email: ");
+                    novoEmail = sc.nextLine();
+
+                    if (EMAIL_PATTERN.matcher(novoEmail).matches()) {
+                        emailValido = true;
+                    } else {
+                        System.out.println("Erro: email inválido.");
+                    }
+                }
+                break;
+
+            default:
+                System.out.println("Opção inválida!");
+                return;
+        }
+
+        // Criar objeto com os novos dados
+        Utilizador dadosNovos = new Utilizador(
+                logado.getNome(),
+                logado.getUsername(),
+                novaPassword,
+                novoEmail
+        );
+
+        atualizadoComSucesso = dao.AtualizarDados(logado, dadosNovos);
+
+        if (atualizadoComSucesso) {
+            System.out.println("Dados atualizados com sucesso!");
+            // Consultar e mostrar os dados atualizados
+            Utilizador atualizado = dao.ConsultarDados(logado);
+            if (atualizado != null) {
+                System.out.println("Nome: " + atualizado.getNome());
+                System.out.println("Username: " + atualizado.getUsername());
+                System.out.println("Email: " + atualizado.getEmail());
+            }
+        } else {
+            System.out.println("Erro ao atualizar dados.");
+        }
+    }
+    }
+
+
+
