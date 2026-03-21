@@ -9,6 +9,7 @@ public class Utilizador {
     private boolean estado;
     private String novaPassword;
     private String novoEmail;
+    private int id;
 
     // construtor
     public Utilizador(String nome, String username, String password, String email) {
@@ -21,6 +22,10 @@ public class Utilizador {
     public Utilizador(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Utilizador(int id) {
+        this.id = id;
     }
 
     public Utilizador() {
@@ -51,6 +56,10 @@ public class Utilizador {
         return estado;
     }
 
+    public int getId() {
+        return id;
+    }
+
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -70,6 +79,9 @@ public class Utilizador {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }
 
