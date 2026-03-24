@@ -18,7 +18,7 @@ public class UtilizadorController {
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
 
-    public void registar(Scanner sc) {
+    public void registar(Scanner sc) throws SQLException {
 
         System.out.println("\n--- Registo de Utilizador ---");
 
@@ -53,7 +53,21 @@ public class UtilizadorController {
         boolean sucesso = dao.RegistarUtilizador(u);
 
         if (sucesso) {
-            System.out.println("Utilizador registado!");
+            System.out.println("Dados inseridos com sucesso");
+            System.out.println("\nPASSO 2 - Registo ");
+            System.out.println("\n 2 Associar utilizador como cliente");
+            System.out.println("\n 1 Associar utilizador como funcionario");
+            int tipoDeConta;
+            Utilizador userLogado = null;
+            tipoDeConta = sc.nextInt();
+            switch (tipoDeConta) {
+                case 1:
+                    Utilizador l = new Utilizador(username, password);
+                    userLogado = dao.Login(l);
+                    FuncionarioController.criarFuncionario(sc,userLogado);;
+                    break;
+
+            }
         } else {
             System.out.println("Erro no registo.");
         }
