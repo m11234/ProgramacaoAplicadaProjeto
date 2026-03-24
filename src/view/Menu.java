@@ -2,6 +2,8 @@ package view;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import controller.ClienteController;
 import controller.UtilizadorController;
 import model.Utilizador;
 import controller.FuncionarioController;
@@ -30,6 +32,12 @@ public class Menu {
             sc.nextLine();
 
             switch (opcao) {
+
+                case 6:
+                    if (userLogado != null) {
+                        ClienteController.criarCliente(sc,userLogado);} else {
+                        System.out.println("Fazer login primeiro");
+                    } break;
 
                 case 5:
                     if (userLogado != null){

@@ -34,7 +34,7 @@ public class UtilizadorController {
         String email = "";
         boolean emailValido = false;
 
-        //BASEADO NESTA IMPLENMENTAÇÃO: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
+        //BASEADO NESTA IMPLEMENTAÇÃO: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
         while (!emailValido) {
             System.out.print("Email: ");
             email = sc.nextLine();
