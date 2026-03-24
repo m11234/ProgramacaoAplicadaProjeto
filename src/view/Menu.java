@@ -21,7 +21,6 @@ public class Menu {
 
         do {
             System.out.println("\n===== MENU =====");
-            System.out.println("5 - Registar Funcionario");
             System.out.println("4- Alterar Dados");
             System.out.println("3 - Consultar dados");
             System.out.println("2 - Login");
@@ -32,19 +31,6 @@ public class Menu {
             sc.nextLine();
 
             switch (opcao) {
-
-                case 6:
-                    if (userLogado != null) {
-                        ClienteController.criarCliente(sc,userLogado);} else {
-                        System.out.println("Fazer login primeiro");
-                    } break;
-
-                case 5:
-                    if (userLogado != null){
-                        FuncionarioController.criarFuncionario(sc,userLogado);} else {
-                        System.out.println("Fazer login primeiro");
-                    } break;
-
                 case 4:
                     if (userLogado != null){
                         controller.atualizarDados(sc,userLogado);

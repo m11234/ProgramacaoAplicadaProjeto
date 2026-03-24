@@ -66,7 +66,11 @@ public class UtilizadorController {
                     userLogado = dao.Login(l);
                     FuncionarioController.criarFuncionario(sc,userLogado);;
                     break;
-
+                case 2:
+                    Utilizador x = new Utilizador(username, password);
+                    userLogado = dao.Login(x);
+                    ClienteController.criarCliente(sc,userLogado);;
+                    break;
             }
         } else {
             System.out.println("Erro no registo.");

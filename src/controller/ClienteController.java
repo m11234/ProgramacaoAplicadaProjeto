@@ -30,13 +30,13 @@ public class ClienteController {
 
         System.out.println("Sector:");
         String sector = sc.nextLine();
-        sc.nextLine();
 
         System.out.println("Escalão:");
         String escalao = sc.nextLine();
-        sc.nextLine();
 
-        Cliente c = new Cliente(nif,telemovel,morada,sector,escalao);
+        int idUtilizador = logado.getId();
+
+        Cliente c = new Cliente(nif,telemovel,morada,sector,escalao, idUtilizador);
         boolean sucesso = dao.RegistarCliente(c);
         if (sucesso) {
             System.out.println("Funcionario registado");
