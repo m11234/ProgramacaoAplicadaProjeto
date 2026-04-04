@@ -55,7 +55,8 @@ public class Menu {
                     break;
 
                 case 0:
-                    System.out.println("Adeus!");
+                    //System.out.println("Adeus!");
+                    userLogado = controller.Logout(userLogado);
                     break;
 
                 default:

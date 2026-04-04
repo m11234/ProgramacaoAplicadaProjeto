@@ -57,6 +57,7 @@ public class UtilizadoresDAO {
             throw new RuntimeException(e);
         }
     }
+
     public Utilizador ConsultarDados(Utilizador userLogado) {
         String sql = "Select nome, username, password , email , estado from utilizador where username = ?";
 

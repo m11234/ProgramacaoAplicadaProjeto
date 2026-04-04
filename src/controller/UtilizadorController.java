@@ -105,6 +105,16 @@ public class UtilizadorController {
         return logado; // agora tens o currentUser
     }
 
+    public Utilizador Logout(Utilizador logado) throws SQLException {
+        if (logado != null){
+            System.out.println("\nAdeus " + logado.getUsername() + ".");
+        } else {
+            System.out.println("\nErro: Não existe nenhuma sessão para encerrar.");
+        }
+        return null;
+    }
+
+
     public Utilizador ConsultarDados(Utilizador logado) {
         Utilizador u = dao.ConsultarDados(logado);
 
