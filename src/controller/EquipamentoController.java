@@ -22,7 +22,7 @@ public class EquipamentoController {
             return;
         }
         if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
-            System.out.println("So gestores podem fazer isto!!!!");
+            System.out.println("So clientes podem fazer isto!!!!");
             return;
         }
 

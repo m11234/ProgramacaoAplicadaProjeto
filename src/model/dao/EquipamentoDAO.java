@@ -3,10 +3,7 @@ package model.dao;
 import model.Equipamento;
 import model.db.DBConnection;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class EquipamentoDAO {
 
@@ -29,5 +26,22 @@ public class EquipamentoDAO {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+    }
+    public boolean verSeEquipPertence(int idEquip,int id) {
+        String sql = "Select 1 from equipamento where idEquip = ? and id = ?";
+        boolean existeAndPertence = false;
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, idEquip);
+            ps.setInt(2, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                System.out.println("Equipamento encontrado...");
+                existeAndPertence = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return existeAndPertence;
     }
 }

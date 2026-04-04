@@ -14,6 +14,7 @@ public class Menu {
     private AdminController controllerAdmin = new AdminController();
     private EquipamentoController controllerEquipamento = new EquipamentoController();
     private Utilizador userLogado = null;
+    private ReparacaoController controllerReparacao = new ReparacaoController();
 
     public void start() throws SQLException {
         controllerAdmin.verAdmins(sc);
@@ -22,6 +23,8 @@ public class Menu {
 
         do {
             System.out.println("\n===== MENU =====");
+            System.out.println("11- Iniciar reparacao");
+            System.out.println("10-Criar equipamento");
             System.out.println("9- Atualizar dados de outra conta ");
             System.out.println("8- Consultar dados de outra conta");
             System.out.println("7- Criar outro gestor");
@@ -37,6 +40,9 @@ public class Menu {
             sc.nextLine();
 
             switch (opcao) {
+                case 11:
+                    controllerReparacao.criarReparacao(sc, userLogado);
+                    break;
                 case 10:
                     controllerEquipamento.criarEquipamento(sc,userLogado);
                     break;

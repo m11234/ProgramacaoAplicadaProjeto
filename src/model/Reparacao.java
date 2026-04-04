@@ -8,12 +8,20 @@ public class Reparacao {
     private Date dataFim;
     private float custo;
     private String observacao;
+    private int idEquip;
 
-    public Reparacao(String observacao, Date dataInicio, Date dataFim, float custo, int estado) {
+    public Reparacao(String observacao, Date dataInicio, Date dataFim, float custo, int estado, int idEquip) {
         this.observacao = observacao;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.custo = custo;
+        this.estado = estado;
+        this.idEquip = idEquip;
+    }
+
+    public Reparacao(String observacao,int idEquip,int estado) {
+        this.observacao = observacao;
+        this.idEquip = idEquip;
         this.estado = estado;
     }
 
@@ -23,6 +31,7 @@ public class Reparacao {
     public Date getDataFim() {return dataFim;}
     public float getCusto() {return custo;}
     public String getObservacao() {return observacao;}
+    public int getIdEquip() {return idEquip;}
 
     //setters
     public void setEstado(int estado) {this.estado = estado;}
@@ -30,4 +39,5 @@ public class Reparacao {
     public void setDataFim(Date dataFim) {this.dataFim = dataFim;}
     public void setCusto(float custo) {this.custo = custo;}
     public void setObservacao(String observacao) {this.observacao = observacao;}
+    public void setIdEquip(int idEquip) {this.idEquip = idEquip;}
 }
