@@ -76,6 +76,47 @@ public class UtilizadorController {
             System.out.println("Erro no registo.");
         }
     }
+    public void registarG(Scanner sc) throws SQLException {
+
+        System.out.println("\n--- Registo de Utilizador ---");
+
+        System.out.print("Nome: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Username: ");
+        String username = sc.nextLine();
+
+        System.out.print("Password: ");
+        String password = sc.nextLine();
+
+        String email = "";
+        boolean emailValido = false;
+
+        //BASEADO NESTA IMPLEMENTAÇÃO: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
+        while (!emailValido) {
+            System.out.print("Email: ");
+            email = sc.nextLine();
+
+            if (EMAIL_PATTERN.matcher(email).matches()) {
+                emailValido = true;
+            } else {
+                System.out.println("Erro: O email deve apresentar um formato válido e obrigatório ([designação] @ [entidade] . [domínio]).");
+            }
+        }
+
+        String estado = "ativo";
+
+        Utilizador u = new Utilizador(nome, username, password, email);
+
+        boolean sucesso = dao.RegistarUtilizador(u);
+
+        if (sucesso) {
+            System.out.println("Dados inseridos com sucesso");
+        } else {
+            System.out.println("Erro no registo.");
+        }
+    }
+
 
     public Utilizador Login(Scanner sc) throws SQLException {
         Utilizador logado = null;
@@ -130,6 +171,7 @@ public class UtilizadorController {
 
         return u;
     }
+
 
     public void atualizarDados(Scanner sc, Utilizador logado) throws SQLException {
         int atualizar;

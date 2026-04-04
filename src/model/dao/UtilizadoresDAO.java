@@ -1,8 +1,7 @@
 package model.dao;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Utilizador;
 import model.db.DBConnection;
@@ -85,6 +84,31 @@ public class UtilizadoresDAO {
         }
         return userLogado;
     }
+    public Utilizador ConsultarDadosGestor(int id) {
+        String sql = "Select nome, username, password , email , estado from utilizador where id = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Utilizador Dados = new Utilizador();
+                Dados.setNome(rs.getString("nome"));
+                Dados.setUsername(rs.getString("username"));
+                Dados.setPassword(rs.getString("password"));
+                Dados.setEmail(rs.getString("email"));
+                Dados.setEstado(rs.getBoolean("estado"));
+                return Dados;
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null ;
+    }
 
     public boolean AtualizarDados(Utilizador userLogado, Utilizador dadosNovos) {
         if (!userLogado.getUsername().equals(dadosNovos.getUsername())) {
@@ -106,6 +130,88 @@ public class UtilizadoresDAO {
         }
 
         return true;
+    }
+
+
+    public boolean atualizarEmailGestor(int id, Utilizador dadosNovos) {
+        String sql = "UPDATE utilizador SET email = ? WHERE id = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, dadosNovos.getEmail());
+
+            ps.setInt(2, id);
+
+            int linhasAfetadas = ps.executeUpdate();
+
+            return linhasAfetadas > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao tentar atualizar o email na base de dados.");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean mudarEstadoGestor(Utilizador userLogado) throws SQLException {
+        String sql = "UPDATE utilizador SET estado = 1 WHERE username = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setBoolean(1,userLogado.getEstado());
+            ps.setString(1, userLogado.getUsername());
+            ps.executeUpdate();
+    }
+        return true;
+    }
+
+    public boolean mudarEstado(int id) throws SQLException {
+        String sql = "UPDATE utilizador SET estado = 1 WHERE id = ?";
+        boolean contaAtivada = false;
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            int atividado = ps.executeUpdate();
+            contaAtivada = atividado == 1;
+
+        }
+        return contaAtivada;
+    }
+    public List<Utilizador> verContasPorAtivar() {
+        String sql = "Select * from utilizador where estado = 0";
+        List<Utilizador> lista = new ArrayList<>();
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Utilizador u = new Utilizador();
+                u.setUsername(rs.getString("username"));
+                u.setId(rs.getInt("id"));
+                lista.add(u);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de utilizadores: " + lista);
+        return lista;
+    }
+    public boolean verSeContaExiste(int id) throws SQLException {
+        String sql = "Select * from utilizador WHERE id = ?";
+        boolean contaExiste = false;
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                contaExiste = true;
+            }
+
+        }
+        return contaExiste;
     }
 
 

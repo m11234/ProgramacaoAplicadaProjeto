@@ -12,6 +12,11 @@ public class Utilizador {
     private int id;
 
     // construtor
+    @Override
+    public String toString() {
+        return "Utilizador [Username: " + username + " | ID: " + id + "]";
+    }
+
     public Utilizador(String nome, String username, String password, String email) {
         this.nome = nome;
         this.username = username;

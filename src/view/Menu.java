@@ -8,19 +8,26 @@ import controller.UtilizadorController;
 import model.Utilizador;
 import controller.FuncionarioController;
 import  model.Funcionario;
-
+import controller.AdminController;
 public class Menu {
 
     private Scanner sc = new Scanner(System.in);
     private UtilizadorController controller = new UtilizadorController();
+    private AdminController controllerAdmin = new AdminController();
     private Utilizador userLogado = null;
 
     public void start() throws SQLException {
+        controllerAdmin.verAdmins(sc);
 
         int opcao;
 
         do {
             System.out.println("\n===== MENU =====");
+            System.out.println("9- Atualizar dados de outra conta ");
+            System.out.println("8- Consultar dados de outra conta");
+            System.out.println("7- Criar outro gestor");
+            System.out.println("6- Ativar conta");
+            System.out.println("5- Ver contas por ativar");
             System.out.println("4- Alterar Dados");
             System.out.println("3 - Consultar dados");
             System.out.println("2 - Login");
@@ -31,25 +38,36 @@ public class Menu {
             sc.nextLine();
 
             switch (opcao) {
+                case 9:
+                    controllerAdmin.atualizarDadosGestor(sc, userLogado);
+                    break;
+                case 8:
+                    controllerAdmin.ConsultarDadosGestor(userLogado,sc);
+                    break;
+                case 7:
+                    controllerAdmin.CriarOutroGestor(userLogado,sc);
+                    break;
+                case 6:
+                    controllerAdmin.ativarConta(userLogado,sc);
+                    break;
+                case 5:
+                    controllerAdmin.verContasPorAtivar(userLogado);
+                    break;
                 case 4:
                     if (userLogado != null){
                         controller.atualizarDados(sc,userLogado);
                     } else {
                         System.out.println("Fazer login primeiro!!!");
                     }break;
-
                 case 3:
                     if (userLogado != null){
                         controller.ConsultarDados(userLogado);
                     } else {
                         System.out.println("Fazer login primeiro!!!");
                     }break;
-
-
                 case 2:
                     userLogado = controller.Login(sc);
                     break;
-
                 case 1:
                     controller.registar(sc);
                     break;
