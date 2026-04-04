@@ -7,6 +7,7 @@ public class Cliente {
     private String sector;
     private String escalao;
     private int idUtilizador; //FK para o utilizador associado
+    private int idC;
 
     public Cliente(int nif, int telemovel, String morada, String sector, String escalao,int idUtilizador) {
         this.nif = nif;
@@ -25,6 +26,7 @@ public class Cliente {
     public String getSector() {return sector;}
     public String getEscalao() {return escalao;}
     public int getIdUtilizador() {return idUtilizador;}
+    public int getIdC() {return idC;}
 
     //setters
 
@@ -34,6 +36,5 @@ public class Cliente {
     public void setSector (String sector) {this.sector = sector;}
     public void setEscalao (String escalao) {this.escalao = escalao;}
     public void setIdUtilizador(int idUtilizador) {this.idUtilizador = idUtilizador;}
-
-
+    public void setIdC(int idC) {this.idC = idC;}
 }

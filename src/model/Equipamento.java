@@ -10,6 +10,7 @@ public class Equipamento {
     private String lote;
     private Date dataSubmissao;
     private Date dataReparacao;
+    private int idC;
 
     public Equipamento(int idEquipamento, String marca, String modelo, String SKU, String lote, Date dataSubmissao, Date getDataReparacao){
         this.idEquipamento = idEquipamento;
@@ -19,6 +20,7 @@ public class Equipamento {
         this.lote = lote;
         this.dataSubmissao = dataSubmissao;
         this.dataReparacao = dataSubmissao;
+        this.idC = idC;
     }
 
     //getters
@@ -29,6 +31,8 @@ public class Equipamento {
     public String getLote() {return lote;}
     public Date getDataSubmissao() {return dataSubmissao;}
     public Date getDataReparacao() {return dataReparacao;}
+    public int getIdC() {return idC;}
+
 
     //setters
     public void setIdEquipamento(int idEquipamento) {this.idEquipamento = idEquipamento;}
@@ -38,4 +42,5 @@ public class Equipamento {
     public void setLote(String lote) {this.lote = lote;}
     public void setDataSubmissao(Date dataSubmissao) {this.dataSubmissao = dataSubmissao;}
     public void  setDataReparacao(Date dataReparacao) {this.dataReparacao = dataReparacao;}
+    public void setIdC(int idC) {this.idC = idC;}
 }

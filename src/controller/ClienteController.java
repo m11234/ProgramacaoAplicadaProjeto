@@ -62,7 +62,7 @@ public class ClienteController {
         if (sucesso) {
             System.out.println("Funcionario registado");
         } else {
-            System.out.println("Err ");
+            System.out.println("Erro");
         }
     }
 
