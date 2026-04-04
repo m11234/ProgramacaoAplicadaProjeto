@@ -1,8 +1,5 @@
 package model.dao;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.*;
 
 import model.Cliente;
 import model.db.DBConnection;
@@ -28,5 +25,19 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public boolean VerSeCliente(int Id) throws SQLException {
+        String sql = "SELECT * FROM clientes WHERE id=?";
+        boolean ClienteSer = false;
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, Id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                System.out.println("O utilizador é um cliente proseguir...");
+                ClienteSer = true;
+            }
+        }
+        return ClienteSer;
     }
 }

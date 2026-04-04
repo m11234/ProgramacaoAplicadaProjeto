@@ -1,4 +1,7 @@
 package controller;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
@@ -8,6 +11,7 @@ import model.Funcionario;
 import model.Utilizador;
 import model.dao.ClienteDAO;
 import model.dao.ClienteDAO;
+import model.db.DBConnection;
 
 import java.util.Scanner;
 
@@ -61,10 +65,5 @@ public class ClienteController {
             System.out.println("Err ");
         }
     }
-
-
-
-
-
 
 }
