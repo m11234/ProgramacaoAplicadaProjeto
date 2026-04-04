@@ -92,8 +92,13 @@ public class UtilizadorController {
 
             if (logado != null) {
                 System.out.println("\nBem-vindo " + logado.getUsername() + ".");
-            } else {
-                System.out.println("Erro: username ou password inválidos");
+                if (!logado.getEstado()) {
+                    System.out.println("Erro: Conta ainda nao ativada pelo gestor contacte um gestor");
+                    logado = null;
+                } }
+            else {
+                System.out.println("Erro dados invalidos tente novamento.");
+
             }
         }
 

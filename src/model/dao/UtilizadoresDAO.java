@@ -31,7 +31,7 @@ public class UtilizadoresDAO {
         }
     }
     public Utilizador Login(Utilizador u) throws SQLException {
-        String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ?";
+        String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ? ";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
