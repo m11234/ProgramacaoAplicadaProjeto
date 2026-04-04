@@ -3,17 +3,16 @@ package view;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import controller.ClienteController;
-import controller.UtilizadorController;
+import controller.*;
 import model.Utilizador;
-import controller.FuncionarioController;
 import  model.Funcionario;
-import controller.AdminController;
+
 public class Menu {
 
     private Scanner sc = new Scanner(System.in);
     private UtilizadorController controller = new UtilizadorController();
     private AdminController controllerAdmin = new AdminController();
+    private EquipamentoController controllerEquipamento = new EquipamentoController();
     private Utilizador userLogado = null;
 
     public void start() throws SQLException {
@@ -38,6 +37,9 @@ public class Menu {
             sc.nextLine();
 
             switch (opcao) {
+                case 10:
+                    controllerEquipamento.criarEquipamento(sc,userLogado);
+                    break;
                 case 9:
                     controllerAdmin.atualizarDadosGestor(sc, userLogado);
                     break;

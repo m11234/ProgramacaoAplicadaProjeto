@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class EquipamentoDAO {
 
     public boolean RegistarEquipamento (Equipamento e){
-        String sql = "Insert into equipamento (Marca, Modelo, SKU, Lote, DataSubmissao, idC) value (?,?,?,?,?,?)";
+        String sql = "Insert into equipamento (Marca, Modelo, SKU, Lote, DataSubmissao, id) values (?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.getconn();
         PreparedStatement ps = conn.prepareStatement(sql)){
@@ -20,8 +20,8 @@ public class EquipamentoDAO {
             ps.setString(2, e.getModelo());
             ps.setString(3, e.getSKU());
             ps.setString(4, e.getLote());
-            ps.setDate(5, (Date) e.getDataSubmissao());
-            ps.setInt(6, e.getIdC());
+            ps.setDate(5, new java.sql.Date(e.getDataSubmissao().getTime()));
+            ps.setInt(6, e.getid());
 
             int criarEquipamento = ps.executeUpdate();
             return (criarEquipamento > 0);

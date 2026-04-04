@@ -3,24 +3,23 @@ package model;
 import java.util.Date;
 
 public class Equipamento {
-    private int idEquipamento;
     private String marca;
     private String modelo;
     private String SKU;
     private String lote;
     private Date dataSubmissao;
+    private int id;
     private Date dataReparacao;
-    private int idC;
+    private int idEquipamento;
 
-    public Equipamento(int idEquipamento, String marca, String modelo, String SKU, String lote, Date dataSubmissao, Date getDataReparacao){
-        this.idEquipamento = idEquipamento;
+    public Equipamento( String marca, String modelo, String SKU, String lote, Date dataSubmissao,int id){
         this.marca = marca;
         this.modelo = modelo;
         this.SKU = SKU;
         this.lote = lote;
         this.dataSubmissao = dataSubmissao;
         this.dataReparacao = dataSubmissao;
-        this.idC = idC;
+        this.id = id;
     }
 
     //getters
@@ -31,7 +30,7 @@ public class Equipamento {
     public String getLote() {return lote;}
     public Date getDataSubmissao() {return dataSubmissao;}
     public Date getDataReparacao() {return dataReparacao;}
-    public int getIdC() {return idC;}
+    public int getid() {return id;}
 
 
     //setters
@@ -42,5 +41,5 @@ public class Equipamento {
     public void setLote(String lote) {this.lote = lote;}
     public void setDataSubmissao(Date dataSubmissao) {this.dataSubmissao = dataSubmissao;}
     public void  setDataReparacao(Date dataReparacao) {this.dataReparacao = dataReparacao;}
-    public void setIdC(int idC) {this.idC = idC;}
+    public void setid(int id) {this.id = id;}
 }

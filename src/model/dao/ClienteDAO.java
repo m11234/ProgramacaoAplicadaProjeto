@@ -26,7 +26,7 @@ public class ClienteDAO {
             throw new RuntimeException(e);
         }
     }
-    public boolean VerSeCliente(int Id) throws SQLException {
+    public static boolean VerSeCliente(int Id) throws SQLException {
         String sql = "SELECT * FROM clientes WHERE id=?";
         boolean ClienteSer = false;
         try (Connection conn = DBConnection.getconn();
