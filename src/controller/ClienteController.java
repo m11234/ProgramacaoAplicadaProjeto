@@ -20,10 +20,27 @@ public class ClienteController {
         System.out.println("NIF");
         int nif = sc.nextInt();
         sc.nextLine();
-
+/*
         System.out.println("Telemovel:");
         int telemovel = sc.nextInt();
         sc.nextLine();
+*/
+//----------------------------------------------------------
+        int telemovel = 0;
+        boolean contactoValido = false;
+
+        while (!contactoValido) {
+            System.out.println("Telemovel:");
+            String entrada = sc.nextLine();
+
+            if (entrada.matches("[923][0-9]{8}")) {
+                telemovel = Integer.parseInt(entrada); //serve para retornar um número inteiro
+                contactoValido = true;
+            } else {
+                System.out.println("Erro: O número de telemovel deve ter 9 dígitos e começar por 9, 2 ou 3.");
+            }
+        }
+//----------------------------------------------------------
 
         System.out.println("Morada:");
         String morada = sc.nextLine();

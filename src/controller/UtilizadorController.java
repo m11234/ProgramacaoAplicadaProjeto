@@ -91,7 +91,7 @@ public class UtilizadorController {
             logado = dao.Login(u);
 
             if (logado != null) {
-                System.out.println("Login com sucesso: " + logado.getUsername());
+                System.out.println("\nBem-vindo " + logado.getUsername() + ".");
             } else {
                 System.out.println("Erro: username ou password inválidos");
             }
