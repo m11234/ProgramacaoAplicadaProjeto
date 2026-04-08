@@ -1,11 +1,12 @@
 package model.dao;
 
 import model.Reparacao;
+import model.Utilizador;
 import model.db.DBConnection;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReparacaoDAO {
     public boolean SubmeterREparacao(Reparacao r){
@@ -24,4 +25,5 @@ public class ReparacaoDAO {
             throw new RuntimeException(e);
         }
     }
+
 }

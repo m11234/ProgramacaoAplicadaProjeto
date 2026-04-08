@@ -45,7 +45,8 @@ public class Menu {
             System.out.print("Opção: ");
             opcao = sc.nextInt();
             sc.nextLine();
-            theLabel: while (true) {
+            //tiramos daqui a solucao para voltar atras https://stackoverflow.com/questions/60023456/how-to-go-back-to-previous-switch
+            theLabel: while (true){
             switch (opcao) {
             /*    case 11:
                     controllerReparacao.criarReparacao(sc, userLogado);
@@ -77,7 +78,6 @@ public class Menu {
 
                 case 3: //cliente
                     if (userLogado != null){
-
                         if (clienteDAO.VerSeCliente(userLogado.getId())){
                             do {
                                 System.out.println("Menu: Cliente");
@@ -91,7 +91,7 @@ public class Menu {
                             switch (opcaoCliente) {
                                 case 0:
                                     userLogado = controller.Logout(userLogado);
-                                    continue theLabel;
+                                    break;
                                 case 1:
                                     controllerReparacao.criarReparacao(sc, userLogado);
                                     break;
@@ -105,24 +105,16 @@ public class Menu {
                                     controller.ConsultarDados(userLogado);
                                     break;
                             } }while (opcaoCliente != 0);
-                            break;
+                            break theLabel;
                         }
-
-
                         //Funcionario
-
-
-
-
-
-
                        // controller.ConsultarDados(userLogado);
                     } else {
                         System.out.println("Fazer login primeiro!!!");
-                    }break;
+                    }break theLabel;
                 case 2:
                     userLogado = controller.Login(sc);
-                    break;
+                    break theLabel;
                 case 1:
                     controller.registar(sc);
                     break;
