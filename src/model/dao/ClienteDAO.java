@@ -34,7 +34,7 @@ public class ClienteDAO {
             ps.setInt(1, Id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                System.out.println("O utilizador é um cliente proseguir...");
+                //.out.println("O utilizador é um cliente proseguir...");
                 ClienteSer = true;
             }
         }
