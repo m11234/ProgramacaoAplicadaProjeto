@@ -84,7 +84,7 @@ public class Menu {
                     if (userLogado != null){
                         if (clienteDAO.VerSeCliente(userLogado.getId())){
                             do {
-                                System.out.println("Menu: Cliente");
+                                System.out.println("\nMenu: Cliente");
                                 System.out.println("4- Consultar Dados");
                                 System.out.println("3 - Atualizar dados");
                                 System.out.println("2 - Registar Equipamento");
@@ -113,7 +113,7 @@ public class Menu {
                         }
                         if (adminDAO.VerSeGestor(userLogado.getId())){
                             do{
-                                System.out.println("Menu: Admin");
+                                System.out.println("\nMenu: Admin");
                                 System.out.println("7- Atualizar dados de outra conta ");
                                 System.out.println("6- Consultar dados de outra conta");
                                 System.out.println("5- Criar outro gestor");

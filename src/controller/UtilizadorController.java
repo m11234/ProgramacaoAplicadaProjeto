@@ -132,7 +132,7 @@ public class UtilizadorController {
             logado = dao.Login(u);
 
             if (logado != null) {
-                System.out.println("\nBem-vindo " + logado.getUsername() + ".");
+                System.out.println("\nBem-vindo " + logado.getUsername() + ".\n");
                 if (!logado.getEstado()) {
                     System.out.println("Erro: Conta ainda nao ativada pelo gestor contacte um gestor");
                     logado = null;
@@ -148,7 +148,7 @@ public class UtilizadorController {
 
     public Utilizador Logout(Utilizador logado) throws SQLException {
         if (logado != null){
-            System.out.println("\nAdeus " + logado.getUsername() + ".");
+            System.out.println("\nAdeus " + logado.getUsername() + ".\n");
         } else {
             System.out.println("\nErro: Não existe nenhuma sessão para encerrar.");
         }
