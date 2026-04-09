@@ -25,6 +25,20 @@ public class Reparacao {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "Reparacao{" +
+                "estado=" + estado +
+                ", dataInicio=" + dataInicio +
+                ", dataFim=" + dataFim +
+                ", custo=" + custo +
+                ", observacao='" + observacao + '\'' +
+                ", idEquip=" + idEquip +
+                '}';
+    }
+
+    public Reparacao() {}
+
     //getters
     public int getEstado() {return estado;}
     public Date getDataInicio() {return dataInicio;}

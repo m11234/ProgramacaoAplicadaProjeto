@@ -3,10 +3,7 @@ package controller;
 import model.Reparacao;
 import model.Utilizador;
 import model.Utilizador;
-import model.dao.ClienteDAO;
-import model.dao.EquipamentoDAO;
-import model.dao.ReparacaoDAO;
-import model.dao.UtilizadoresDAO;
+import model.dao.*;
 import model.Reparacao;
 
 import java.sql.SQLException;
@@ -17,6 +14,7 @@ public class ReparacaoController {
     private EquipamentoController equipamentoController = new EquipamentoController();
     private ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
     private EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
+    private AdminDao adminDao = new AdminDao();
 
     public void criarReparacao(Scanner sc, Utilizador userLogado) throws SQLException {
         if (userLogado == null) {
@@ -49,4 +47,18 @@ public class ReparacaoController {
             System.out.println("Erro");
     }
 
-} }
+    }
+    public void verReparacoesPorAprovar(Utilizador userLogado) throws SQLException {
+
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+
+        reparacaoDAO.verReparacoesPorAprovar();
+    }
+    }

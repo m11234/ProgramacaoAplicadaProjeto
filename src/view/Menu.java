@@ -4,8 +4,10 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import controller.*;
+import model.Admin;
 import model.Utilizador;
 import  model.Funcionario;
+import model.dao.AdminDao;
 import model.dao.ClienteDAO;
 import model.dao.FuncionarioDAO;
 
@@ -21,12 +23,14 @@ public class Menu {
     private Utilizador utilizador = new Utilizador();
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
     private Funcionario funcionario;
+    private AdminDao adminDAO = new AdminDao();
 
     public void start() throws SQLException {
         controllerAdmin.verAdmins(sc);
 
         int opcao;
         int opcaoCliente;
+        int opcaoAdmin;
 
         do {
             /*System.out.println("\n===== MENU =====");
@@ -105,6 +109,54 @@ public class Menu {
                                     controller.ConsultarDados(userLogado);
                                     break;
                             } }while (opcaoCliente != 0);
+                            break theLabel;
+                        }
+                        if (adminDAO.VerSeGestor(userLogado.getId())){
+                            do{
+                                System.out.println("Menu: Admin");
+                                System.out.println("7- Atualizar dados de outra conta ");
+                                System.out.println("6- Consultar dados de outra conta");
+                                System.out.println("5- Criar outro gestor");
+                                System.out.println("4- Ativar conta");
+                                System.out.println("3- Ver contas por ativar");
+                                System.out.println("2- Alterar Dados");
+                                System.out.println("1- Consultar Dados");
+                                System.out.println("0 - Sair");
+                                opcaoAdmin = sc.nextInt();
+                                switch (opcaoAdmin) {
+                                    case 0:
+                                        userLogado = controller.Logout(userLogado);
+                                        break;
+                                    case 1:
+                                        userLogado = controller.ConsultarDados(userLogado);
+                                        break;
+                                    case 2:
+                                        controller.atualizarDados(sc,userLogado);
+                                        break;
+                                    case 3:
+                                        controllerAdmin.verContasPorAtivar(userLogado);
+                                        break;
+                                    case 4:
+                                        controllerAdmin.atualizarDadosGestor(sc, userLogado);
+                                        break;
+                                    case 5:
+                                        controllerAdmin.ConsultarDadosGestor(userLogado,sc);
+                                        break;
+                                    case 6:
+                                        controllerAdmin.CriarOutroGestor(userLogado,sc);
+                                        break;
+                                    case 7:
+                                        controllerAdmin.ativarConta(userLogado,sc);
+                                        break;
+                                    case 8:
+                                        controllerAdmin.verContasPorAtivar(userLogado);
+                                        break;
+                                    case 9:
+                                        ReparacaoController controllerReparacao = new ReparacaoController();
+                                        controllerReparacao.verReparacoesPorAprovar(userLogado);
+
+                                }
+                            } while (opcaoAdmin != 0);
                             break theLabel;
                         }
                         //Funcionario

@@ -1,5 +1,6 @@
 package model.dao;
 
+import controller.AdminController;
 import model.Reparacao;
 import model.Utilizador;
 import model.db.DBConnection;
@@ -25,5 +26,27 @@ public class ReparacaoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Reparacao> verReparacoesPorAprovar() {
+        String sql = "Select * from reparacao where estado = 1";
+        List<Reparacao> listaR = new ArrayList<>();
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Reparacao r = new Reparacao();
+                r.setIdEquip(rs.getInt("idEquip"));
+                r.setObservacao(rs.getString("Observacao"));
+                listaR.add(r);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de reparacoes por aprovar: " + listaR);
+        return listaR;
+    }
+
+
 
 }
