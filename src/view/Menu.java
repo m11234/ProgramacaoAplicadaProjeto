@@ -10,6 +10,7 @@ import  model.Funcionario;
 import model.dao.AdminDao;
 import model.dao.ClienteDAO;
 import model.dao.FuncionarioDAO;
+import model.dao.ReparacaoDAO;
 
 public class Menu {
 
@@ -24,6 +25,7 @@ public class Menu {
     private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
     private Funcionario funcionario;
     private AdminDao adminDAO = new AdminDao();
+    private ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
 
     public void start() throws SQLException {
         controllerAdmin.verAdmins(sc);
@@ -31,6 +33,7 @@ public class Menu {
         int opcao;
         int opcaoCliente;
         int opcaoAdmin;
+        int opcaoFuncionario;
 
         do {
             /*System.out.println("\n===== MENU =====");
@@ -52,34 +55,6 @@ public class Menu {
             //tiramos daqui a solucao para voltar atras https://stackoverflow.com/questions/60023456/how-to-go-back-to-previous-switch
             theLabel: while (true){
             switch (opcao) {
-            /*    case 11:
-                    controllerReparacao.criarReparacao(sc, userLogado);
-                    break;
-                case 10:
-                    controllerEquipamento.criarEquipamento(sc,userLogado);
-                    break;
-                case 9:
-                    controllerAdmin.atualizarDadosGestor(sc, userLogado);
-                    break;
-                case 8:
-                    controllerAdmin.ConsultarDadosGestor(userLogado,sc);
-                    break;
-                case 7:
-                    controllerAdmin.CriarOutroGestor(userLogado,sc);
-                    break;
-                case 6:
-                    controllerAdmin.ativarConta(userLogado,sc);
-                    break;
-                case 5:
-                    controllerAdmin.verContasPorAtivar(userLogado);
-                    break;
-                case 4:
-                    if (userLogado != null){
-                        controller.atualizarDados(sc,userLogado);
-                    } else {
-                        System.out.println("Fazer login primeiro!!!");
-                    }break; */
-
                 case 3: //cliente
                     if (userLogado != null){
                         if (clienteDAO.VerSeCliente(userLogado.getId())){
@@ -108,12 +83,18 @@ public class Menu {
                                 case 4:
                                     controller.ConsultarDados(userLogado);
                                     break;
+                                case 5:
+                                    controllerReparacao.criarReparacao(sc, userLogado);
+                                    break;
+
                             } }while (opcaoCliente != 0);
                             break theLabel;
                         }
                         if (adminDAO.VerSeGestor(userLogado.getId())){
                             do{
                                 System.out.println("\nMenu: Admin");
+                                System.out.println("9- Aprovar reparacoes");
+                                System.out.println("8- Reparacoes por Aprovar");
                                 System.out.println("7- Atualizar dados de outra conta ");
                                 System.out.println("6- Consultar dados de outra conta");
                                 System.out.println("5- Criar outro gestor");
@@ -137,26 +118,45 @@ public class Menu {
                                         controllerAdmin.verContasPorAtivar(userLogado);
                                         break;
                                     case 4:
-                                        controllerAdmin.atualizarDadosGestor(sc, userLogado);
-                                        break;
-                                    case 5:
-                                        controllerAdmin.ConsultarDadosGestor(userLogado,sc);
-                                        break;
-                                    case 6:
-                                        controllerAdmin.CriarOutroGestor(userLogado,sc);
-                                        break;
-                                    case 7:
                                         controllerAdmin.ativarConta(userLogado,sc);
                                         break;
+                                    case 5:
+                                        controllerAdmin.CriarOutroGestor(userLogado,sc);
+                                        break;
+                                    case 6:
+                                        controllerAdmin.ConsultarDadosGestor(userLogado,sc);
+                                        break;
+                                    case 7:
+                                        controllerAdmin.atualizarDadosGestor(sc,userLogado);
+                                        break;
                                     case 8:
-                                        controllerAdmin.verContasPorAtivar(userLogado);
+                                        controllerReparacao.verReparacoesPorAprovar(userLogado);
                                         break;
                                     case 9:
-                                        ReparacaoController controllerReparacao = new ReparacaoController();
-                                        controllerReparacao.verReparacoesPorAprovar(userLogado);
-
+                                        controllerReparacao.aceitarReparacao(sc, userLogado);
+                                        break;
                                 }
                             } while (opcaoAdmin != 0);
+                            break theLabel;
+                        }
+                        if (FuncionarioDAO.verSeFuncionario(userLogado.getId())){
+                            do {
+                                System.out.println("\nMenu: Funcionario");
+                                System.out.println("1 - Ver reparacoes por aprovar ");
+                                System.out.println("2 - Aprovar ou rejeitar reparacoes ");
+                                opcaoFuncionario = sc.nextInt();
+                                switch (opcaoFuncionario) {
+                                    case 0:
+                                        userLogado = controller.Logout(userLogado);
+                                        break;
+                                    case 1:
+                                        controllerReparacao.verReparacoesPorAprovarF(userLogado);
+                                        break;
+                                    case 2:
+                                        controllerReparacao.aceitarReparacaoF(sc,userLogado);
+                                        break;
+                                }
+                            } while (opcaoFuncionario != 0);
                             break theLabel;
                         }
                         //Funcionario

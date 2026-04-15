@@ -1,8 +1,5 @@
 package model.dao;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.*;
 
 import model.Funcionario;
 import model.db.DBConnection;
@@ -28,5 +25,23 @@ public class FuncionarioDAO {
             throw new RuntimeException(e);
 
         }
+    }
+
+    public static boolean verSeFuncionario(int id) {
+        String sql = "select * from funcionario where id=?";
+        boolean existeFuncionario = false;
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                existeFuncionario = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return existeFuncionario;
     }
 }
