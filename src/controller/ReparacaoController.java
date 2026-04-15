@@ -2,10 +2,7 @@ package controller;
 
 import model.Reparacao;
 import model.Utilizador;
-import model.Utilizador;
 import model.dao.*;
-import model.Reparacao;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -165,4 +162,46 @@ public class ReparacaoController {
             System.out.println("Erro a aprovar reparacao");
         }
     }
+    public void FinalizarReparacaoF(Scanner sc, Utilizador userLogado) throws SQLException {
+
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!FuncionarioDAO.verSeFuncionario(userLogado.getId())) {
+            System.out.println("So funcionarios podem fazer isto!!!!");
+            return;
+        }
+
+        int idFuncionario = userLogado.getId();
+
+        List<Reparacao> listaPorFinalizar = reparacaoDAO.verReparacoesPorFinalizarF(userLogado);
+
+        if (listaPorFinalizar == null || listaPorFinalizar.isEmpty()) {
+            System.out.println("Não tem reparações pendentes para aprovar neste momento.");
+            return;
+        }
+
+        for (Reparacao rep : listaPorFinalizar) {
+            System.out.println("ID Reparação: " + rep.getIdR() +
+                    " | ID Equipamento: " + rep.getIdEquip() +
+                    " | Observações: " + rep.getObservacao());
+        }
+
+        System.out.println("Inserir reparacao a aprovar");
+        int idReparacao = sc.nextInt();
+        sc.nextLine();
+
+
+        Reparacao r = new Reparacao(4, idReparacao, idFuncionario);
+        boolean sucesso = reparacaoDAO.FinalizarReparacaoFDAO(r,idFuncionario);
+
+        if (sucesso) {
+            System.out.println("Reparacao aprovado");
+        }
+        else {
+            System.out.println("Erro a aprovar reparacao");
+        }
+    }
+
     }

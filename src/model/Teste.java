@@ -3,19 +3,21 @@ package model;
 import java.util.Date;
 
 public class Teste {
+    private int idReparacao;
     private String designacao;
     private String descricao;
     private Date dataTeste;
     private Float preco;
 
-    public Teste(String designacao, String descricao, Date dataTeste, float preco) {
+    public Teste(int idReparacao,String designacao, String descricao,float preco) {
+        this.idReparacao = idReparacao;
         this.designacao = designacao;
         this.descricao = descricao;
-        this.dataTeste  = new Date();
         this.preco = preco;
     }
 
     //getters
+    public int getIdReparacao() {return idReparacao;}
     public String getDesignacao() {return designacao;}
     public String getDescricao() {return descricao;}
     public Date getDataTeste() {return dataTeste;}
@@ -23,6 +25,7 @@ public class Teste {
 
 
     //setters
+    public void setIdReparacao(int idReparacao) {this.idReparacao = idReparacao;}
     public void setDescricao(String descricao) {this.descricao = descricao;}
     public void setDesignacao(String designacao) {this.designacao = designacao;}
     public void setDataTeste(String descricao) {this.descricao = descricao;}

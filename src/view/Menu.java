@@ -26,6 +26,7 @@ public class Menu {
     private Funcionario funcionario;
     private AdminDao adminDAO = new AdminDao();
     private ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
+    private TestesController controllerTestes = new TestesController();
 
     public void start() throws SQLException {
         controllerAdmin.verAdmins(sc);
@@ -36,15 +37,6 @@ public class Menu {
         int opcaoFuncionario;
 
         do {
-            /*System.out.println("\n===== MENU =====");
-            System.out.println("11- Iniciar reparacao");
-            System.out.println("10-Criar equipamento");
-            System.out.println("9- Atualizar dados de outra conta ");
-            System.out.println("8- Consultar dados de outra conta");
-            System.out.println("7- Criar outro gestor");
-            System.out.println("6- Ativar conta");
-            System.out.println("5- Ver contas por ativar");
-            System.out.println("4- Alterar Dados"); */
             System.out.println("3 - Mais opções");
             System.out.println("2 - Login");
             System.out.println("1 - Registar utilizador");
@@ -144,6 +136,8 @@ public class Menu {
                                 System.out.println("\nMenu: Funcionario");
                                 System.out.println("1 - Ver reparacoes por aprovar ");
                                 System.out.println("2 - Aprovar ou rejeitar reparacoes ");
+                                System.out.println("3 - Submeter testes");
+                                System.out.println("4 - Finalizar reparacao");
                                 opcaoFuncionario = sc.nextInt();
                                 switch (opcaoFuncionario) {
                                     case 0:
@@ -155,6 +149,13 @@ public class Menu {
                                     case 2:
                                         controllerReparacao.aceitarReparacaoF(sc,userLogado);
                                         break;
+                                    case 3:
+                                        controllerTestes.submeterTesteF(sc,userLogado);
+                                        break;
+                                    case 4:
+                                        controllerReparacao.FinalizarReparacaoF(sc,userLogado);
+                                        break;
+
                                 }
                             } while (opcaoFuncionario != 0);
                             break theLabel;

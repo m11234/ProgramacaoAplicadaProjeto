@@ -3,11 +3,13 @@ package controller;
 import model.Admin;
 import model.Utilizador;
 import model.dao.AdminDao;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import model.dao.UtilizadoresDAO;
+
 public class AdminController {
     private static AdminDao adminDao = new AdminDao();
     private UtilizadorController controller = new UtilizadorController();
@@ -66,7 +68,8 @@ public class AdminController {
 
         dao.verContasPorAtivar();
     }
-    public void ativarConta(Utilizador userLogado,Scanner sc) throws SQLException {
+
+    public void ativarConta(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
             return;
@@ -76,7 +79,7 @@ public class AdminController {
             return;
         }
         System.out.println("Inserir id da conta a ativar");
-        int id  = sc.nextInt();
+        int id = sc.nextInt();
         if (!dao.verSeContaExiste(id)) {
             System.out.println("Essa conta nao existe!!");
             return;
@@ -85,7 +88,7 @@ public class AdminController {
         System.out.println("Conta atualizada com sucesso para o ID: " + id);
     }
 
-    public void CriarOutroGestor(Utilizador userLogado,Scanner sc) throws SQLException {
+    public void CriarOutroGestor(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
             return;
@@ -93,7 +96,7 @@ public class AdminController {
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
             return;
-    }
+        }
         System.out.println("A proceder a criacao de um gestor");
         controller.registarG(sc);
         sc.nextLine();
@@ -119,6 +122,7 @@ public class AdminController {
             System.out.println("Erro: Não foi possível validar a conta acabada de criar.");
         }
     }
+
     public Utilizador ConsultarDadosGestor(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
@@ -131,7 +135,7 @@ public class AdminController {
         System.out.println("Id do utilizador a consultar dados");
         int id = sc.nextInt();
         Utilizador Ver = dao.ConsultarDadosGestor(id);
-        if (Ver != null){
+        if (Ver != null) {
             System.out.println("\n Dados Utilizador");
             System.out.println("Nome:" + Ver.getNome());
             System.out.println("Email:" + Ver.getEmail());
@@ -142,6 +146,7 @@ public class AdminController {
 
         return Ver;
     }
+
     public void atualizarDadosGestor(Scanner sc, Utilizador userLogado) throws SQLException {
 
         if (userLogado == null || !adminDao.VerSeGestor(userLogado.getId())) {
