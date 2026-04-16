@@ -1,6 +1,8 @@
 package model.dao;
 import java.sql.*;
 import model.Cliente;
+import model.Equipamento;
+import model.Reparacao;
 import model.db.DBConnection;
 
 
@@ -39,4 +41,6 @@ public class ClienteDAO {
         }
         return ClienteSer;
     }
+
+
 }

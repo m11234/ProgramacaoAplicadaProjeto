@@ -101,7 +101,7 @@ public class AdminDao {
     }
 
     public Equipamento perquisarEquipamento(int idEquip) {
-        String sql = "Select * from equipamento where idEquip = ?";
+        String sql = "Select * from equipamento where idEquip = ? order by";
         try (Connection conn = DBConnection.getconn();
             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idEquip);
@@ -120,10 +120,7 @@ public class AdminDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Lista de Equipamento: ");
+        System.out.println("Equipamento: ");
         return null;
     }
-
-
-
 }

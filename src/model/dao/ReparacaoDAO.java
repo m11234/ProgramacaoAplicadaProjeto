@@ -168,8 +168,26 @@ public class ReparacaoDAO {
         System.out.println("Lista de reparacoes que passou 10 dias sem ser finalizado: " + listaR);
     }
 
+    public static Reparacao PesquisarPedidosReparacao(int idR) {
+        String sql = "SELECT * FROM reparacao WHERE idR=?";
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, idR);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Reparacao re = new Reparacao();
+                re.setIdR(rs.getInt("IdR"));
+                re.setDataInicio(rs.getDate("DataInicio"));
+                re.setDataFim(rs.getDate("DataFim"));
+                re.setCusto(rs.getInt("Custo"));
+                re.setObservacao(rs.getString("Observacao"));
+                return re;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Pedido: ");
+        return null;
 
-
-
-
+    }
 }

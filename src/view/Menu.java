@@ -51,6 +51,7 @@ public class Menu {
                             if (ClienteDAO.VerSeCliente(userLogado.getId())){
                                 do {
                                     System.out.println("\nMenu: Cliente");
+                                    System.out.println("6 - Consultar pedidos de reparacao: ");
                                     System.out.println("5 - Iniciar pedido para apagar conta");
                                     System.out.println("4- Criar pedido reparacao");
                                     System.out.println("3 - Criar equipamento");
@@ -78,7 +79,9 @@ public class Menu {
                                         case 5:
                                             ClienteController.ApagarContaPedido(userLogado,sc);
                                             break;
-
+                                        case 6:
+                                            ClienteController.pesquisarPedidosReparacao(userLogado,sc);
+                                            break;
                                     } }while (true);
                             }
                             if (adminDAO.VerSeGestor(userLogado.getId())){

@@ -4,9 +4,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import model.Cliente;
+import model.Equipamento;
+import model.Reparacao;
 import model.Utilizador;
 import model.dao.ClienteDAO;
+import model.dao.ReparacaoDAO;
 import model.dao.UtilizadoresDAO;
+
 
 
 public class ClienteController {
@@ -85,4 +89,51 @@ public class ClienteController {
         }
     }
 
+    public static void pesquisarPedidosReparacao(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!");
+            return;
+        }
+        if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
+            System.out.println("So clientes podem fazer isto!!!!");
+            return;
+        }
+        System.out.println("Insira o numero do pedido de reparação: ");
+        sc.nextLine();
+        int idR =  sc.nextInt();
+        Reparacao Ver = ReparacaoDAO.PesquisarPedidosReparacao(idR);
+        if (Ver != null) {
+            System.out.println("\n Dados da Reparação");
+            System.out.println("Id: " + Ver.getIdR());
+            System.out.println("Data inicio: " + Ver.getDataInicio());
+            System.out.println("Data fim: " + Ver.getDataFim());
+            System.out.println("Observação: " + Ver.getObservacao());
+        } else {
+            System.out.println("Nao foi posssivel encontrar os dados");
+        }
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
