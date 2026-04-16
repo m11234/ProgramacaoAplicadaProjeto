@@ -11,7 +11,12 @@ public class Utilizador {
     private String novoEmail;
     private int id;
 
-    // construtor
+    /**
+     * Metodo para formatar a visualizacao da peca.
+     * Solucao adaptada de: Duncan Jones
+     * Fonte: https://stackoverflow.com/questions/29140402/how-do-i-print-my-java-object-without-getting-sometype2f92e0f4
+     * Acedido em: 16 de Abril de 2026.
+     */
     @Override
     public String toString() {
         return "Utilizador [Username: " + username + " | ID: " + id + "]";

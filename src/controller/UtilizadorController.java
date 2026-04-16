@@ -34,7 +34,12 @@ public class UtilizadorController {
         String email = "";
         boolean emailValido = false;
 
-        //BASEADO NESTA IMPLEMENTAÇÃO: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
+        /**
+         * Logica de validacao de enderecos de email em Java.
+         * Solucao adaptada de: Nicolas Rio
+         * Fonte: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
+         * Acedido em: Dezasseis de Abril de dois mil e vinte e seis.
+         */
         while (!emailValido) {
             System.out.print("Email: ");
             email = sc.nextLine();

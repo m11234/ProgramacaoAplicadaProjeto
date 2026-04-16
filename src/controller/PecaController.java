@@ -83,4 +83,22 @@ public class PecaController {
             System.out.println("Erro ao registar a peca usada.");
         }
     }
+
+    public void pecaInferior (Utilizador userLogado) {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+
+        try {
+            if (!adminDao.VerSeGestor(userLogado.getId()))  {
+                System.out.println("So gestores podem fazer isto!!!!");
+                return;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        PecaDAO.pecaInferior();
+    }
 }

@@ -15,6 +15,22 @@ public class Peca {
         this.preco = preco;
     }
 
+    public Peca() {
+
+    }
+
+
+    /**
+     * Metodo para formatar a visualizacao da peca.
+     * Solucao adaptada de: Duncan Jones
+     * Fonte: https://stackoverflow.com/questions/29140402/how-do-i-print-my-java-object-without-getting-sometype2f92e0f4
+     * Acedido em: 16 de Abril de 2026.
+     */
+    @Override
+    public String toString() {
+        return "Peça: " + designacao + " | Unidades em Stock: " + quantidade;
+    }
+
     //getters
     public int getIdPeca() {return idPeca;}
     public String getDesignacao() {return designacao;}
@@ -29,3 +45,4 @@ public class Peca {
     public void setQuantidade(int quantidade) {this.quantidade = quantidade;}
     public void setPreco(float preco) {this.preco = preco;}
 }
+

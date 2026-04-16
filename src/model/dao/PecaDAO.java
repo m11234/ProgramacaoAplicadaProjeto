@@ -1,11 +1,16 @@
 package model.dao;
 
+import jdk.jshell.execution.Util;
 import model.Peca;
 import model.PecaUsada;
+import model.Utilizador;
 import model.db.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PecaDAO {
 
@@ -53,4 +58,26 @@ public class PecaDAO {
             throw new RuntimeException(e);
         }
     }
-}
+
+    public static List<Peca>  pecaInferior () {
+        String sql = "SELECT * FROM peca WHERE quantidade < 10";
+        List<Peca> listaPecas = new ArrayList<>();
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Peca pu = new Peca();
+                pu.setDesignacao(rs.getString("designacao"));
+                pu.setFabricante(rs.getString("fabricante"));
+                pu.setQuantidade(rs.getInt("quantidade"));
+                listaPecas.add(pu);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+            System.out.println("Peças com stock inferior a 10 unidades: " + listaPecas.toString());
+            return listaPecas;
+        }
+    }

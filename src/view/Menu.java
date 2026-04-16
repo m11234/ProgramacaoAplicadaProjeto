@@ -45,7 +45,13 @@ public class Menu {
             System.out.print("Opção: ");
             opcao = sc.nextInt();
             sc.nextLine();
-            //tiramos daqui a solucao para voltar atras https://stackoverflow.com/questions/60023456/how-to-go-back-to-previous-switch
+
+            /**
+             * Logica de navegacao de menus (voltar ao menu anterior).
+             * Solucao adaptada de: Andy Turner
+             * Fonte: https://stackoverflow.com/questions/60023456/how-to-go-back-to-previous-switch
+             * Acedido em: 8 de Abril de 2026.
+             */
             theLabel: while (true){
             switch (opcao) {
                 case 3: //cliente
@@ -86,6 +92,7 @@ public class Menu {
                         if (adminDAO.VerSeGestor(userLogado.getId())){
                             do{
                                 System.out.println("\nMenu: Admin");
+                                System.out.println("15- Ver notificações do stock");
                                 System.out.println("14- Pesquisar utilizador por email");
                                 System.out.println("13- Pesquisar utilizador por username");
                                 System.out.println("12- Pesquisar utilizador por nome");
@@ -147,6 +154,9 @@ public class Menu {
                                         break;
                                     case 14:
                                         controllerAdmin.ConsultarEmail(userLogado, sc);
+                                        break;
+                                    case 15:
+                                        controllerPeca.pecaInferior(userLogado);
                                         break;
                                 }
                             } while (opcaoAdmin != 0);
