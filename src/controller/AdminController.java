@@ -4,7 +4,9 @@ import model.Admin;
 import model.Utilizador;
 import model.dao.AdminDao;
 
+import java.awt.*;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -212,4 +214,94 @@ public class AdminController {
                 break;
         }
     }
+
+    public void verUtilizador(Utilizador userLogado) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+        AdminDao.verUtilizadores();
+    }
+
+
+    public Utilizador ConsultarNome(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return userLogado;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return userLogado;
+        }
+        System.out.println("Insira o nome para pesquisar: ");
+        sc.nextLine();
+        String nome = sc.nextLine();
+        Utilizador Ver = dao.ConsultarNomeUtilizador(nome);
+        if (Ver != null) {
+            System.out.println("\n Dados Utilizador");
+            System.out.println("Nome:" + Ver.getNome());
+            System.out.println("Username:" + Ver.getUsername());
+            System.out.println("Email:" + Ver.getEmail());
+        } else {
+            System.out.println("Nao foi posssivel encontrar os dados");
+        }
+
+        return Ver;
+    }
+
+    public Utilizador ConsultarUsername(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return userLogado;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return userLogado;
+        }
+        System.out.println("Insira o username para pesquisar: ");
+        sc.nextLine();
+        String username = sc.nextLine();
+        Utilizador Ver = dao.ConsultarUsername(username);
+        if (Ver != null) {
+            System.out.println("\n Dados Utilizador");
+            System.out.println("Nome:" + Ver.getNome());
+            System.out.println("Username:" + Ver.getUsername());
+            System.out.println("Email:" + Ver.getEmail());
+        } else {
+            System.out.println("Nao foi posssivel encontrar os dados");
+        }
+
+        return Ver;
+    }
+
+    public Utilizador ConsultarEmail(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return userLogado;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return userLogado;
+        }
+        System.out.println("Insira o email para pesquisar: ");
+        sc.nextLine();
+        String email = sc.nextLine();
+        Utilizador Ver = dao.ConsultarEmailUtilizador(email);
+        if (Ver != null) {
+            System.out.println("\n Dados Utilizador");
+            System.out.println("Nome:" + Ver.getNome());
+            System.out.println("Username:" + Ver.getUsername());
+            System.out.println("Email:" + Ver.getEmail());
+        } else {
+            System.out.println("Nao foi posssivel encontrar os dados");
+        }
+
+        return Ver;
+    }
+
+
 }

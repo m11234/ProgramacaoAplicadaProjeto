@@ -110,6 +110,74 @@ public class UtilizadoresDAO {
         return null ;
     }
 
+
+    public Utilizador ConsultarNomeUtilizador(String nome) {
+        String sql = "Select nome, username, email from utilizador where nome = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Utilizador Dados = new Utilizador();
+                Dados.setNome(rs.getString("nome"));
+                Dados.setUsername(rs.getString("username"));
+                Dados.setEmail(rs.getString("email"));
+                return Dados;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null ;
+    }
+
+    public Utilizador ConsultarUsername(String username) {
+        String sql = "Select nome, username, email from utilizador where usarname = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Utilizador Dados = new Utilizador();
+                Dados.setNome(rs.getString("nome"));
+                Dados.setUsername(rs.getString("username"));
+                Dados.setEmail(rs.getString("email"));
+                return Dados;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null ;
+    }
+
+    public Utilizador ConsultarEmailUtilizador(String email) {
+        String sql = "Select nome, username, email from utilizador where email = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Utilizador Dados = new Utilizador();
+                Dados.setNome(rs.getString("nome"));
+                Dados.setUsername(rs.getString("username"));
+                Dados.setEmail(rs.getString("email"));
+                return Dados;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null ;
+    }
+
+
     public boolean AtualizarDados(Utilizador userLogado, Utilizador dadosNovos) {
         if (!userLogado.getUsername().equals(dadosNovos.getUsername())) {
             throw new SecurityException("Ação proibida!!");

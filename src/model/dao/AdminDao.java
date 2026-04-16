@@ -1,12 +1,17 @@
 package model.dao;
 
 import model.Admin;
+import model.Reparacao;
 import model.db.DBConnection;
 
+import model.Utilizador;
 import java.sql.Connection;
+import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminDao {
@@ -57,4 +62,45 @@ public class AdminDao {
         }
         return GestorSer;
     }
+
+    public static List<Utilizador> verUtilizadores() {
+        String sql = "Select * from utilizador order by nome asc";
+        List<Utilizador> listaA = new ArrayList<>();
+        try (Connection conn = DBConnection.getconn();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Utilizador u = new Utilizador();
+                u.setNome(rs.getString("nome"));
+                u.setUsername(rs.getString("username"));
+                listaA.add(u);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de utilizadores: " + listaA.toString());
+        return listaA;
+    }
+
+    public static List<Utilizador> pesquisarUtilizadores(Utilizador userLogado) throws SQLException {
+        String SQL = "Select * from utilizador where nome like ?";
+        List<Utilizador> listaA = new ArrayList<>();
+        try (Connection conn = DBConnection.getconn();
+        PreparedStatement ps = conn.prepareStatement(SQL)){
+            ps.setString(1, userLogado.getNome());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Utilizador u = new Utilizador();
+                u.setNome(rs.getString("nome"));
+                u.setUsername(rs.getString("username"));
+                listaA.add(u);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de informação de utilizadores: " + listaA.toString());
+        return listaA;
+    }
+
 }

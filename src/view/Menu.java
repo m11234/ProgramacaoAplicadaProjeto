@@ -86,6 +86,10 @@ public class Menu {
                         if (adminDAO.VerSeGestor(userLogado.getId())){
                             do{
                                 System.out.println("\nMenu: Admin");
+                                System.out.println("14- Pesquisar utilizador por email");
+                                System.out.println("13- Pesquisar utilizador por username");
+                                System.out.println("12- Pesquisar utilizador por nome");
+                                System.out.println("11- Ver lista de utilizadores");
                                 System.out.println("10- Inserir peca");
                                 System.out.println("9- Aprovar reparacoes");
                                 System.out.println("8- Reparacoes por Aprovar");
@@ -131,6 +135,18 @@ public class Menu {
                                         break;
                                     case 10:
                                         controllerPeca.inserirPecaController(sc,userLogado);
+                                        break;
+                                    case 11:
+                                        controllerAdmin.verUtilizador(userLogado);
+                                        break;
+                                    case 12:
+                                        controllerAdmin.ConsultarNome(userLogado, sc);
+                                        break;
+                                    case 13:
+                                        controllerAdmin.ConsultarUsername(userLogado, sc);
+                                        break;
+                                    case 14:
+                                        controllerAdmin.ConsultarEmail(userLogado, sc);
                                         break;
                                 }
                             } while (opcaoAdmin != 0);
