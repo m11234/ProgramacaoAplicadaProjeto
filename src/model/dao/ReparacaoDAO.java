@@ -29,7 +29,7 @@ public class ReparacaoDAO {
     }
 
     public List<Reparacao> verReparacoesPorAprovar() {
-        String sql = "Select * from reparacao where estado = 1";
+        String sql = "Select * from reparacao where estado = 1 order by idR";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -49,7 +49,7 @@ public class ReparacaoDAO {
     }
 
     public List<Reparacao> verReparacoesPorAprovarF(Utilizador userlogado) throws SQLException {
-        String sql = "Select * from reparacao where estado = 2 and FuncionarioA = ?";
+        String sql = "Select * from reparacao where estado = 2 and FuncionarioA = ? order by idR";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
