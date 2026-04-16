@@ -63,7 +63,7 @@ public class Menu {
                             switch (opcaoCliente) {
                                 case 0:
                                     userLogado = controller.Logout(userLogado);
-                                    break;
+                                    break theLabel;
                                 case 1:
                                     controllerReparacao.criarReparacao(sc, userLogado);
                                     break;
@@ -105,7 +105,7 @@ public class Menu {
                                 switch (opcaoAdmin) {
                                     case 0:
                                         userLogado = controller.Logout(userLogado);
-                                        break;
+                                        break theLabel;
                                     case 1:
                                         userLogado = controller.ConsultarDados(userLogado);
                                         break;
@@ -155,6 +155,7 @@ public class Menu {
                         if (FuncionarioDAO.verSeFuncionario(userLogado.getId())){
                             do {
                                 System.out.println("\nMenu: Funcionario");
+                                System.out.println("0 - Sair");
                                 System.out.println("1 - Ver reparacoes por aprovar ");
                                 System.out.println("2 - Aprovar ou rejeitar reparacoes ");
                                 System.out.println("3 - Submeter testes");
@@ -164,7 +165,7 @@ public class Menu {
                                 switch (opcaoFuncionario) {
                                     case 0:
                                         userLogado = controller.Logout(userLogado);
-                                        break;
+                                        break theLabel;
                                     case 1:
                                         controllerReparacao.verReparacoesPorAprovarF(userLogado);
                                         break;
@@ -200,11 +201,15 @@ public class Menu {
                 case 0:
                     //System.out.println("Adeus!");
                     userLogado = controller.Logout(userLogado);
-                    break;
+                    break theLabel;
 
                 default:
                     System.out.println("Opção inválida!");
-            }}
+                    break theLabel;
+
+
+            }
+            }
         } while (opcao != 0);
     }
 }
