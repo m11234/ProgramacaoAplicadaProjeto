@@ -72,6 +72,20 @@ public class AdminController {
         dao.verContasPorAtivar();
     }
 
+    public void verContasPorApagar(Utilizador userLogado) throws SQLException {
+
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+
+        dao.verContasPorApagar();
+    }
+
     public void ativarConta(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");

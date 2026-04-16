@@ -310,6 +310,27 @@ public class UtilizadoresDAO {
         System.out.println("Lista de utilizadores: " + lista);
         return lista;
     }
+
+    public List<Utilizador> verContasPorApagar() {
+        String sql = "Select * from utilizador where estado = 3";
+        List<Utilizador> lista = new ArrayList<>();
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Utilizador u = new Utilizador();
+                u.setUsername(rs.getString("username"));
+                u.setId(rs.getInt("id"));
+                lista.add(u);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de utilizadores: " + lista);
+        return lista;
+    }
+
     public boolean verSeContaExiste(int id) throws SQLException {
         String sql = "Select * from utilizador WHERE id = ?";
         boolean contaExiste = false;
