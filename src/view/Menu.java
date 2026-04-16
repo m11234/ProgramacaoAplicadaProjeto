@@ -92,12 +92,12 @@ public class Menu {
                                 System.out.println("11- Ver lista de utilizadores");
                                 System.out.println("10- Inserir peca");
                                 System.out.println("9- Aprovar reparacoes");
-                                System.out.println("8- Reparacoes por Aprovar");
+                                System.out.println("8- Ver notificacoes novas reparacoes");
                                 System.out.println("7- Atualizar dados de outra conta ");
                                 System.out.println("6- Consultar dados de outra conta");
                                 System.out.println("5- Criar outro gestor");
                                 System.out.println("4- Ativar conta");
-                                System.out.println("3- Ver contas por ativar");
+                                System.out.println("3- Ver notificacoes contas novas");
                                 System.out.println("2- Alterar Dados");
                                 System.out.println("1- Consultar Dados");
                                 System.out.println("0 - Sair");

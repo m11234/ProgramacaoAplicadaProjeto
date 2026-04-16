@@ -148,7 +148,7 @@ public class ReparacaoController {
         int idReparacao = sc.nextInt();
         sc.nextLine();
 
-        System.out.print("Para aceitar 3 para rejeitar 2");
+        System.out.print("Para aceitar 3 para rejeitar 1");
         int Estado = sc.nextInt();
         sc.nextLine();
 
