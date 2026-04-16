@@ -13,6 +13,7 @@ public class UtilizadorController {
     private UtilizadoresDAO dao = new UtilizadoresDAO();
 
 
+
     //email
     private static final String EMAIL_REGEX = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]{2,}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
@@ -138,12 +139,12 @@ public class UtilizadorController {
 
             if (logado != null) {
                 System.out.println("\nBem-vindo " + logado.getUsername() + ".\n");
-                if (!logado.getEstado()) {
+                if (logado.getEstado() != 1) {
                     System.out.println("Erro: Conta ainda nao ativada pelo gestor contacte um gestor");
                     logado = null;
                 } }
             else {
-                System.out.println("Erro dados invalidos tente novamento.");
+                System.out.println("Erro dados invalidos ou conta foi apagada contacte um gestor");
 
             }
         }
@@ -164,7 +165,7 @@ public class UtilizadorController {
     public Utilizador ConsultarDados(Utilizador logado) {
         Utilizador u = dao.ConsultarDados(logado);
 
-        if (u != null & u.getEstado()){
+        if (u != null & u.getEstado() != 1){
             System.out.println("\n Dados Utilizador");
             System.out.println("Nome:" + u.getNome());
             System.out.println("Email:" + u.getEmail());

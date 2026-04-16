@@ -54,11 +54,13 @@ public class Menu {
              */
             theLabel: while (true){
             switch (opcao) {
-                case 3: //cliente
+                case 3:
                     if (userLogado != null){
                         if (clienteDAO.VerSeCliente(userLogado.getId())){
                             do {
                                 System.out.println("\nMenu: Cliente");
+                                System.out.println("6 - Iniciar pedido para apagar conta");
+                                System.out.println("5 - Iniciar pedido para reparacao");
                                 System.out.println("4- Consultar Dados");
                                 System.out.println("3 - Atualizar dados");
                                 System.out.println("2 - Registar Equipamento");
@@ -71,19 +73,19 @@ public class Menu {
                                     userLogado = controller.Logout(userLogado);
                                     break theLabel;
                                 case 1:
-                                    controllerReparacao.criarReparacao(sc, userLogado);
-                                    break;
-                                case 2:
-                                    controllerEquipamento.criarEquipamento(sc, userLogado);
-                                    break;
-                                case 3:
                                     controller.atualizarDados(sc, userLogado);
                                     break;
-                                case 4:
+                                case 2:
                                     controller.ConsultarDados(userLogado);
+                                    break;
+                                case 3:
+                                    controllerEquipamento.criarEquipamento(sc, userLogado);
                                     break;
                                 case 5:
                                     controllerReparacao.criarReparacao(sc, userLogado);
+                                    break;
+                                case 6:
+                                    ClienteController.ApagarContaPedido(userLogado,sc);
                                     break;
 
                             } }while (opcaoCliente != 0);
@@ -92,19 +94,20 @@ public class Menu {
                         if (adminDAO.VerSeGestor(userLogado.getId())){
                             do{
                                 System.out.println("\nMenu: Admin");
-                                System.out.println("17- Consultar reparação por ID: ");
-                                System.out.println("16- Ver notificações de reparações a ocorrer á mais de 10 dias");
-                                System.out.println("15- Ver notificações do stock");
-                                System.out.println("14- Pesquisar utilizador por email");
-                                System.out.println("13- Pesquisar utilizador por username");
-                                System.out.println("12- Pesquisar utilizador por nome");
-                                System.out.println("11- Ver lista de utilizadores");
-                                System.out.println("10- Inserir peca");
-                                System.out.println("9- Aprovar reparacoes");
-                                System.out.println("8- Ver notificacoes novas reparacoes");
-                                System.out.println("7- Atualizar dados de outra conta ");
-                                System.out.println("6- Consultar dados de outra conta");
-                                System.out.println("5- Criar outro gestor");
+                                System.out.println("18- Consultar reparação por ID: ");
+                                System.out.println("17- Ver notificações de reparações a ocorrer á mais de 10 dias");
+                                System.out.println("16- Ver notificações do stock");
+                                System.out.println("15- Pesquisar utilizador por email");
+                                System.out.println("14- Pesquisar utilizador por username");
+                                System.out.println("13- Pesquisar utilizador por nome");
+                                System.out.println("12- Ver lista de utilizadores");
+                                System.out.println("11- Inserir peca");
+                                System.out.println("10- Aprovar reparacoes");
+                                System.out.println("9- Ver notificacoes novas reparacoes");
+                                System.out.println("8- Atualizar dados de outra conta ");
+                                System.out.println("7- Consultar dados de outra conta");
+                                System.out.println("6- Criar outro gestor");
+                                System.out.println("5- Apagar conta de outro utilizador");
                                 System.out.println("4- Ativar conta");
                                 System.out.println("3- Ver notificacoes contas novas");
                                 System.out.println("2- Alterar Dados");
@@ -128,43 +131,47 @@ public class Menu {
                                         controllerAdmin.ativarConta(userLogado,sc);
                                         break;
                                     case 5:
-                                        controllerAdmin.CriarOutroGestor(userLogado,sc);
+                                        controllerAdmin.apagarContas(userLogado,sc);
                                         break;
                                     case 6:
-                                        controllerAdmin.ConsultarDadosGestor(userLogado,sc);
+                                        controllerAdmin.CriarOutroGestor(userLogado,sc);
                                         break;
                                     case 7:
-                                        controllerAdmin.atualizarDadosGestor(sc,userLogado);
+                                        controllerAdmin.ConsultarDadosGestor(userLogado,sc);
                                         break;
                                     case 8:
-                                        controllerReparacao.verReparacoesPorAprovar(userLogado);
+                                        controllerAdmin.atualizarDadosGestor(sc,userLogado);
                                         break;
                                     case 9:
-                                        controllerReparacao.aceitarReparacao(sc, userLogado);
+                                        controllerReparacao.verReparacoesPorAprovar(userLogado);
                                         break;
                                     case 10:
-                                        controllerPeca.inserirPecaController(sc,userLogado);
+                                        controllerReparacao.aceitarReparacao(sc, userLogado);
                                         break;
                                     case 11:
-                                        controllerAdmin.verUtilizador(userLogado);
+                                        controllerPeca.inserirPecaController(sc,userLogado);
                                         break;
                                     case 12:
-                                        controllerAdmin.ConsultarNome(userLogado, sc);
+                                        controllerAdmin.verUtilizador(userLogado);
                                         break;
                                     case 13:
-                                        controllerAdmin.ConsultarUsername(userLogado, sc);
+                                        controllerAdmin.ConsultarNome(userLogado, sc);
                                         break;
                                     case 14:
-                                        controllerAdmin.ConsultarEmail(userLogado, sc);
+                                        controllerAdmin.ConsultarUsername(userLogado, sc);
                                         break;
                                     case 15:
-                                        controllerPeca.pecaInferior(userLogado);
+                                        controllerAdmin.ConsultarEmail(userLogado, sc);
                                         break;
                                     case 16:
-                                        controllerReparacao.notificacaoDezDiasSemFinalizacao(userLogado);
+                                        controllerPeca.pecaInferior(userLogado);
                                         break;
                                     case 17:
+                                        controllerReparacao.notificacaoDezDiasSemFinalizacao(userLogado);
+                                        break;
+                                    case 18:
                                         controllerAdmin.ConsultarReparacao(userLogado,sc);
+                                        break;
                                 }
                             } while (opcaoAdmin != 0);
                             break theLabel;

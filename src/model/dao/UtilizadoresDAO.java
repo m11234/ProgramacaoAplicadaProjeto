@@ -31,7 +31,7 @@ public class UtilizadoresDAO {
         }
     }
     public Utilizador Login(Utilizador u) throws SQLException {
-        String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ? ";
+        String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ? and estado = 1 ";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -46,7 +46,7 @@ public class UtilizadoresDAO {
                 logado.setUsername(rs.getString("username"));
                 logado.setPassword(rs.getString("password"));
                 logado.setEmail(rs.getString("email"));
-                logado.setEstado(rs.getBoolean("estado"));
+                logado.setEstado(rs.getInt("estado"));
                 logado.setId(rs.getInt("id"));
                 return logado;
             } else {
@@ -75,7 +75,7 @@ public class UtilizadoresDAO {
                 u.setUsername(rs.getString("username"));
                 u.setPassword(rs.getString("password"));
                 u.setEmail(rs.getString("email"));
-                u.setEstado(rs.getBoolean("estado"));
+                u.setEstado(rs.getInt("estado"));
                 return u;
 
             }
@@ -100,7 +100,7 @@ public class UtilizadoresDAO {
                 Dados.setUsername(rs.getString("username"));
                 Dados.setPassword(rs.getString("password"));
                 Dados.setEmail(rs.getString("email"));
-                Dados.setEstado(rs.getBoolean("estado"));
+                Dados.setEstado(rs.getInt("estado"));
                 return Dados;
 
             }
@@ -203,6 +203,47 @@ public class UtilizadoresDAO {
         return true;
     }
 
+    public boolean ApagarContaUtilizador(Utilizador userLogado,int id) {
+
+        if (userLogado.getId() != id) {
+            throw new SecurityException("Acao proibida!!");
+
+    }
+        String sql = "UPDATE utilizador SET estado = 3 WHERE id = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1,id);
+            int apagarConta = ps.executeUpdate();
+            return apagarConta > 0;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public boolean ApagarContaAdmin(int id) {
+
+        String sql = "UPDATE utilizador SET estado = 4, nome = ?, username = ?, email = ? WHERE id = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "apagadoNome" + id);
+
+            ps.setString(2, "apagadoUsername" + id);
+
+            ps.setString(3, "apagadoEmail" + id + "@email.apagado");
+
+            ps.setInt(4, id);
+
+            int apagada = ps.executeUpdate();
+            return apagada > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Erro na base de dados ao apagar conta: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 
     public boolean atualizarEmailGestor(int id, Utilizador dadosNovos) {
         String sql = "UPDATE utilizador SET email = ? WHERE id = ?";
@@ -229,7 +270,7 @@ public class UtilizadoresDAO {
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setBoolean(1,userLogado.getEstado());
+            ps.setInt(1,userLogado.getEstado());
             ps.setString(1, userLogado.getUsername());
             ps.executeUpdate();
     }

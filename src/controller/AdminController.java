@@ -90,6 +90,28 @@ public class AdminController {
         dao.mudarEstado(id);
         System.out.println("Conta atualizada com sucesso para o ID: " + id);
     }
+    public void apagarContas(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+        System.out.println("Inserir id da conta a apagar 0 para abortar");
+        int id = sc.nextInt();
+        if (id == 0) {
+            System.out.println("A abortar processo....");
+            return;
+        }
+        if (!dao.verSeContaExiste(id)) {
+            System.out.println("Essa conta nao existe!!");
+            return;
+        }
+        dao.ApagarContaAdmin(id);
+        System.out.println("Conta apagada com sucesso para o ID: " + id);
+    }
 
     public void CriarOutroGestor(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {

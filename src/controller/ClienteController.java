@@ -11,12 +11,15 @@ import model.Funcionario;
 import model.Utilizador;
 import model.dao.ClienteDAO;
 import model.dao.ClienteDAO;
+import model.dao.FuncionarioDAO;
+import model.dao.UtilizadoresDAO;
 import model.db.DBConnection;
 
 import java.util.Scanner;
 
 public class ClienteController {
     private static ClienteDAO dao = new ClienteDAO();
+    private static UtilizadoresDAO utilizadoresDAO = new UtilizadoresDAO();
 
     public static void criarCliente(Scanner sc, Utilizador logado) {
         System.out.println("\nRegistar Cliente");
@@ -62,6 +65,29 @@ public class ClienteController {
         if (sucesso) {
             System.out.println("Funcionario registado");
         } else {
+            System.out.println("Erro");
+        }
+    }
+
+    public static void ApagarContaPedido(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!");
+        }
+        if (!dao.VerSeCliente(userLogado.getId())) {
+            System.out.println("So clientes podem fazer isto!!!!");
+            return;
+        }
+        System.out.println("A iniciar pedido para apagar conta para confirmar entrar id para desistir entrar 0");
+        int id = sc.nextInt();
+        if (id == 0) {
+            System.out.println("A abortar pedido para apagar conta");
+        }
+        boolean sucesso = utilizadoresDAO.ApagarContaUtilizador(userLogado, id);
+        if (sucesso) {
+            System.out.println("Pedido para apagar conta iniciado com sucesso");
+        }
+        else
+        {
             System.out.println("Erro");
         }
     }

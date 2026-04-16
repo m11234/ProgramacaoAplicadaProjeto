@@ -6,7 +6,7 @@ public class Utilizador {
     private String username;
     private String password;
     private String email;
-    private boolean estado;
+    private int estado;
     private String novaPassword;
     private String novoEmail;
     private int id;
@@ -62,7 +62,7 @@ public class Utilizador {
         return email;
     }
 
-    public boolean getEstado() {
+    public int getEstado() {
         return estado;
     }
 
@@ -87,7 +87,7 @@ public class Utilizador {
         this.email = email;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     public void setId(int id) {
