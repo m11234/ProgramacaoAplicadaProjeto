@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Reparacao;
 import model.Utilizador;
 import model.db.DBConnection;
 
@@ -176,6 +177,8 @@ public class UtilizadoresDAO {
         }
         return null ;
     }
+
+
 
 
     public boolean AtualizarDados(Utilizador userLogado, Utilizador dadosNovos) {

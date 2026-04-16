@@ -82,4 +82,25 @@ public class AdminDao {
         return listaA;
     }
 
+    public Reparacao verReparacoes(int idR) {
+        String sql = "Select * from Reparacao where idR = ?";
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idR);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                Reparacao rep = new Reparacao();
+                rep.setIdR(rs.getInt("idR"));
+                rep.setDataInicio(rs.getDate("DataInicio"));
+                rep.setDataFim(rs.getDate("DataFim"));
+                rep.setObservacao(rs.getString("Observacao"));
+                return rep;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de Reparacoes: ");
+        return null;
+    }
+
 }

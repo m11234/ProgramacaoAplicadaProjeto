@@ -1,6 +1,7 @@
 package controller;
 
 import model.Admin;
+import model.Reparacao;
 import model.Utilizador;
 import model.dao.AdminDao;
 
@@ -303,5 +304,29 @@ public class AdminController {
         return Ver;
     }
 
+    public void ConsultarReparacao(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+        System.out.println("Insira o numero da reparacao para pesquisar: ");
+        sc.nextLine();
+        int idR = sc.nextInt();
+        Reparacao Ver = adminDao.verReparacoes(idR);
+        if (Ver != null) {
+            System.out.println("\n Dados da Reparacao");
+            System.out.println("Numero: " + Ver.getIdR());
+            System.out.println("Data: " + Ver.getDataInicio());
+            System.out.println("Data fim: " + Ver.getDataFim());
+            System.out.println("Observacao: " + Ver.getObservacao());
+        } else {
+            System.out.println("Nao foi posssivel encontrar os dados");
+        }
+        return;
+    }
 
 }
