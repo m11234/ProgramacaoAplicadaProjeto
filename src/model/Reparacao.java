@@ -41,6 +41,16 @@ public class Reparacao {
         this.FuncionarioA = idFuncionario;
     }
 
+    public Reparacao() {
+
+    }
+
+    /**
+     * Metodo para formatar a visualizacao da peca.
+     * Solucao adaptada de: Duncan Jones
+     * Fonte: https://stackoverflow.com/questions/29140402/how-do-i-print-my-java-object-without-getting-sometype2f92e0f4
+     * Acedido em: 16 de Abril de 2026.
+     */
     @Override
     public String toString() {
         return "Reparacao{" +
@@ -53,7 +63,6 @@ public class Reparacao {
                 '}';
     }
 
-    public Reparacao() {}
 
     //getters
     public int getIdR() {return idR;}

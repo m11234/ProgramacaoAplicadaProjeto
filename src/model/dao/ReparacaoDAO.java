@@ -1,15 +1,13 @@
 package model.dao;
 
-import controller.AdminController;
-import model.Admin;
 import model.Reparacao;
 import model.Utilizador;
 import model.db.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.dao.UtilizadoresDAO;
-import java.sql.Date;
+
+
 public class ReparacaoDAO {
     public boolean SubmeterREparacao(Reparacao r){
         String sql = "Insert into reparacao (observacao, idEquip,Estado) values (?, ?,?)";
@@ -150,6 +148,27 @@ public class ReparacaoDAO {
         }
     }
 
+    public static List<Reparacao> notificacaoDezDiasSemFinalizacao(){
+        String sql = "Select * from reparacao where (CURRENT_DATE - DataInicio) > 10 and estado != 4";
+        List<Reparacao> listaR = new ArrayList<>();
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                Reparacao r = new Reparacao();
+                r.setIdR(rs.getInt("idR"));
+                r.setDataInicio(rs.getDate("DataInicio"));
+                r.setIdEquip(rs.getInt("idEquip"));
+                r.setObservacao(rs.getString("Observacao"));
+                listaR.add(r);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de reparacoes que passou 10 dias sem ser finalizado: " + listaR.toString());
+        return listaR;
+    }
 
 
 

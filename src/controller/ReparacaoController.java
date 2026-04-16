@@ -204,4 +204,16 @@ public class ReparacaoController {
         }
     }
 
-    }
+        public void notificacaoDezDiasSemFinalizacao(Utilizador userLogado) throws SQLException {
+            if (userLogado == null) {
+                System.out.println("Fazer login!!!");
+                return;
+            }
+            if (!adminDao.VerSeGestor(userLogado.getId())) {
+                System.out.println("So gestores podem fazer isto!!!!");
+                return;
+            }
+
+            reparacaoDAO.notificacaoDezDiasSemFinalizacao();
+        }
+}

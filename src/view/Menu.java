@@ -92,6 +92,7 @@ public class Menu {
                         if (adminDAO.VerSeGestor(userLogado.getId())){
                             do{
                                 System.out.println("\nMenu: Admin");
+                                System.out.println("16- Ver notificações de reparações a ocorrer á mais de 10 dias");
                                 System.out.println("15- Ver notificações do stock");
                                 System.out.println("14- Pesquisar utilizador por email");
                                 System.out.println("13- Pesquisar utilizador por username");
@@ -157,6 +158,9 @@ public class Menu {
                                         break;
                                     case 15:
                                         controllerPeca.pecaInferior(userLogado);
+                                        break;
+                                    case 16:
+                                        controllerReparacao.notificacaoDezDiasSemFinalizacao(userLogado);
                                         break;
                                 }
                             } while (opcaoAdmin != 0);
