@@ -27,6 +27,7 @@ public class Menu {
     private AdminDao adminDAO = new AdminDao();
     private ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
     private TestesController controllerTestes = new TestesController();
+    private PecaController controllerPeca = new PecaController();
 
     public void start() throws SQLException {
         controllerAdmin.verAdmins(sc);
@@ -85,6 +86,7 @@ public class Menu {
                         if (adminDAO.VerSeGestor(userLogado.getId())){
                             do{
                                 System.out.println("\nMenu: Admin");
+                                System.out.println("10- Inserir peca");
                                 System.out.println("9- Aprovar reparacoes");
                                 System.out.println("8- Reparacoes por Aprovar");
                                 System.out.println("7- Atualizar dados de outra conta ");
@@ -126,6 +128,9 @@ public class Menu {
                                         break;
                                     case 9:
                                         controllerReparacao.aceitarReparacao(sc, userLogado);
+                                        break;
+                                    case 10:
+                                        controllerPeca.inserirPecaController(sc,userLogado);
                                         break;
                                 }
                             } while (opcaoAdmin != 0);
