@@ -78,28 +78,7 @@ public class AdminDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Lista de utilizadores: " + listaA.toString());
-        return listaA;
-    }
-
-    public static List<Utilizador> pesquisarUtilizadores(Utilizador userLogado) throws SQLException {
-        String SQL = "Select * from utilizador where nome like ?";
-        List<Utilizador> listaA = new ArrayList<>();
-        try (Connection conn = DBConnection.getconn();
-        PreparedStatement ps = conn.prepareStatement(SQL)){
-            ps.setString(1, userLogado.getNome());
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                Utilizador u = new Utilizador();
-                u.setNome(rs.getString("nome"));
-                u.setUsername(rs.getString("username"));
-                listaA.add(u);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Lista de informação de utilizadores: " + listaA.toString());
+        System.out.println("Lista de utilizadores: " + listaA);
         return listaA;
     }
 

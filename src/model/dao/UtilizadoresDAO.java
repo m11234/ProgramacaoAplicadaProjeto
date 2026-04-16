@@ -134,7 +134,7 @@ public class UtilizadoresDAO {
     }
 
     public Utilizador ConsultarUsername(String username) {
-        String sql = "Select nome, username, email from utilizador where usarname = ?";
+        String sql = "Select nome, username, email from utilizador where username = ?";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
