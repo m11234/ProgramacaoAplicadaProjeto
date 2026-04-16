@@ -1,6 +1,7 @@
 package controller;
 
 import model.Peca;
+import model.PecaUsada;
 import model.Utilizador;
 
 import java.sql.SQLException;
@@ -46,6 +47,40 @@ public class PecaController {
         }
         else {
             System.out.println("Erro!!!");
+        }
+    }
+
+    public void inserirPecaUsada(Scanner sc, Utilizador userLogado) {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+
+        if (!FuncionarioDAO.verSeFuncionario(userLogado.getId())) {
+            System.out.println("So funcionarios podem fazer isto!!!!");
+            return;
+        }
+
+        System.out.print("Inserir ID da reparacao associada a essa peca: ");
+        int idReparacao = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Inserir ID da peca a utilizar: ");
+        int idPeca = sc.nextInt();
+        sc.nextLine();
+
+        PecaUsada pu = new PecaUsada(idPeca, idReparacao);
+
+        try {
+            boolean sucesso = PecaDAO.PecasUsadas(pu, userLogado.getId());
+
+            if (sucesso) {
+                System.out.println("Peca inserida na reparacao com sucesso!");
+            }
+        } catch (SecurityException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro ao registar a peca usada.");
         }
     }
 }

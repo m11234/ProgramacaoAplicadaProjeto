@@ -159,6 +159,7 @@ public class Menu {
                                 System.out.println("2 - Aprovar ou rejeitar reparacoes ");
                                 System.out.println("3 - Submeter testes");
                                 System.out.println("4 - Finalizar reparacao");
+                                System.out.println("5 - Associar peca utilizada com reparacao");
                                 opcaoFuncionario = sc.nextInt();
                                 switch (opcaoFuncionario) {
                                     case 0:
@@ -175,6 +176,9 @@ public class Menu {
                                         break;
                                     case 4:
                                         controllerReparacao.FinalizarReparacaoF(sc,userLogado);
+                                        break;
+                                    case 5:
+                                        controllerPeca.inserirPecaUsada(sc,userLogado);
                                         break;
 
                                 }
