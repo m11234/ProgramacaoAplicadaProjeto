@@ -114,6 +114,7 @@ public class Menu {
                                 System.out.println("2- Alterar Dados");
                                 System.out.println("1- Consultar Dados");
                                 System.out.println("0 - Sair");
+                                System.out.println("Menu admin");
                                 opcaoAdmin = sc.nextInt();
                                 switch (opcaoAdmin) {
                                     case 0:
