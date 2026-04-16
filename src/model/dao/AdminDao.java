@@ -1,10 +1,13 @@
 package model.dao;
 
 import model.Admin;
+import model.Equipamento;
 import model.Reparacao;
 import model.db.DBConnection;
 
 import model.Utilizador;
+
+import java.nio.channels.ScatteringByteChannel;
 import java.sql.Connection;
 import java.sql.*;
 import java.sql.PreparedStatement;
@@ -102,5 +105,31 @@ public class AdminDao {
         System.out.println("Lista de Reparacoes: ");
         return null;
     }
+
+    public Equipamento perquisarEquipamento(int idEquip) {
+        String sql = "Select * from equipamento where idEquip = ?";
+        try (Connection conn = DBConnection.getconn();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEquip);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Equipamento eq = new Equipamento();
+                eq.setIdEquipamento(rs.getInt("idEquip"));
+                eq.setMarca(rs.getString("Marca"));
+                eq.setModelo(rs.getString("Modelo"));
+                eq.setSKU(rs.getString("SKU"));
+                eq.setLote(rs.getString("Lote"));
+                eq.setDataReparacao(rs.getDate("dataSubmissao"));
+                eq.setDataSubmissao(rs.getDate("dataReparacao"));
+                return eq;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Lista de Equipamento: ");
+        return null;
+    }
+
+
 
 }

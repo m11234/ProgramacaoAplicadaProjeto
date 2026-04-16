@@ -1,6 +1,7 @@
 package controller;
 
 import model.Admin;
+import model.Equipamento;
 import model.Reparacao;
 import model.Utilizador;
 import model.dao.AdminDao;
@@ -359,6 +360,33 @@ public class AdminController {
             System.out.println("Data: " + Ver.getDataInicio());
             System.out.println("Data fim: " + Ver.getDataFim());
             System.out.println("Observacao: " + Ver.getObservacao());
+        } else {
+            System.out.println("Nao foi posssivel encontrar os dados");
+        }
+        return;
+    }
+
+    public void PesquisarEquipamento(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+        System.out.println("Insira o numero do equipamento para pesquisar: ");
+        sc.nextLine();
+        int idEquip = sc.nextInt();
+        Equipamento Ver = adminDao.perquisarEquipamento(idEquip);
+        if (Ver != null) {
+            System.out.println("\n Dados da Reparacao");
+            System.out.println("Numero: " + Ver.getIdEquipamento());
+            System.out.println("Marca: " + Ver.getMarca());
+            System.out.println("Modelo: " + Ver.getModelo());
+            System.out.println("SKU: " + Ver.getSKU());
+            System.out.println("Data: " + Ver.getDataSubmissao());
+            System.out.println("Data fim: " + Ver.getDataReparacao());
         } else {
             System.out.println("Nao foi posssivel encontrar os dados");
         }

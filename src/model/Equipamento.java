@@ -22,6 +22,10 @@ public class Equipamento {
         this.id = id;
     }
 
+    public Equipamento() {
+
+    }
+
     //getters
     public int getIdEquipamento() {return idEquipamento;}
     public String getMarca() {return marca;}
