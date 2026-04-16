@@ -6,7 +6,7 @@ import view.Menu;
 import java.sql.SQLException;
 
 public class Main {
-  public static void main(String[] args) throws SQLException {
+  static void main() throws SQLException {
 
     if (DBConnection.getconn() == null) {
       System.out.println("Erro na ligação à BD.");

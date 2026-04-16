@@ -9,7 +9,7 @@ import java.util.Scanner;
 import model.dao.*;
 
 public class PecaController {
-    private AdminDao adminDao = new AdminDao();
+    private final AdminDao adminDao = new AdminDao();
 
     public void inserirPecaController(Scanner sc, Utilizador userLogado) {
         if (userLogado == null) {

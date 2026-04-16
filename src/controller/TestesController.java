@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 
 public class TestesController {
-    private ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
-    private TestesDAO testesDAO = new TestesDAO();
     public void submeterTesteF(Scanner sc, Utilizador userLogado) {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");

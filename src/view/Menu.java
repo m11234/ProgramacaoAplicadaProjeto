@@ -4,30 +4,22 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import controller.*;
-import model.Admin;
 import model.Utilizador;
-import  model.Funcionario;
 import model.dao.AdminDao;
 import model.dao.ClienteDAO;
 import model.dao.FuncionarioDAO;
-import model.dao.ReparacaoDAO;
 
 public class Menu {
 
-    private Scanner sc = new Scanner(System.in);
-    private UtilizadorController controller = new UtilizadorController();
-    private AdminController controllerAdmin = new AdminController();
-    private EquipamentoController controllerEquipamento = new EquipamentoController();
+    private final Scanner sc = new Scanner(System.in);
+    private final UtilizadorController controller = new UtilizadorController();
+    private final AdminController controllerAdmin = new AdminController();
+    private final EquipamentoController controllerEquipamento = new EquipamentoController();
     private Utilizador userLogado = null;
-    private ReparacaoController controllerReparacao = new ReparacaoController();
-    private ClienteDAO clienteDAO = new ClienteDAO();
-    private Utilizador utilizador = new Utilizador();
-    private FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-    private Funcionario funcionario;
-    private AdminDao adminDAO = new AdminDao();
-    private ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
-    private TestesController controllerTestes = new TestesController();
-    private PecaController controllerPeca = new PecaController();
+    private final ReparacaoController controllerReparacao = new ReparacaoController();
+    private final AdminDao adminDAO = new AdminDao();
+    private final TestesController controllerTestes = new TestesController();
+    private final PecaController controllerPeca = new PecaController();
 
     public void start() throws SQLException {
         controllerAdmin.verAdmins(sc);
@@ -46,25 +38,24 @@ public class Menu {
             opcao = sc.nextInt();
             sc.nextLine();
 
-            /**
-             * Logica de navegacao de menus (voltar ao menu anterior).
-             * Solucao adaptada de: Andy Turner
-             * Fonte: https://stackoverflow.com/questions/60023456/how-to-go-back-to-previous-switch
-             * Acedido em: 8 de Abril de 2026.
+            /*
+              Logica de navegacao de menus (voltar ao menu anterior).
+              Solucao adaptada de: Andy Turner
+              Fonte: https://stackoverflow.com/questions/60023456/how-to-go-back-to-previous-switch
+              Acedido em: 8 de Abril de 2026.
              */
             theLabel: while (true){
                 switch (opcao) {
                     case 3:
                         if (userLogado != null){
-                            if (clienteDAO.VerSeCliente(userLogado.getId())){
+                            if (ClienteDAO.VerSeCliente(userLogado.getId())){
                                 do {
                                     System.out.println("\nMenu: Cliente");
-                                    System.out.println("6 - Iniciar pedido para apagar conta");
-                                    System.out.println("5 - Iniciar pedido para reparacao");
-                                    System.out.println("4- Consultar Dados");
-                                    System.out.println("3 - Atualizar dados");
-                                    System.out.println("2 - Registar Equipamento");
-                                    System.out.println("1 - Inserir reparação");
+                                    System.out.println("5 - Iniciar pedido para apagar conta");
+                                    System.out.println("4- Criar pedido reparacao");
+                                    System.out.println("3 - Criar equipamento");
+                                    System.out.println("2 - Consultar dados");
+                                    System.out.println("1 - Atualizar Dados");
                                     System.out.println("0 - Sair");
                                     System.out.print("Opção: ");
                                     opcaoCliente = sc.nextInt();
@@ -81,15 +72,14 @@ public class Menu {
                                         case 3:
                                             controllerEquipamento.criarEquipamento(sc, userLogado);
                                             break;
-                                        case 5:
+                                        case 4:
                                             controllerReparacao.criarReparacao(sc, userLogado);
                                             break;
-                                        case 6:
+                                        case 5:
                                             ClienteController.ApagarContaPedido(userLogado,sc);
                                             break;
 
-                                    } }while (opcaoCliente != 0);
-                                break theLabel;
+                                    } }while (true);
                             }
                             if (adminDAO.VerSeGestor(userLogado.getId())){
                                 do{
@@ -181,8 +171,7 @@ public class Menu {
                                             controllerAdmin.PesquisarEquipamento(userLogado,sc);
                                             break;
                                     }
-                                } while (opcaoAdmin != 0);
-                                break theLabel;
+                                } while (true);
                             }
                             if (FuncionarioDAO.verSeFuncionario(userLogado.getId())){
                                 do {
@@ -215,8 +204,7 @@ public class Menu {
                                             break;
 
                                     }
-                                } while (opcaoFuncionario != 0);
-                                break theLabel;
+                                } while (true);
                             }
                             //Funcionario
                             // controller.ConsultarDados(userLogado);

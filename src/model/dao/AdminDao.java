@@ -7,15 +7,12 @@ import model.db.DBConnection;
 
 import model.Utilizador;
 
-import java.nio.channels.ScatteringByteChannel;
 import java.sql.Connection;
-import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class AdminDao {
     public boolean verificarGestores() throws SQLException {
@@ -31,7 +28,6 @@ public class AdminDao {
                     ExistemGestores = true;
                 }
                 else  {
-                    ExistemGestores = false;
                     System.out.println("Nao existem gestores");
                 }
             }
@@ -39,14 +35,13 @@ public class AdminDao {
         return ExistemGestores;
     }
 
-    public boolean criarGestor(Admin a) throws SQLException {
+    public void criarGestor(Admin a) throws SQLException {
         String sql = "INSERT INTO administrador (id) VALUES (?)";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1,a.getId());
-            int criarGestor = ps.executeUpdate();
-            return criarGestor > 0;
+            ps.executeUpdate();
 
         }
     }
@@ -66,7 +61,7 @@ public class AdminDao {
         return GestorSer;
     }
 
-    public static List<Utilizador> verUtilizadores() {
+    public static void verUtilizadores() {
         String sql = "Select * from utilizador order by nome asc";
         List<Utilizador> listaA = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -82,7 +77,6 @@ public class AdminDao {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de utilizadores: " + listaA);
-        return listaA;
     }
 
     public Reparacao verReparacoes(int idR) {

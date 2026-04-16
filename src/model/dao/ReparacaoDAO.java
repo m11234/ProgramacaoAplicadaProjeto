@@ -26,7 +26,7 @@ public class ReparacaoDAO {
         }
     }
 
-    public List<Reparacao> verReparacoesPorAprovar() {
+    public void verReparacoesPorAprovar() {
         String sql = "Select * from reparacao where estado = 1 order by idR";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -43,10 +43,9 @@ public class ReparacaoDAO {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de reparacoes por aprovar: " + listaR);
-        return listaR;
     }
 
-    public List<Reparacao> verReparacoesPorAprovarF(Utilizador userlogado) throws SQLException {
+    public List<Reparacao> verReparacoesPorAprovarF(Utilizador userlogado) {
         String sql = "Select * from reparacao where estado = 2 and FuncionarioA = ? order by idR";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -70,7 +69,7 @@ public class ReparacaoDAO {
         return listaR;
     }
 
-    public List<Reparacao> verReparacoesPorFinalizarF(Utilizador userlogado) throws SQLException {
+    public List<Reparacao> verReparacoesPorFinalizarF(Utilizador userlogado) {
         String sql = "Select * from reparacao where estado = 3 and FuncionarioA = ?";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -99,7 +98,7 @@ public class ReparacaoDAO {
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, r.getFuncionarioA());
+            ps.setInt(1, Reparacao.getFuncionarioA());
             ps.setInt(2,r.getIdR());
             int ReparacaoAceite = ps.executeUpdate();
             return (ReparacaoAceite > 0);
@@ -111,7 +110,7 @@ public class ReparacaoDAO {
 
     public boolean AceitarReparacaoFDAO(Reparacao r , int id) {
 
-        if (id != (r.getFuncionarioA())) {
+        if (id != (Reparacao.getFuncionarioA())) {
             throw new SecurityException("Ação proibida: Só pode aceitar ou rejeitar a sua própria reparação!");
         }
         String sql = "Update reparacao set Estado = ? , DataInicio = current_date  where idR = ? and FuncionarioA = ? ";
@@ -120,7 +119,7 @@ public class ReparacaoDAO {
         PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, r.getEstado());
             ps.setInt(2, r.getIdR());
-            ps.setInt(3, r.getFuncionarioA());
+            ps.setInt(3, Reparacao.getFuncionarioA());
 
             int ReparacaoAceiteF = ps.executeUpdate();
             return (ReparacaoAceiteF > 0);
@@ -130,7 +129,7 @@ public class ReparacaoDAO {
     }
     public boolean FinalizarReparacaoFDAO(Reparacao r , int id) {
 
-        if (id != (r.getFuncionarioA())) {
+        if (id != (Reparacao.getFuncionarioA())) {
             throw new SecurityException("Ação proibida: Só pode finalizar a sua própria reparação!");
         }
         String sql = "Update reparacao set Estado = ? , DataFim = current_date  where idR = ? and FuncionarioA = ? ";
@@ -139,7 +138,7 @@ public class ReparacaoDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, r.getEstado());
             ps.setInt(2, r.getIdR());
-            ps.setInt(3, r.getFuncionarioA());
+            ps.setInt(3, Reparacao.getFuncionarioA());
 
             int ReparacaoAceiteF = ps.executeUpdate();
             return (ReparacaoAceiteF > 0);
@@ -148,7 +147,7 @@ public class ReparacaoDAO {
         }
     }
 
-    public static List<Reparacao> notificacaoDezDiasSemFinalizacao(){
+    public static void notificacaoDezDiasSemFinalizacao(){
         String sql = "Select * from reparacao where (CURRENT_DATE - DataInicio) > 10 and estado != 4";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -166,8 +165,7 @@ public class ReparacaoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Lista de reparacoes que passou 10 dias sem ser finalizado: " + listaR.toString());
-        return listaR;
+        System.out.println("Lista de reparacoes que passou 10 dias sem ser finalizado: " + listaR);
     }
 
 

@@ -3,17 +3,12 @@ import model.Equipamento;
 import model.Utilizador;
 import model.dao.ClienteDAO;
 import model.dao.EquipamentoDAO;
-import model.dao.UtilizadoresDAO;
 import java.sql.SQLException;
-import model.dao.UtilizadoresDAO;
 import java.util.Date;
 import java.util.Scanner;
 
 public class EquipamentoController {
-    private EquipamentoDAO dao = new EquipamentoDAO();
-    private controller.UtilizadorController controller = new controller.UtilizadorController();
-    private UtilizadoresDAO dao2 = new UtilizadoresDAO();
-    private EquipamentoDAO dao3 = new EquipamentoDAO();
+    private final EquipamentoDAO dao3 = new EquipamentoDAO();
 
     public void criarEquipamento(Scanner sc, Utilizador userLogado) throws SQLException {
 
@@ -29,6 +24,7 @@ public class EquipamentoController {
         System.out.println("\nRegistar Equipamento:");
 
         System.out.println("Digite o marca do equipamento:");
+        sc.nextLine();
         String marca = sc.nextLine();
 
         System.out.println("Digite o modelo do equipamento:");

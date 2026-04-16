@@ -1,9 +1,8 @@
 package model.dao;
 
-import jdk.jshell.execution.Util;
+
 import model.Peca;
 import model.PecaUsada;
-import model.Utilizador;
 import model.db.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

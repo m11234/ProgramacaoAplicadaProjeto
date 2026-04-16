@@ -23,7 +23,7 @@ public class Peca {
     /**
      * Metodo para formatar a visualizacao da peca.
      * Solucao adaptada de: Duncan Jones
-     * Fonte: https://stackoverflow.com/questions/29140402/how-do-i-print-my-java-object-without-getting-sometype2f92e0f4
+     * Fonte: <a href="https://stackoverflow.com/questions/29140402/how-do-i-print-my-java-object-without-getting-sometype2f92e0f4">...</a>
      * Acedido em: 16 de Abril de 2026.
      */
     @Override

@@ -2,8 +2,6 @@ package model.dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.Reparacao;
 import model.Utilizador;
 import model.db.DBConnection;
 
@@ -31,7 +29,7 @@ public class UtilizadoresDAO {
         }
     }
     public Utilizador Login(Utilizador u) throws SQLException {
-        String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ? and estado = 1 ";
+        String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ?";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -221,7 +219,7 @@ public class UtilizadoresDAO {
             throw new RuntimeException(e);
         }
     }
-    public boolean ApagarContaAdmin(int id) {
+    public void ApagarContaAdmin(int id) {
 
         String sql = "UPDATE utilizador SET estado = 4, nome = ?, username = ?, email = ? WHERE id = ?";
 
@@ -236,8 +234,7 @@ public class UtilizadoresDAO {
 
             ps.setInt(4, id);
 
-            int apagada = ps.executeUpdate();
-            return apagada > 0;
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("Erro na base de dados ao apagar conta: " + e.getMessage());
@@ -265,7 +262,7 @@ public class UtilizadoresDAO {
         }
     }
 
-    public boolean mudarEstadoGestor(Utilizador userLogado) throws SQLException {
+    public void mudarEstadoGestor(Utilizador userLogado) throws SQLException {
         String sql = "UPDATE utilizador SET estado = 1 WHERE username = ?";
 
         try (Connection conn = DBConnection.getconn();
@@ -274,24 +271,20 @@ public class UtilizadoresDAO {
             ps.setString(1, userLogado.getUsername());
             ps.executeUpdate();
     }
-        return true;
     }
 
-    public boolean mudarEstado(int id) throws SQLException {
+    public void mudarEstado(int id) throws SQLException {
         String sql = "UPDATE utilizador SET estado = 1 WHERE id = ?";
-        boolean contaAtivada = false;
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
-            int atividado = ps.executeUpdate();
-            contaAtivada = atividado == 1;
+            ps.executeUpdate();
 
         }
-        return contaAtivada;
     }
-    public List<Utilizador> verContasPorAtivar() {
+    public void verContasPorAtivar() {
         String sql = "Select * from utilizador where estado = 0";
         List<Utilizador> lista = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -308,10 +301,9 @@ public class UtilizadoresDAO {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de utilizadores: " + lista);
-        return lista;
     }
 
-    public List<Utilizador> verContasPorApagar() {
+    public void verContasPorApagar() {
         String sql = "Select * from utilizador where estado = 3";
         List<Utilizador> lista = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -328,7 +320,6 @@ public class UtilizadoresDAO {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de utilizadores: " + lista);
-        return lista;
     }
 
     public boolean verSeContaExiste(int id) throws SQLException {

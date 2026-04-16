@@ -28,10 +28,4 @@ public class Funcionario {
     public int getIdUtilizador() { return idUtilizador; }
 
     // setters
-    public void setNif(int nif) { this.nif = nif; }
-    public void setTelemovel(int telemovel) { this.telemovel = telemovel; }
-    public void setMorada(String morada) { this.morada = morada; }
-    public void setNivelE(int nivelE) { this.nivelE = nivelE; }
-    public void setDataI(Date dataI) { this.dataI = dataI; }
-    public void setIdUtilizador(int idUtilizador) { this.idUtilizador = idUtilizador; }
 }

@@ -1,15 +1,13 @@
 package controller;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
 
 import model.Funcionario;
 import model.Utilizador;
 import model.dao.FuncionarioDAO;
-import model.dao.UtilizadoresDAO;
 
 public class FuncionarioController {
-    private static FuncionarioDAO dao = new FuncionarioDAO();
+    private static final FuncionarioDAO dao = new FuncionarioDAO();
 
     public static void criarFuncionario(Scanner sc, Utilizador logado) {
         System.out.println("\n Registar Funcionario");

@@ -1,25 +1,17 @@
 package controller;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Scanner;
 
 import model.Cliente;
-import model.Funcionario;
 import model.Utilizador;
 import model.dao.ClienteDAO;
-import model.dao.ClienteDAO;
-import model.dao.FuncionarioDAO;
 import model.dao.UtilizadoresDAO;
-import model.db.DBConnection;
 
-import java.util.Scanner;
 
 public class ClienteController {
-    private static ClienteDAO dao = new ClienteDAO();
-    private static UtilizadoresDAO utilizadoresDAO = new UtilizadoresDAO();
+    private static final ClienteDAO dao = new ClienteDAO();
+    private static final UtilizadoresDAO utilizadoresDAO = new UtilizadoresDAO();
 
     public static void criarCliente(Scanner sc, Utilizador logado) {
         System.out.println("\nRegistar Cliente");
@@ -73,7 +65,8 @@ public class ClienteController {
         if (userLogado == null) {
             System.out.println("Fazer login!!");
         }
-        if (!dao.VerSeCliente(userLogado.getId())) {
+        assert userLogado != null;
+        if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
             System.out.println("So clientes podem fazer isto!!!!");
             return;
         }

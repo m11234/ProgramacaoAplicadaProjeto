@@ -45,5 +45,4 @@ public class Equipamento {
     public void setLote(String lote) {this.lote = lote;}
     public void setDataSubmissao(Date dataSubmissao) {this.dataSubmissao = dataSubmissao;}
     public void  setDataReparacao(Date dataReparacao) {this.dataReparacao = dataReparacao;}
-    public void setid(int id) {this.id = id;}
 }

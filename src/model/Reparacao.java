@@ -21,7 +21,7 @@ public class Reparacao {
         this.custo = custo;
         this.estado = estado;
         this.idEquip = idEquip;
-        this.FuncionarioA = FuncionarioA;
+        Reparacao.FuncionarioA = FuncionarioA;
     }
 
     public Reparacao(String observacao,int idEquip,int estado) {
@@ -31,14 +31,14 @@ public class Reparacao {
     }
 
     public Reparacao(int FuncionarioA, int idR) {
-        this.FuncionarioA = FuncionarioA;
+        Reparacao.FuncionarioA = FuncionarioA;
         this.idR = idR;
     }
 
     public Reparacao(int estado, int idReparacao, int idFuncionario) {
         this.estado = estado;
         this.idR = idReparacao;
-        this.FuncionarioA = idFuncionario;
+        FuncionarioA = idFuncionario;
     }
 
     public Reparacao() {
@@ -48,7 +48,7 @@ public class Reparacao {
     /**
      * Metodo para formatar a visualizacao da peca.
      * Solucao adaptada de: Duncan Jones
-     * Fonte: https://stackoverflow.com/questions/29140402/how-do-i-print-my-java-object-without-getting-sometype2f92e0f4
+     * Fonte: <a href="https://stackoverflow.com/questions/29140402/how-do-i-print-my-java-object-without-getting-sometype2f92e0f4">...</a>
      * Acedido em: 16 de Abril de 2026.
      */
     @Override
@@ -82,5 +82,6 @@ public class Reparacao {
     public void setCusto(float custo) {this.custo = custo;}
     public void setObservacao(String observacao) {this.observacao = observacao;}
     public void setIdEquip(int idEquip) {this.idEquip = idEquip;}
-    public void setFuncionarioA(int FuncionarioA) {this.FuncionarioA = FuncionarioA;}
+    public void setFuncionarioA(int FuncionarioA) {
+        Reparacao.FuncionarioA = FuncionarioA;}
 }

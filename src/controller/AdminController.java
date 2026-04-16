@@ -6,18 +6,16 @@ import model.Reparacao;
 import model.Utilizador;
 import model.dao.AdminDao;
 
-import java.awt.*;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import model.dao.UtilizadoresDAO;
 
 public class AdminController {
-    private static AdminDao adminDao = new AdminDao();
-    private UtilizadorController controller = new UtilizadorController();
-    private UtilizadoresDAO dao = new UtilizadoresDAO();
+    private static final AdminDao adminDao = new AdminDao();
+    private final UtilizadorController controller = new UtilizadorController();
+    private final UtilizadoresDAO dao = new UtilizadoresDAO();
     //email
     private static final String EMAIL_REGEX = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]{2,}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
@@ -44,15 +42,12 @@ public class AdminController {
                 Utilizador userCriado = dao.Login(uPrimeiro);
                 dao.mudarEstadoGestor(userCriado);
 
-                if (userCriado != null) {
-                    Admin novoGestor = new Admin();
-                    novoGestor.setId(userCriado.getId());
 
-                    adminDao.criarGestor(novoGestor);
-                    System.out.println("Conta de Gestor criada com sucesso para o ID: " + userCriado.getId());
-                } else {
-                    System.out.println("Erro: Não foi possível validar a conta acabada de criar.");
-                }
+                Admin novoGestor = new Admin();
+                novoGestor.setId(userCriado.getId());
+
+                adminDao.criarGestor(novoGestor);
+                System.out.println("Conta de Gestor criada com sucesso para o ID: " + userCriado.getId());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -152,25 +147,21 @@ public class AdminController {
         Utilizador userCriado = dao.Login(uPrimeiro);
         dao.mudarEstadoGestor(userCriado);
 
-        if (userCriado != null) {
-            Admin novoGestor = new Admin();
-            novoGestor.setId(userCriado.getId());
+        Admin novoGestor = new Admin();
+        novoGestor.setId(userCriado.getId());
 
-            adminDao.criarGestor(novoGestor);
-            System.out.println("Conta de Gestor criada com sucesso para o ID: " + userCriado.getId());
-        } else {
-            System.out.println("Erro: Não foi possível validar a conta acabada de criar.");
-        }
+        adminDao.criarGestor(novoGestor);
+        System.out.println("Conta de Gestor criada com sucesso para o ID: " + userCriado.getId());
     }
 
-    public Utilizador ConsultarDadosGestor(Utilizador userLogado, Scanner sc) throws SQLException {
+    public void ConsultarDadosGestor(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return userLogado;
+            return;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return userLogado;
+            return;
         }
         System.out.println("Id do utilizador a consultar dados");
         int id = sc.nextInt();
@@ -184,7 +175,6 @@ public class AdminController {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
 
-        return Ver;
     }
 
     public void atualizarDadosGestor(Scanner sc, Utilizador userLogado) throws SQLException {
@@ -266,14 +256,14 @@ public class AdminController {
     }
 
 
-    public Utilizador ConsultarNome(Utilizador userLogado, Scanner sc) throws SQLException {
+    public void ConsultarNome(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return userLogado;
+            return;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return userLogado;
+            return;
         }
         System.out.println("Insira o nome para pesquisar: ");
         sc.nextLine();
@@ -288,17 +278,16 @@ public class AdminController {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
 
-        return Ver;
     }
 
-    public Utilizador ConsultarUsername(Utilizador userLogado, Scanner sc) throws SQLException {
+    public void ConsultarUsername(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return userLogado;
+            return;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return userLogado;
+            return;
         }
         System.out.println("Insira o username para pesquisar: ");
         sc.nextLine();
@@ -313,17 +302,16 @@ public class AdminController {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
 
-        return Ver;
     }
 
-    public Utilizador ConsultarEmail(Utilizador userLogado, Scanner sc) throws SQLException {
+    public void ConsultarEmail(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return userLogado;
+            return;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return userLogado;
+            return;
         }
         System.out.println("Insira o email para pesquisar: ");
         sc.nextLine();
@@ -338,7 +326,6 @@ public class AdminController {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
 
-        return Ver;
     }
 
     public void ConsultarReparacao(Utilizador userLogado, Scanner sc) throws SQLException {
@@ -363,7 +350,6 @@ public class AdminController {
         } else {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
-        return;
     }
 
     public void PesquisarEquipamento(Utilizador userLogado, Scanner sc) throws SQLException {
@@ -390,7 +376,6 @@ public class AdminController {
         } else {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
-        return;
     }
 
 }

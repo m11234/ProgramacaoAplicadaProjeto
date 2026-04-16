@@ -10,7 +10,7 @@ import model.dao.UtilizadoresDAO;
 
 public class UtilizadorController {
 
-    private UtilizadoresDAO dao = new UtilizadoresDAO();
+    private final UtilizadoresDAO dao = new UtilizadoresDAO();
 
 
 
@@ -35,11 +35,11 @@ public class UtilizadorController {
         String email = "";
         boolean emailValido = false;
 
-        /**
-         * Logica de validacao de enderecos de email em Java.
-         * Solucao adaptada de: Nicolas Rio
-         * Fonte: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
-         * Acedido em: Dezasseis de Abril de dois mil e vinte e seis.
+        /*
+          Logica de validacao de enderecos de email em Java.
+          Solucao adaptada de: Nicolas Rio
+          Fonte: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
+          Acedido em: Dezasseis de Abril de dois mil e vinte e seis.
          */
         while (!emailValido) {
             System.out.print("Email: ");
@@ -52,8 +52,6 @@ public class UtilizadorController {
             }
         }
 
-        String estado = "ativo";
-
         Utilizador u = new Utilizador(nome, username, password, email);
 
         boolean sucesso = dao.RegistarUtilizador(u);
@@ -64,18 +62,18 @@ public class UtilizadorController {
             System.out.println("\n 2 Associar utilizador como cliente");
             System.out.println("\n 1 Associar utilizador como funcionario");
             int tipoDeConta;
-            Utilizador userLogado = null;
+            Utilizador userLogado;
             tipoDeConta = sc.nextInt();
             switch (tipoDeConta) {
                 case 1:
                     Utilizador l = new Utilizador(username, password);
                     userLogado = dao.Login(l);
-                    FuncionarioController.criarFuncionario(sc,userLogado);;
+                    FuncionarioController.criarFuncionario(sc,userLogado);
                     break;
                 case 2:
                     Utilizador x = new Utilizador(username, password);
                     userLogado = dao.Login(x);
-                    ClienteController.criarCliente(sc,userLogado);;
+                    ClienteController.criarCliente(sc,userLogado);
                     break;
             }
         } else {
@@ -87,6 +85,7 @@ public class UtilizadorController {
         System.out.println("\n--- Registo de Utilizador ---");
 
         System.out.print("Nome: ");
+        sc.nextLine();
         String nome = sc.nextLine();
 
         System.out.print("Username: ");
@@ -109,8 +108,6 @@ public class UtilizadorController {
                 System.out.println("Erro: O email deve apresentar um formato válido e obrigatório ([designação] @ [entidade] . [domínio]).");
             }
         }
-
-        String estado = "ativo";
 
         Utilizador u = new Utilizador(nome, username, password, email);
 
@@ -141,7 +138,6 @@ public class UtilizadorController {
                 System.out.println("\nBem-vindo " + logado.getUsername() + ".\n");
                 if (logado.getEstado() != 1) {
                     System.out.println("Erro: Conta ainda nao ativada pelo gestor contacte um gestor");
-                    logado = null;
                 } }
             else {
                 System.out.println("Erro dados invalidos ou conta foi apagada contacte um gestor");
@@ -152,7 +148,7 @@ public class UtilizadorController {
         return logado; // agora tens o currentUser
     }
 
-    public Utilizador Logout(Utilizador logado) throws SQLException {
+    public Utilizador Logout(Utilizador logado) {
         if (logado != null){
             System.out.println("\nAdeus " + logado.getUsername() + ".\n");
         } else {
@@ -165,7 +161,8 @@ public class UtilizadorController {
     public Utilizador ConsultarDados(Utilizador logado) {
         Utilizador u = dao.ConsultarDados(logado);
 
-        if (u != null & u.getEstado() != 1){
+        assert u != null;
+        if (u.getEstado() == 1){
             System.out.println("\n Dados Utilizador");
             System.out.println("Nome:" + u.getNome());
             System.out.println("Email:" + u.getEmail());
@@ -179,9 +176,9 @@ public class UtilizadorController {
     }
 
 
-    public void atualizarDados(Scanner sc, Utilizador logado) throws SQLException {
+    public void atualizarDados(Scanner sc, Utilizador logado) {
         int atualizar;
-        boolean atualizadoComSucesso = false;
+        boolean atualizadoComSucesso;
         System.out.println("\n--- Atualizar Dados ---");
         System.out.println("1 - Atualizar password");
         System.out.println("2 - Atualizar email");

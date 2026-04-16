@@ -1,6 +1,5 @@
 package model.dao;
 import java.sql.*;
-
 import model.Cliente;
 import model.db.DBConnection;
 

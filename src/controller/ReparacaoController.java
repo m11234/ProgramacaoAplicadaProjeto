@@ -8,11 +8,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ReparacaoController {
-    private UtilizadoresDAO dao = new UtilizadoresDAO();
-    private EquipamentoController equipamentoController = new EquipamentoController();
-    private ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
-    private EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
-    private AdminDao adminDao = new AdminDao();
+    private final ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
+    private final EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
+    private final AdminDao adminDao = new AdminDao();
 
     public void criarReparacao(Scanner sc, Utilizador userLogado) throws SQLException {
         if (userLogado == null) {
@@ -214,6 +212,6 @@ public class ReparacaoController {
                 return;
             }
 
-            reparacaoDAO.notificacaoDezDiasSemFinalizacao();
+            ReparacaoDAO.notificacaoDezDiasSemFinalizacao();
         }
 }
