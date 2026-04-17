@@ -7,6 +7,21 @@ import model.db.DBConnection;
 
 
 public class UtilizadoresDAO {
+    /**
+     * Regista um novo utilizador na base de dados.
+     * <p>
+     *      O processo começa por preparar uma instrução de inserção SQL para armazenar as informações
+     *      principais do perfil (nome, username, password e email) na tabela correspondente. Durante a
+     *      inserção, o estado da conta é definido automaticamente como 0 (a espera de aprovacao de um gestor).
+     *      O método recorre ao padrão try-with-resources para garantir
+     *      o fecho automático da ligação à base de dados. Caso os dados fornecidos violem restrições únicas
+     *      (como a tentativa de registar um username ou email já existentes), o sistema emite um aviso na consola
+     *      e lança uma exceção para interromper a execução.
+     * </p>
+     * @param u O objeto {@link Utilizador} que contém os dados pessoais e as credenciais a registar.
+     * @return {@code true} se a inserção do novo utilizador for concluída com sucesso.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public boolean RegistarUtilizador(Utilizador u ) {
         String sql = "Insert into utilizador (nome,username,password,estado,email) values (?,?,?,0,?)";
 
@@ -28,6 +43,23 @@ public class UtilizadoresDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Login.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando por um registo exato que corresponda ao nome de utilizador (username) e
+     *      à palavra-passe (password) fornecidos. Se as credenciais estiverem corretas e o utilizador
+     *      for encontrado, o método constrói um novo objeto {@link Utilizador} e preenche-o com
+     *      as informações essenciais da conta (identificador, nome, username, password, email e estado),
+     *      devolvendo este objeto que servirá para manter a sessão ativa. Caso as credenciais não
+     *      coincidam com nenhum registo, a autenticação falha e o método retorna {@code null}.
+     * </p>
+     * @param u O objeto {@link Utilizador} que contém as credenciais introduzidas (username e password) a serem validadas na base de dados.
+     * @return Um objeto {@link Utilizador} preenchido com os dados do perfil em caso de sucesso, ou {@code null} se o login falhar.
+     * @throws SQLException Se ocorrer algum erro declarado na assinatura do método.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public Utilizador Login(Utilizador u) throws SQLException {
         String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ?";
 
@@ -56,6 +88,18 @@ public class UtilizadoresDAO {
         }
     }
 
+    /**
+     * Consulta e recupera os dados atualizados do perfil de um utilizador.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando pelo registo que corresponda ao nome de utilizador (username) da conta
+     *      fornecida. Se o registo for encontrado, o método constrói e devolve um novo objeto
+     *      com as informações email e estado).
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} que representa o utilizador atual e que contém o username a ser pesquisado na base de dados.
+     * @return Um novo objeto {@link Utilizador} com os dados recuperados da base de dados, ou o objeto original se o registo não for encontrado.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public Utilizador ConsultarDados(Utilizador userLogado) {
         String sql = "Select nome, username, password , email , estado from utilizador where username = ?";
 
@@ -83,6 +127,23 @@ public class UtilizadoresDAO {
         }
         return userLogado;
     }
+
+
+    /**
+     * Consulta os dados de qualquer conta de utilizador através do seu identificador.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando pelo registo que corresponda ao identificador único (id) fornecido.
+     *      Esta funcionalidade destina-se a perfis com privilégios de gestão, permitindo
+     *      a verificação ou auditoria de qualquer conta registada no sistema. Se o registo
+     *      for encontrado, o método constrói um novo objeto {@link Utilizador} e preenche-o
+     *      com as informações essenciais do perfil (nome, username, password, email e estado),
+     *      devolvendo este objeto. Caso a consulta não retorne resultados, o método devolve {@code null}.
+     * </p>
+     * @param id O identificador único do utilizador a ser pesquisado na base de dados.
+     * @return Um objeto {@link Utilizador} com os dados recuperados da base de dados, ou {@code null} caso o registo não exista.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public Utilizador ConsultarDadosGestor(int id) {
         String sql = "Select nome, username, password , email , estado from utilizador where id = ?";
 

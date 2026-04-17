@@ -7,6 +7,21 @@ import java.sql.*;
 
 public class EquipamentoDAO {
 
+    /**
+     * Metodo para persistir o registo de um novo equipamento na base de dados
+     * <p>
+     *      O metodo recebe um objeto do tipo {@link Equipamento} e executa uma instrução SQL {@code INSERT}
+     *      para gravar as especificações técnicas do dispositivo (marca, modelo, SKU e lote), a data
+     *      em que foi submetido e o identificador do utilizador que realizou o registo.
+     *      A data de submissão é convertida do formato {@code java.util.Date} para {@code java.sql.Date}
+     *      para garantir a compatibilidade com a base de dados.
+     * </p>
+     * @param e O objeto {@link Equipamento} contendo os dados a serem inseridos na tabela "equipamento"
+     * @return {@code true} se o equipamento for registado com sucesso (pelo menos uma linha inserida),
+     * {@code false} caso contrário
+     * @throws RuntimeException Se ocorrer um erro de SQL durante a execução da instrução,
+     * encapsulando a {@link SQLException} original.
+     */
     public boolean RegistarEquipamento (Equipamento e){
         String sql = "Insert into equipamento (Marca, Modelo, SKU, Lote, DataSubmissao, id) values (?,?,?,?,?,?)";
 
@@ -27,6 +42,23 @@ public class EquipamentoDAO {
             throw new RuntimeException(ex);
         }
     }
+
+    /**
+     * Metodo para verificar se um equipamento específico pertence a um determinado utilizador
+     * <p>
+     *      O metodo realiza uma consulta na base de dados procurando por um registo na tabela "equipamento"
+     *      que coincida simultaneamente com o ID do equipamento e o ID do utilizador fornecidos.
+     *      Esta validação é usada para garantir a segurança dos dados, impedindo
+     *      que um utilizador aceda ou manipule equipamentos que não são seus. Se a correspondência
+     *      for encontrada, confirma a propriedade e retorna verdadeiro.
+     * </p>
+     * @param idEquip O identificador único do equipamento a ser verificado
+     * @param id O identificador único do utilizador (proprietário)
+     * @return {@code true} se o equipamento existir e pertencer ao utilizador indicado,
+     * {@code false} caso contrário
+     * @throws RuntimeException Se ocorrer um erro de SQL durante a execução da consulta,
+     * encapsulando a {@link SQLException} original.
+     */
     public boolean verSeEquipPertence(int idEquip,int id) {
         String sql = "Select 1 from equipamento where idEquip = ? and id = ?";
         boolean existeAndPertence = false;
