@@ -1,0 +1,100 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes- idN: int
+- id: int
+- mensagem: string
+- dataEnvio: date
+- lido: boo</help_text><element><id>UMLClass</id><coordinates><x>618</x><y>132</y><w>126</w><h>84</h></coordinates><panel_attributes>Utilizador
+--
+-id: int
+- nome: string
+- usarname: unique
+- password: string
+- estado: bool
+- email: unique
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>990</x><y>258</y><w>126</w><h>36</h></coordinates><panel_attributes>Gestor/Administrador
+--
+-idA: unique
+-Id: int
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>696</x><y>258</y><w>126</w><h>84</h></coordinates><panel_attributes>Clientes
+--
+-idC: unique
+-Id:int
+-NIF: int
+-Telemovel: string
+-Morada: string
+-SectorA: string
+-Escalao: string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>846</x><y>258</y><w>126</w><h>84</h></coordinates><panel_attributes>Funcionários
+--
+-idC: unique
+-id:int
+-NIF: int
+-Telemovel: int
+-Morada: string
+-NivelE: int
+-DataI: date</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>738</x><y>156</y><w>324</w><h>114</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;520;10;520;170</additional_attributes></element><element><id>Relation</id><coordinates><x>738</x><y>162</y><w>186</w><h>108</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;290;10;290;160</additional_attributes></element><element><id>Relation</id><coordinates><x>738</x><y>168</y><w>36</w><h>102</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10;40;150</additional_attributes></element><element><id>UMLClass</id><coordinates><x>690</x><y>408</y><w>126</w><h>84</h></coordinates><panel_attributes>Equipamento
+--
+- idEquip: int
+- Marca: string
+- Modelo: string
+- SKU: string
+- Lote: string
+- dataSubmissao: date
+- dataReparacao: date
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>690</x><y>558</y><w>126</w><h>84</h></coordinates><panel_attributes>Reparação
+--
+- idR: unique
+- idEquip: int
+- Estado: int
+- DataInicio: date
+- DataFim: date
+- Custo: float
+- Observação: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>690</x><y>708</y><w>126</w><h>84</h></coordinates><panel_attributes>Teste
+--
+- idTeste: unique
+- idReparacao: int
+- designacao: string
+- descricao: string
+- dataTeste: date
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>912</x><y>564</y><w>126</w><h>72</h></coordinates><panel_attributes>Peça
+--
+- idPeça: int
+- idEquip: int
+- codigo: int
+- designaçao: string
+- fabricante: string
+- quantidade: int
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>492</x><y>408</y><w>126</w><h>84</h></coordinates><panel_attributes>Notificação
+--
+- idN: int
+- id: int
+- mensagem: string
+- dataEnvio: date
+- lido: boo</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>492</x><y>132</y><w>54</w><h>48</h></coordinates><panel_attributes>Log
+--
+- id: int
+- data: date
+- acao: string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>336</y><w>30</w><h>84</h></coordinates><panel_attributes>lt=-
+m1=0...*
+m2=1
+</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>486</y><w>30</w><h>84</h></coordinates><panel_attributes>lt=-
+m1=0...*
+m2=1
+</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>336</y><w>66</w><h>246</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=0..*
+</panel_attributes><additional_attributes>80;10;80;380;10;380</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>636</y><w>30</w><h>84</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=0..*
+</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>552</x><y>210</y><w>102</w><h>210</h></coordinates><panel_attributes>lt=-
+m1=0...*
+m2=1
+</panel_attributes><additional_attributes>10;330;10;280;140;280;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>594</y><w>114</w><h>30</h></coordinates><panel_attributes>lt=-
+m1=0..*
+m2=0..*
+</panel_attributes><additional_attributes>10;20;170;20</additional_attributes></element></diagram>
