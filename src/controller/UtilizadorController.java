@@ -188,7 +188,7 @@ public class UtilizadorController {
             }
         }
 
-        return logado; // agora tens o currentUser
+        return logado;
     }
 
     /**
