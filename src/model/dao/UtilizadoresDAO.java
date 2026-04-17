@@ -171,6 +171,20 @@ public class UtilizadoresDAO {
     }
 
 
+    /**
+     * Consulta as informações básicas de um utilizador através do seu nome.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando pelo registo que corresponda de forma exata ao nome fornecido. Se o
+     *      registo for encontrado, o método constrói um novo objeto {@link Utilizador} e
+     *      preenche-o apenas com as informações essenciais de identificação e contacto
+     *      (nome, username e email), devolvendo este objeto. Caso a consulta não retorne
+     *      nenhum resultado, o método conclui a operação devolvendo {@code null}.
+     * </p>
+     * @param nome O nome completo ou designação do utilizador a ser pesquisado na base de dados.
+     * @return Um objeto {@link Utilizador} com os dados recuperados da base de dados, ou {@code null} caso o registo não exista.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public Utilizador ConsultarNomeUtilizador(String nome) {
         String sql = "Select nome, username, email from utilizador where nome = ?";
 
@@ -193,6 +207,20 @@ public class UtilizadoresDAO {
         return null ;
     }
 
+    /**
+     * Consulta as informações básicas de um utilizador através do seu username.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando pelo registo que corresponda de forma exata ao username fornecido. Se o
+     *      registo for encontrado, o método constrói um novo objeto {@link Utilizador} e
+     *      preenche-o apenas com as informações essenciais de identificação e contacto
+     *      (nome, username e email), devolvendo este objeto. Caso a consulta não retorne
+     *      nenhum resultado, o método conclui a operação devolvendo {@code null}.
+     * </p>
+     * @param username O nome completo ou designação do utilizador a ser pesquisado na base de dados.
+     * @return Um objeto {@link Utilizador} com os dados recuperados da base de dados, ou {@code null} caso o registo não exista.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public Utilizador ConsultarUsername(String username) {
         String sql = "Select nome, username, email from utilizador where username = ?";
 
@@ -215,6 +243,20 @@ public class UtilizadoresDAO {
         return null ;
     }
 
+    /**
+     * Consulta as informações básicas de um utilizador através do seu email.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando pelo registo que corresponda de forma exata ao email fornecido. Se o
+     *      registo for encontrado, o método constrói um novo objeto {@link Utilizador} e
+     *      preenche-o apenas com as informações essenciais de identificação e contacto
+     *      (nome, username e email), devolvendo este objeto. Caso a consulta não retorne
+     *      nenhum resultado, o método conclui a operação devolvendo {@code null}.
+     * </p>
+     * @param email O nome completo ou designação do utilizador a ser pesquisado na base de dados.
+     * @return Um objeto {@link Utilizador} com os dados recuperados da base de dados, ou {@code null} caso o registo não exista.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public Utilizador ConsultarEmailUtilizador(String email) {
         String sql = "Select nome, username, email from utilizador where email = ?";
 
@@ -237,9 +279,23 @@ public class UtilizadoresDAO {
         return null ;
     }
 
-
-
-
+    /**
+     * Atualiza as credenciais e informações de contacto de um utilizador autenticado.
+     * <p>
+     *      O processo começa por verificar se o nome de utilizador (username) da conta
+     *      com sessão iniciada corresponde ao nome de utilizador dos novos dados fornecidos.
+     *      Se os identificadores não coincidirem, a ação é imediatamente bloqueada e é lançada
+     *      uma exceção de segurança, garantindo que um utilizador apenas possa alterar o seu
+     *      próprio perfil. Ultrapassada esta validação de segurança, o método executa uma instrução
+     *      de atualização na base de dados, modificando a palavra-passe e o endereço de email
+     *      vinculados a essa conta específica.
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} que representa a conta atualmente com sessão iniciada.
+     * @param dadosNovos O objeto {@link Utilizador} contendo as novas informações (palavra-passe e email) a serem gravadas.
+     * @return {@code true} se a atualização dos dados for concluída com sucesso na base de dados.
+     * @throws SecurityException Se o utilizador tentar modificar os dados de uma conta diferente da sua.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public boolean AtualizarDados(Utilizador userLogado, Utilizador dadosNovos) {
         if (!userLogado.getUsername().equals(dadosNovos.getUsername())) {
             throw new SecurityException("Ação proibida!!");
@@ -262,6 +318,22 @@ public class UtilizadoresDAO {
         return true;
     }
 
+    /**
+     * Inicia o processo de eliminação de uma conta de utilizador através da alteração do seu estado.
+     * <p>
+     O processo começa por verificar se o identificador fornecido corresponde ao identificador da
+     conta com sessão iniciada. Se os identificadores não coincidirem, a ação é imediatamente bloqueada
+     e é lançada uma exceção de segurança, garantindo que um utilizador apenas possa solicitar a
+     eliminação da sua própria conta. Ultrapassada esta validação de segurança, o método executa
+     uma instrução de atualização na base de dados, alterando o estado do utilizador para 3 (indicando
+     que o pedido para apagar a conta foi iniciado).
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} que representa a conta atualmente com sessão iniciada.
+     * @param id O identificador único do utilizador cuja conta se pretende apagar.
+     * @return {@code true} se o estado da conta for atualizado com sucesso na base de dados, {@code false} caso contrário.
+     * @throws SecurityException Se o utilizador tentar apagar uma conta diferente da sua.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public boolean ApagarContaUtilizador(Utilizador userLogado,int id) {
 
         if (userLogado.getId() != id) {
@@ -280,6 +352,22 @@ public class UtilizadoresDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Executa a eliminação administrativa e a anonimização dos dados de uma conta de utilizador.
+     * <p>
+     *      O processo consiste em efetuar uma eliminicação e ofuscação dos dados
+     *      pessoais do utilizador. O método executa uma instrução de atualização na base de dados,
+     *      alterando o estado da conta para 4 (indica que foi apagada).
+     *      Simultaneamente, para garantir a privacidade e cumprir com as normas
+     *      de proteção de dados, as informações sensíveis (nome, nome de utilizador e email) são
+     *      substituídas por valores genéricos concatenados com o identificador único do perfil.
+     *      Esta abordagem preserva a integridade referencial do sistema (como o histórico de ações e
+     *      reparações associadas ao identificador) sem reter os dados reais e identificáveis da pessoa.
+     * </p>
+     * @param id O identificador único do utilizador cuja conta será apagada e anonimizada.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public void ApagarContaAdmin(int id) {
 
         String sql = "UPDATE utilizador SET estado = 4, nome = ?, username = ?, email = ? WHERE id = ?";
@@ -303,6 +391,22 @@ public class UtilizadoresDAO {
         }
     }
 
+    /**
+     * Atualiza o endereço de email de uma conta de utilizador através de privilégios de gestão.
+     * <p>
+     *      O processo começa por preparar uma instrução de atualização na base de dados focada
+     *      em modificar exclusivamente o endereço de email correspondente ao identificador (id)
+     *      fornecido. Esta funcionalidade é concebida para ser utilizada por gestores ou
+     *      administradores, permitindo-lhes a correção ou alteração dos dados de contacto de
+     *      qualquer conta registada no sistema. O método executa a operação através de um
+     *      {@link PreparedStatement} para garantir a segurança da instrução SQL e verifica se
+     *      a atualização teve impacto em alguma linha da tabela, confirmando assim o sucesso da operação.
+     * </p>
+     * @param id O identificador único do utilizador cujo endereço de email será modificado.
+     * @param dadosNovos O objeto {@link Utilizador} que contém o novo endereço de email a ser gravado na conta especificada.
+     * @return {@code true} se o endereço de email for atualizado com sucesso na base de dados, {@code false} caso o identificador não seja encontrado.
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public boolean atualizarEmailGestor(int id, Utilizador dadosNovos) {
         String sql = "UPDATE utilizador SET email = ? WHERE id = ?";
 
@@ -323,6 +427,18 @@ public class UtilizadoresDAO {
         }
     }
 
+    /**
+     * Ativa automaticamente a conta de um utilizador com perfil de gestor.
+     * <p>
+     *      O processo executa uma instrução de atualização na base de dados para alterar o estado
+     *      da conta para 1 (ativa), utiliza o nome de utilizador (username) da conta fornecida.
+     *      Esta funcionalidade é concebida para ser utilizada principalmente durante a primeira execução
+     *      do programa (setup inicial), garantindo que a conta do administrador principal (gestor)
+     *      fique imediatamente operacional, sem a necessidade de passar por um processo de aprovação manual.
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} que representa a conta do gestor recém-criada e a ser ativada.
+     * @throws SQLException Se ocorrer algum erro na manipulação da base de dados durante a ligação ou execução da instrução SQL.
+     */
     public void mudarEstadoGestor(Utilizador userLogado) throws SQLException {
         String sql = "UPDATE utilizador SET estado = 1 WHERE username = ?";
 
@@ -334,6 +450,18 @@ public class UtilizadoresDAO {
     }
     }
 
+    /**
+     * Altera o estado de uma conta de utilizador para ativo através do seu identificador.
+     * <p>
+     *      O processo executa uma instrução de atualização na base de dados para modificar o estado
+     *      da conta para 1 (ativa), utilizando o identificador único (id) fornecido. Esta funcionalidade
+     *      é utilizada por administradores/gestores aprovarem e desbloquear contas de
+     *      utilizadores que se encontravam inativas, permitindo-lhes assim o acesso
+     *      normal às funcionalidades do sistema.
+     * </p>
+     * @param id O identificador único do utilizador cuja conta será ativada.
+     * @throws SQLException Se ocorrer algum erro na manipulação da base de dados durante a ligação ou execução da instrução SQL.
+     */
     public void mudarEstado(int id) throws SQLException {
         String sql = "UPDATE utilizador SET estado = 1 WHERE id = ?";
 
@@ -345,6 +473,19 @@ public class UtilizadoresDAO {
 
         }
     }
+
+    /**
+     * Consulta e exibe a lista de contas de utilizador que se encontram pendentes de ativação.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando por todos os registos cujo estado seja igual a 0 (indica
+     *      que a conta está inativa). Para cada registo encontrado, o
+     *      método constrói um novo objeto {@link Utilizador} e preenche-o com as informações
+     *      essenciais (nome de utilizador e identificador único), adicionando-o a uma lista.
+     *      No final, a lista completa é impressa na consola, permitindo aos gestores visualizarem rapidamente os perfis que necessitam de intervenção para serem ativados.
+     * </p>
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public void verContasPorAtivar() {
         String sql = "Select * from utilizador where estado = 0";
         List<Utilizador> lista = new ArrayList<>();
@@ -364,6 +505,17 @@ public class UtilizadoresDAO {
         System.out.println("Lista de utilizadores: " + lista);
     }
 
+    /**
+     * Consulta e exibe a lista de contas de utilizador que se encontram pendentes de apagar.
+     * <p>
+     O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     procurando por todos os registos cujo estado seja igual a 3 (indica que a conta pediu para ser apagada).
+     Para cada registo encontrado, o método constrói um novo objeto {@link Utilizador} e preenche-o com as informações
+     essenciais (nome de utilizador e identificador único), adicionando-o a uma lista.
+     No final, a lista completa é impressa na consola, permitindo aos gestores visualizarem rapidamente os perfis que necessitam de intervenção para serem desativados.
+     * </p>
+     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
+     */
     public void verContasPorApagar() {
         String sql = "Select * from utilizador where estado = 3";
         List<Utilizador> lista = new ArrayList<>();
@@ -383,6 +535,21 @@ public class UtilizadoresDAO {
         System.out.println("Lista de utilizadores: " + lista);
     }
 
+    /**
+     * Verifica a existência de uma conta de utilizador através do seu identificador.
+     * <p>
+     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     *      procurando por um registo que corresponda ao identificador único (id) fornecido.
+     *      Se a consulta retornar algum resultado, o método confirma a existência da conta,
+     *      alterando a variável de controlo interna e devolvendo {@code true}. Caso contrário,
+     *      se o identificador não for encontrado, o método conclui a operação devolvendo {@code false}.
+     *      Esta validação prévia é fundamental para garantir que operações subsequentes apenas
+     *      sejam aplicadas a contas válidas e existentes no sistema.
+     * </p>
+     * @param id O identificador único da conta de utilizador a ser verificada na base de dados.
+     * @return {@code true} se a conta existir, {@code false} caso não seja encontrado nenhum registo com esse identificador.
+     * @throws SQLException Se ocorrer algum erro na manipulação da base de dados durante a ligação ou execução da instrução SQL.
+     */
     public boolean verSeContaExiste(int id) throws SQLException {
         String sql = "Select * from utilizador WHERE id = ?";
         boolean contaExiste = false;

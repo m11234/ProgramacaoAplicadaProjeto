@@ -9,6 +9,12 @@ public class Teste {
     private Date dataTeste;
     private Float preco;
 
+    /**
+     * @param idReparacao
+     * @param designacao
+     * @param descricao
+     * @param preco
+     */
     public Teste(int idReparacao,String designacao, String descricao,float preco) {
         this.idReparacao = idReparacao;
         this.designacao = designacao;
@@ -16,11 +22,26 @@ public class Teste {
         this.preco = preco;
     }
 
+    /**
+     * @return
+     */
     //getters
     public int getIdReparacao() {return idReparacao;}
+
+    /**
+     * @return
+     */
     public String getDesignacao() {return designacao;}
+
+    /**
+     * @return
+     */
     public String getDescricao() {return descricao;}
     public Date getDataTeste() {return dataTeste;}
+
+    /**
+     * @return
+     */
     public Float getPreco() {return preco;}
 
 

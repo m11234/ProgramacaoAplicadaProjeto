@@ -21,6 +21,9 @@ public class Menu {
     private final TestesController controllerTestes = new TestesController();
     private final PecaController controllerPeca = new PecaController();
 
+    /**
+     * @throws SQLException
+     */
     public void start() throws SQLException {
         controllerAdmin.verAdmins(sc);
 

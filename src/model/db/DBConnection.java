@@ -9,6 +9,9 @@ import java.util.Properties;
 
 public class DBConnection {
 
+    /**
+     * @return
+     */
     public static Connection getconn() {
         try {
             Properties props = new Properties();

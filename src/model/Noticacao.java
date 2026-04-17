@@ -8,6 +8,12 @@ public class Noticacao {
     private boolean lido;
     private int idN;
 
+    /**
+     * @param mensagem
+     * @param dataEnvio
+     * @param lido
+     * @param idN
+     */
     public Noticacao(String mensagem, Date dataEnvio, boolean lido, int idN) {
         this.mensagem = mensagem;
         this.dataEnvio = dataEnvio;

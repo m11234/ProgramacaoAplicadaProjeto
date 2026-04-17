@@ -9,6 +9,14 @@ public class Cliente {
     private int idUtilizador; //FK para o utilizador associado
     private int idC;
 
+    /**
+     * @param nif
+     * @param telemovel
+     * @param morada
+     * @param sector
+     * @param escalao
+     * @param idUtilizador
+     */
     public Cliente(int nif, int telemovel, String morada, String sector, String escalao,int idUtilizador) {
         this.nif = nif;
         this.telemovel = telemovel;
@@ -20,11 +28,30 @@ public class Cliente {
 
     //getters
 
+    /**
+     * @return
+     */
     public int getNif() {return nif;}
+
+    /**
+     * @return
+     */
     public int getTelemovel() {return telemovel;}
     public String getMorada() {return morada;}
+
+    /**
+     * @return
+     */
     public String getSector() {return sector;}
+
+    /**
+     * @return
+     */
     public String getEscalao() {return escalao;}
+
+    /**
+     * @return
+     */
     public int getIdUtilizador() {return idUtilizador;}
     public int getIdC() {return idC;}
 

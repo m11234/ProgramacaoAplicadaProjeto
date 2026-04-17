@@ -13,6 +13,16 @@ public class Reparacao {
     private int idEquip;
     private static int FuncionarioA;
 
+    /**
+     * @param idR
+     * @param observacao
+     * @param dataInicio
+     * @param dataFim
+     * @param custo
+     * @param estado
+     * @param idEquip
+     * @param FuncionarioA
+     */
     public Reparacao(int idR,String observacao, Date dataInicio, Date dataFim, float custo, int estado, int idEquip, int FuncionarioA) {
         this.idR = idR;
         this.observacao = observacao;
@@ -24,17 +34,31 @@ public class Reparacao {
         Reparacao.FuncionarioA = FuncionarioA;
     }
 
+    /**
+     * @param observacao
+     * @param idEquip
+     * @param estado
+     */
     public Reparacao(String observacao,int idEquip,int estado) {
         this.observacao = observacao;
         this.idEquip = idEquip;
         this.estado = estado;
     }
 
+    /**
+     * @param FuncionarioA
+     * @param idR
+     */
     public Reparacao(int FuncionarioA, int idR) {
         Reparacao.FuncionarioA = FuncionarioA;
         this.idR = idR;
     }
 
+    /**
+     * @param estado
+     * @param idReparacao
+     * @param idFuncionario
+     */
     public Reparacao(int estado, int idReparacao, int idFuncionario) {
         this.estado = estado;
         this.idR = idReparacao;
@@ -64,23 +88,69 @@ public class Reparacao {
     }
 
 
+    /**
+     * @return
+     */
     //getters
     public int getIdR() {return idR;}
+
+    /**
+     * @return
+     */
     public int getEstado() {return estado;}
     public Date getDataInicio() {return dataInicio;}
+
+    /**
+     * @return
+     */
     public Date getDataFim() {return dataFim;}
     public float getCusto() {return custo;}
+
+    /**
+     * @return
+     */
     public String getObservacao() {return observacao;}
+
+    /**
+     * @return
+     */
     public int getIdEquip() {return idEquip;}
+
+    /**
+     * @return
+     */
     public static int getFuncionarioA() {return FuncionarioA;}
 
+    /**
+     * @param idR
+     */
     //setters
     public void setIdR(int idR) {this.idR = idR;}
     public void setEstado(int estado) {this.estado = estado;}
+
+    /**
+     * @param dataInicio
+     */
     public void setDataInicio(Date dataInicio) {this.dataInicio = dataInicio;}
+
+    /**
+     * @param dataFim
+     */
     public void setDataFim(Date dataFim) {this.dataFim = dataFim;}
+
+    /**
+     * @param custo
+     */
     public void setCusto(float custo) {this.custo = custo;}
+
+    /**
+     * @param observacao
+     */
     public void setObservacao(String observacao) {this.observacao = observacao;}
+
+    /**
+     * @param idEquip
+     */
     public void setIdEquip(int idEquip) {this.idEquip = idEquip;}
     public void setFuncionarioA(int FuncionarioA) {
         Reparacao.FuncionarioA = FuncionarioA;}

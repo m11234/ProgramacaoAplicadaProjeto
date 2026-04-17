@@ -8,6 +8,12 @@ public class Peca {
     private float preco;
 
 
+    /**
+     * @param designacao
+     * @param fabricante
+     * @param quantidade
+     * @param preco
+     */
     public Peca( String designacao, String fabricante, int quantidade,float preco) {
         this.designacao = designacao;
         this.fabricante = fabricante;
@@ -33,15 +39,43 @@ public class Peca {
 
     //getters
     public int getIdPeca() {return idPeca;}
+
+    /**
+     * @return
+     */
     public String getDesignacao() {return designacao;}
+
+    /**
+     * @return
+     */
     public String getFabricante() {return fabricante;}
+
+    /**
+     * @return
+     */
     public int getQuantidade() {return quantidade;}
+
+    /**
+     * @return
+     */
     public float getPreco() {return preco;}
 
     //setters
     public void setIdPeca(int idPeca) {this.idPeca = idPeca;}
+
+    /**
+     * @param designacao
+     */
     public void setDesignacao(String designacao) {this.designacao = designacao;}
+
+    /**
+     * @param fabricante
+     */
     public void setFabricante(String fabricante) {this.fabricante = fabricante;}
+
+    /**
+     * @param quantidade
+     */
     public void setQuantidade(int quantidade) {this.quantidade = quantidade;}
     public void setPreco(float preco) {this.preco = preco;}
 }
