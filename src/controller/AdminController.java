@@ -7,10 +7,12 @@ import model.Utilizador;
 import model.dao.AdminDao;
 
 import java.sql.SQLException;
+import java.util.IllegalFormatCodePointException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import model.dao.ClienteDAO;
+import model.dao.ReparacaoDAO;
 import model.dao.UtilizadoresDAO;
 
 public class AdminController {
@@ -114,7 +116,6 @@ public class AdminController {
 
         dao.verContasPorApagar();
     }
-
 
     /**
      * Metodo para ativar contas de utilizadores
@@ -585,4 +586,20 @@ public class AdminController {
         System.out.println("Numero de Utilizadores: " + Utilizadores);
     }
 
+    public void reparacoesEmCurso(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+        int numRaparacoesEmCurso = ReparacaoDAO.contarReparacoes();
+        if (numRaparacoesEmCurso == 0) {
+            System.out.println("Não existem reparacoes em curso");
+            return;
+        }
+        System.out.println("Numero de Reparacoes: " + numRaparacoesEmCurso);
+    }
 }

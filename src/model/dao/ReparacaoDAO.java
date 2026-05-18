@@ -252,6 +252,8 @@ public class ReparacaoDAO {
         }
     }
 
+
+
     /**
      * Identifica as reparações em curso há mais de 10 dias sem conclusão.
      * <p>
@@ -321,5 +323,23 @@ public class ReparacaoDAO {
         System.out.println("Pedido: ");
         return null;
 
+    }
+
+
+    public static int contarReparacoes() throws SQLException {
+        String sql = "Select count(*) from reparacao where estado = 3";
+        int reparacaoAtivas=0;
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                reparacaoAtivas = rs.getInt(1);
+            }
+            if (reparacaoAtivas >= 0) {
+                System.out.println("Não existem reparações ativas");
+            }
+        }
+        return reparacaoAtivas;
     }
 }

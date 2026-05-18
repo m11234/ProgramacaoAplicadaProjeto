@@ -179,6 +179,10 @@ public class Menu {
                                             break;
                                         case 21:
                                             controllerAdmin.NumeroDeUtilizadores(userLogado,sc);
+                                            break;
+                                        case 22:
+                                            controllerAdmin.reparacoesEmCurso(userLogado,sc);
+                                            break;
                                     }
                                 } while (true);
                             }
