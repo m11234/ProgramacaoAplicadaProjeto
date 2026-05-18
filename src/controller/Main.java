@@ -1,16 +1,17 @@
 package controller;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import model.db.DBConnection;
 import view.Menu;
-import view.MenuNovo;
+import view.LoginPagina;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 public class Main {
   static void main() throws SQLException {
-    MenuNovo menuLogin = new MenuNovo();
+    LoginPagina menuLogin = new LoginPagina();
     menuLogin.Login();
     /**
      * Solução adaptada de: Stackify
@@ -26,7 +27,7 @@ public class Main {
     }
 
     Menu menu = new Menu();
-    FlatLightLaf.setup();
+    FlatDarkLaf.setup();
     menu.start();
     // time passes
     Instant end = Instant.now();

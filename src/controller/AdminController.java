@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import model.dao.ClienteDAO;
 import model.dao.UtilizadoresDAO;
 
 public class AdminController {
@@ -565,6 +566,23 @@ public class AdminController {
         } else {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
+    }
+
+    public void NumeroDeUtilizadores(Utilizador userLogado, Scanner sc) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return;
+        }
+        int Utilizadores = ClienteDAO.ContarUtilizadores(userLogado.getId());
+        if (Utilizadores == 0) {
+            System.out.println("Nao existem utilizadores");
+            return;
+        }
+        System.out.println("Numero de Utilizadores: " + Utilizadores);
     }
 
 }

@@ -71,5 +71,21 @@ public class ClienteDAO {
         return ClienteSer;
     }
 
+    public static int ContarUtilizadores(int Id ) throws SQLException {
+        String sql = "Select count(*) from utilizador";
+        int Nutilizadores = 0;
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Nutilizadores =  rs.getInt(1);
+                if (Nutilizadores >= 0) {
+                    System.out.println("Nao existem utilizadores");
+                }
+            }
+        }
+        return Nutilizadores;
+    }
+
 
 }

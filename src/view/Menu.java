@@ -90,6 +90,7 @@ public class Menu {
                             if (adminDAO.VerSeGestor(userLogado.getId())){
                                 do{
                                     System.out.println("\nMenu: Admin");
+                                    System.out.println("21- Numero de utilizadores: ");
                                     System.out.println("20- Consultar equipamentos por codigo: ");
                                     System.out.println("19- Consultar reparação por ID: ");
                                     System.out.println("18- Ver notificações de reparações a ocorrer á mais de 10 dias");
@@ -176,6 +177,8 @@ public class Menu {
                                         case 20:
                                             controllerAdmin.PesquisarEquipamento(userLogado,sc);
                                             break;
+                                        case 21:
+                                            controllerAdmin.NumeroDeUtilizadores(userLogado,sc);
                                     }
                                 } while (true);
                             }
