@@ -2,14 +2,12 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
-import com.formdev.flatlaf.FlatDarkLaf;
 public class LoginPagina extends javax.swing.JFrame {
     private Container cont;
     private JButton botaoOK;
     private JTextField caixaLogin, caixaPassword;
 
     public Object Login() {
-            FlatDarkLaf.setup();
             cont = getContentPane();
             cont.setLayout(new BorderLayout());
 
