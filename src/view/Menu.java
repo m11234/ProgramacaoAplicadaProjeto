@@ -225,11 +225,11 @@ public class Menu {
                             System.out.println("Fazer login primeiro!!!");
                         }break theLabel;
                     case 2:
-                        userLogado = controller.Login(sc);
-                        break theLabel;
+                       // userLogado = controller.Login(sc);
+                       // break theLabel;
                     case 1:
-                        controller.registar(sc);
-                        break;
+                        //controller.registar(sc);
+                        //break;
 
                     case 0:
                         //System.out.println("Adeus!");

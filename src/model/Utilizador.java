@@ -10,6 +10,7 @@ public class Utilizador {
     private String novaPassword;
     private String novoEmail;
     private int id;
+    private String foto;
 
     /**
      * Metodo para formatar a visualizacao da peca.
@@ -28,6 +29,14 @@ public class Utilizador {
      * @param password
      * @param email
      */
+    public Utilizador(String nome, String username, String password, String email, String foto) {
+        this.nome = nome;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.foto = foto;
+    }
+
     public Utilizador(String nome, String username, String password, String email) {
         this.nome = nome;
         this.username = username;
@@ -141,5 +150,9 @@ public class Utilizador {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void setFoto(String foto) {this.foto = foto;}
+
+    public String getFoto() {return foto;}
 }
 

@@ -3,15 +3,12 @@ package controller;
 import com.mysql.cj.log.Log;
 import model.db.DBConnection;
 import view.Menu;
-import view.LoginPagina;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 public class Main {
   static void main() throws SQLException {
-    LoginPagina menuLogin = new LoginPagina();
-    menuLogin.setVisible(true);
     /**
      * Solução adaptada de: Stackify
      * Fonte: <a href="https://stackify.com/heres-how-to-calculate-elapsed-time-in-java/">Here's How to Calculate Elapsed Time in Java</a>

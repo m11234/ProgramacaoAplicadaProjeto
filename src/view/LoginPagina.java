@@ -1,99 +1,116 @@
-package view;
+import controller.UtilizadorController;
+import model.Utilizador;
+import view.RegistarPagina;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.sql.SQLException;
 
 public class LoginPagina extends JFrame {
 
-        private Container cont;
-        private JButton botaoOK;
-        private JTextField caixaLogin, caixaPassword;
+        private JTextField username = new JTextField(15);
+        private JPasswordField pass = new JPasswordField(15);
+        private JButton loginButao = new JButton("Login");
+        private JButton IrRegistoButao = new JButton("Registar Conta");
 
-        public LoginPagina() {
-                cont = getContentPane();
-                cont.setLayout(new BorderLayout());
+        private final UtilizadorController controller = new UtilizadorController();
+        private Utilizador userLogado = null;
 
-                JPanel painelTopo = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                painelTopo.add(new JLabel("Janela de Autentica��o"));
+        public LoginPagina()  {
 
-                GridLayout gl = new GridLayout(3,2);
-                gl.setHgap(2);
-                gl.setVgap(2);
-                JPanel painelLogin = new JPanel(gl);
+                setTitle("Login");
+                setSize(400, 300);
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-                JPanel painelLabelLogin = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-                painelLabelLogin.add(new JLabel("Login"));
+                JPanel painelUsername = new JPanel(new FlowLayout());
+                painelUsername.add(new JLabel("Username:", SwingConstants.RIGHT));
+                painelUsername.add(username);
+                username.setToolTipText("Insira aqui o seu username");
 
-                JPanel painelLabelPassword= new JPanel(new FlowLayout(FlowLayout.RIGHT));
-                painelLabelPassword.add(new JLabel("Password"));
+                JPanel painelPassword = new JPanel(new FlowLayout());
+                painelPassword.add(new JLabel("Password:", SwingConstants.RIGHT));
+                painelPassword.add(pass);
+                pass.setToolTipText("Insira aqui a sua password");
 
-                JPanel painelCaixaLogin = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                caixaLogin = new JTextField(10);
-                painelCaixaLogin.add(caixaLogin);
+                JPanel PainelIrRegistoButao = new JPanel(new FlowLayout());
+                PainelIrRegistoButao.add(IrRegistoButao);
+                IrRegistoButao.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-                JPanel painelCaixaPassword = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                caixaPassword = new JTextField(10);
-                painelCaixaPassword.add(caixaPassword);
+                JPanel painelLoginPrincipal = new JPanel(new GridLayout(4, 1));
+                painelLoginPrincipal.add(new JLabel("Login", SwingConstants.CENTER));
+                painelLoginPrincipal.add(painelUsername);
+                painelLoginPrincipal.add(painelPassword);
+                painelLoginPrincipal.add(PainelIrRegistoButao);
 
-                JPanel painelBotao = new JPanel(new FlowLayout(FlowLayout.CENTER));
-                botaoOK = new JButton ("  OK  ");
-                botaoOK.setActionCommand("ok");
-                painelBotao.add(botaoOK);
+                JPanel painelBotoes = new JPanel(new FlowLayout());
+                painelBotoes.add(loginButao);
+                loginButao.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-                painelLogin.add(painelLabelLogin);
-                painelLogin.add(painelCaixaLogin);
+                Container contentor = getContentPane();
+                contentor.setLayout(new BorderLayout());
 
-                painelLogin.add(painelLabelPassword);
-                painelLogin.add(painelCaixaPassword);
+                contentor.add(painelLoginPrincipal, BorderLayout.NORTH);
+                contentor.add(new JPanel(), BorderLayout.CENTER);
+                contentor.add(painelBotoes, BorderLayout.SOUTH);
 
-                painelLogin.add(new JPanel());
-                painelLogin.add(painelBotao);
+                loginButao.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                                String userText = username.getText();
+                                String passText = pass.getText();
 
-
-                cont.add(painelTopo, BorderLayout.NORTH);
-                cont.add(painelLogin, BorderLayout.CENTER);
-                cont.add(new JPanel(), BorderLayout.SOUTH);
-        }
-
-
-        public int autenticacao() {
-                String login = caixaLogin.getText();
-                String password = caixaPassword.getText();
-
-                if (login.length() > 0 && password.length() > 0)
-                        return (verificaAutenticacao(login, password)? 1: -1);
-                else {
-                        String mensagem;
-
-                        if (login.length() == 0) {
-                                if (password.length() == 0) {
-                                        mensagem = "Os campos LOGIN e PASSWORD devem ser preenchidos";
+                                if (userText.isEmpty() || passText.isEmpty()) {
+                                        JOptionPane.showMessageDialog(
+                                                LoginPagina.this ,
+                                                "Por favor preencha todos os campos.",
+                                                "Erro",
+                                                JOptionPane.ERROR_MESSAGE );
                                 } else {
-                                        mensagem = "O campo LOGIN deve ser preenchido";
+                                        try {
+                                                userLogado = controller.Login(userText,passText);
+                                        } catch (SQLException ex) {
+                                                throw new RuntimeException(ex);
+                                        }
+
+                                        if (userLogado != null) {
+                                                dispose();
+                                        } else {
+                                                JOptionPane.showMessageDialog(
+                                                        LoginPagina.this,
+                                                        "Username ou password incorretos",
+                                                        "Erro",
+                                                        JOptionPane.ERROR_MESSAGE
+                                                );
+                                        }
                                 }
-                        } else {
-                                mensagem = "O campo PASSWORD deve ser preenchido";
                         }
+                });
 
-                        JOptionPane.showMessageDialog(this,  mensagem,  "Informa��o", JOptionPane.ERROR_MESSAGE);
-                        return 0;
-                }
+                IrRegistoButao.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                                int valor = JOptionPane.showConfirmDialog(
+                                        LoginPagina.this,
+                                        "Deseja ir para o menu para registar uma conta?",
+                                        "Confirmacao de Registo",
+                                        JOptionPane.OK_CANCEL_OPTION
+                                );
+
+                                if (valor == JOptionPane.OK_OPTION) {
+                                        dispose();
+
+                                        RegistarPagina paginaRegisto = new RegistarPagina();
+                                        paginaRegisto.setVisible(true);
+                                }
+                        }
+                });
         }
 
-        private boolean verificaAutenticacao(String aLogin, String aPawword) {
-                //acesso � BD e compara��o com os dados armazenados de forma persistente
-                return true;
+        public static void main(String[] args) {
+                SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                                new LoginPagina().setVisible(true);
+                        }
+                });
         }
-
-
 }

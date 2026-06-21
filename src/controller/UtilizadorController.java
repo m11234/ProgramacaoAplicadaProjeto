@@ -34,20 +34,8 @@ public class UtilizadorController {
      * ({@code dao.RegistarUtilizador}), autenticação automática ({@code dao.Login}) ou nos registos de perfil
      * ({@code criarFuncionario} ou {@code criarCliente}).
      */
-    public void registar(Scanner sc) throws SQLException {
+    public Utilizador registar(String nome, String username, String password, String email, String foto) throws SQLException {
 
-        System.out.println("\n--- Registo de Utilizador ---");
-
-        System.out.print("Nome: ");
-        String nome = sc.nextLine();
-
-        System.out.print("Username: ");
-        String username = sc.nextLine();
-
-        System.out.print("Password: ");
-        String password = sc.nextLine();
-
-        String email = "";
         boolean emailValido = false;
 
         /*
@@ -58,42 +46,27 @@ public class UtilizadorController {
          */
         while (!emailValido) {
             System.out.print("Email: ");
-            email = sc.nextLine();
+            String emailValidado = email;
 
-            if (EMAIL_PATTERN.matcher(email).matches()) {
+            if (EMAIL_PATTERN.matcher(emailValidado).matches()) {
                 emailValido = true;
             } else {
                 System.out.println("Erro: O email deve apresentar um formato válido e obrigatório ([designação] @ [entidade] . [domínio]).");
+                return null;
             }
         }
 
-        Utilizador u = new Utilizador(nome, username, password, email);
+        Utilizador u = new Utilizador(nome, username, password, email, foto);
 
         boolean sucesso = dao.RegistarUtilizador(u);
 
         if (sucesso) {
-            System.out.println("Dados inseridos com sucesso");
-            System.out.println("\nPASSO 2 - Registo ");
-            System.out.println("\n 2 Associar utilizador como cliente");
-            System.out.println("\n 1 Associar utilizador como funcionario");
-            int tipoDeConta;
-            Utilizador userLogado;
-            tipoDeConta = sc.nextInt();
-            switch (tipoDeConta) {
-                case 1:
-                    Utilizador l = new Utilizador(username, password);
-                    userLogado = dao.Login(l);
-                    FuncionarioController.criarFuncionario(sc,userLogado);
-                    break;
-                case 2:
-                    Utilizador x = new Utilizador(username, password);
-                    userLogado = dao.Login(x);
-                    ClienteController.criarCliente(sc,userLogado);
-                    break;
+            System.out.println("Dados inseridos com sucesso");;
+            Utilizador temp = new Utilizador(username, password);
+            return dao.Login(temp);
+
             }
-        } else {
-            System.out.println("Erro no registo.");
-        }
+        return null;
     }
     /**
      * Metodo para realizar o registo inicial de uma conta de gestor no sistema
@@ -123,6 +96,9 @@ public class UtilizadorController {
         System.out.print("Password: ");
         String password = sc.nextLine();
 
+        System.out.print("Foto: ");
+        String foto = sc.nextLine();
+
         String email = "";
         boolean emailValido = false;
 
@@ -138,7 +114,7 @@ public class UtilizadorController {
             }
         }
 
-        Utilizador u = new Utilizador(nome, username, password, email);
+        Utilizador u = new Utilizador(nome, username, password, email, foto);
 
         boolean sucesso = dao.RegistarUtilizador(u);
 
@@ -164,17 +140,13 @@ public class UtilizadorController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados durante o processo
      * de verificação de credenciais ({@code dao.Login}).
      */
-    public Utilizador Login(Scanner sc) throws SQLException {
+    public Utilizador Login(String login, String password) throws SQLException {
         Utilizador logado = null;
 
         while (logado == null) {
-            System.out.println("\n--- Login ---");
-            System.out.print("Username: ");
-            String username = sc.nextLine();
-            System.out.print("Password: ");
-            String password = sc.nextLine();
 
-            Utilizador u = new Utilizador(username, password);
+
+            Utilizador u = new Utilizador(login, password);
             logado = dao.Login(u);
 
             if (logado != null) {
@@ -184,6 +156,7 @@ public class UtilizadorController {
                 } }
             else {
                 System.out.println("Erro dados invalidos ou conta foi apagada contacte um gestor");
+                return null;
 
             }
         }

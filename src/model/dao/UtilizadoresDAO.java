@@ -23,7 +23,7 @@ public class UtilizadoresDAO {
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
     public boolean RegistarUtilizador(Utilizador u ) {
-        String sql = "Insert into utilizador (nome,username,password,estado,email) values (?,?,?,0,?)";
+        String sql = "Insert into utilizador (nome,username,password,estado,email,foto) values (?,?,?,0,?,?)";
 
         // o que for feito dentro do try é fechado automaticamente ()
         // falta fazer um select para ver se o username e email ja existem e verificar o email
@@ -34,6 +34,7 @@ public class UtilizadoresDAO {
             ps.setString(2, u.getUsername());
             ps.setString(3, u.getPassword());
             ps.setString(4, u.getEmail());
+            ps.setString(5, u.getFoto());
 
             ps.executeUpdate();
             return true;
@@ -61,7 +62,7 @@ public class UtilizadoresDAO {
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
     public Utilizador Login(Utilizador u) throws SQLException {
-        String sql = "SELECT id,nome, username, password, email, estado FROM utilizador WHERE username = ? AND password = ?";
+        String sql = "SELECT id,nome, username, password, email, estado,foto FROM utilizador WHERE username = ? AND password = ?";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -78,6 +79,7 @@ public class UtilizadoresDAO {
                 logado.setEmail(rs.getString("email"));
                 logado.setEstado(rs.getInt("estado"));
                 logado.setId(rs.getInt("id"));
+                logado.setFoto(rs.getString("foto"));
                 return logado;
             } else {
                 return null;
