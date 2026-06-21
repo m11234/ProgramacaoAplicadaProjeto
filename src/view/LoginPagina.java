@@ -26,11 +26,13 @@ public class LoginPagina extends JFrame {
 
                 JPanel painelUsername = new JPanel(new FlowLayout());
                 painelUsername.add(new JLabel("Username:", SwingConstants.RIGHT));
+                painelUsername.setPreferredSize(new Dimension(100,20));
                 painelUsername.add(username);
                 username.setToolTipText("Insira aqui o seu username");
 
                 JPanel painelPassword = new JPanel(new FlowLayout());
                 painelPassword.add(new JLabel("Password:", SwingConstants.RIGHT));
+                painelPassword.setPreferredSize(new Dimension(100,20));
                 painelPassword.add(pass);
                 pass.setToolTipText("Insira aqui a sua password");
 

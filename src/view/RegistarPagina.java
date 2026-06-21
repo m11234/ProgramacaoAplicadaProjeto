@@ -24,21 +24,23 @@ public class RegistarPagina extends JFrame {
 
     public RegistarPagina() {
         setTitle("Registar conta parte 1");
-        setSize(400,350);
+        setSize(700,350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel painelNome = new JPanel(new FlowLayout());
-        painelNome.add(new JLabel("Nome:", SwingConstants.CENTER));
+        painelNome.add(new JLabel("Nome:", SwingConstants.RIGHT));
+        painelNome.setPreferredSize(new Dimension(100,20));
         painelNome.add(nome);
         nome.setToolTipText("Insira aqui o seu nome");
 
         JPanel painelUsername = new JPanel(new FlowLayout());
-        painelUsername.add(new JLabel("Username:", SwingConstants.CENTER));
+        painelUsername.add(new JLabel("Username:", SwingConstants.RIGHT));
+        painelUsername.setPreferredSize(new Dimension(100,20));
         painelUsername.add(username);
         username.setToolTipText("Insira aqui o seu username");
 
         JPanel painelEmail = new JPanel(new FlowLayout());
-        painelEmail.add(new JLabel("Email:", SwingConstants.CENTER));
+        painelEmail.add(new JLabel("Email:", SwingConstants.RIGHT));
         painelEmail.add(email);
         email.setToolTipText("Insira aqui o seu email");
 
@@ -71,7 +73,7 @@ public class RegistarPagina extends JFrame {
         });
 
         JPanel painelRegiso = new JPanel(new GridLayout(7, 1));
-        painelRegiso.add( new JLabel("Registar conta dados comuns", SwingConstants.CENTER) );
+        painelRegiso.add( new JLabel("Registar conta dados comuns", SwingConstants.RIGHT) );
         painelRegiso.add(painelNome);
         painelRegiso.add(painelUsername);
         painelRegiso.add(painelEmail);
@@ -122,6 +124,8 @@ public class RegistarPagina extends JFrame {
                         throw new RuntimeException(ex);
                     } if (registado != null) {
                         dispose();
+                        RegistarPagina_parte2 parte2 = new RegistarPagina_parte2(registado);
+                        parte2.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(
                                 RegistarPagina.this,
