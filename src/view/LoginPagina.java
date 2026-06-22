@@ -15,7 +15,7 @@ public class LoginPagina extends JFrame {
         private JTextField username = new JTextField(15);
         private JPasswordField pass = new JPasswordField(15);
         private JButton loginButao = new JButton("Login");
-        private JButton IrRegistoButao = new JButton("Registarw Conta");
+        private JButton IrRegistoButao = new JButton("Registar Conta");
 
         private final UtilizadorController controller = new UtilizadorController();
         private Utilizador userLogado = null;
