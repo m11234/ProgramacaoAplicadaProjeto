@@ -45,6 +45,7 @@ public class ClienteController {
                 NumeroValido = true;
             } else {
                 System.out.println("Erro: O número de telemovel deve ter 9 dígitos e começar por 9, 2 ou 3.");
+                break;
             }
         }
 

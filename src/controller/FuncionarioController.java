@@ -8,6 +8,7 @@ import model.dao.FuncionarioDAO;
 
 public class FuncionarioController {
     private static final FuncionarioDAO dao = new FuncionarioDAO();
+    public Funcionario criarFuncionario;
 
     /**
      * Método para criar e registar um novo funcionário no sistema
@@ -23,7 +24,7 @@ public class FuncionarioController {
      * @param logado O objeto {@link Utilizador} representa a conta com sessão iniciada no momento utilizado
      * para obter o identificador do utilizador e associar ao novo registo de funcionário
      */
-    public static void criarFuncionario(String nif,String telemovel, String morada,String nivelE, Utilizador logado) {
+    public Funcionario criarFuncionario (String nif,String telemovel, String morada,String nivelE, Utilizador logado) {
         System.out.println("\n Registar Funcionario");
 
         boolean NumeroValido = false;
@@ -38,6 +39,23 @@ public class FuncionarioController {
                 NumeroValido = true;
             } else {
                 System.out.println("Erro: O número de telemovel deve ter 9 dígitos e começar por 9, 2 ou 3.");
+                break;
+            }
+        }
+
+        boolean nivelValido = false;
+
+        while (!nivelValido) {
+            System.out.println("Nivel inserido" + nivelE);
+
+            String nivelInsirido = nivelE;
+            if (nivelInsirido.matches("[0-5]")) {
+                nivelE = String.valueOf(Integer.parseInt(nivelInsirido));
+                nivelValido = true;
+
+            } else {
+                System.out.println("Erro o nivel inserido nao é valido");
+                break;
             }
         }
 
@@ -49,7 +67,8 @@ public class FuncionarioController {
         if (sucesso) {
             System.out.println("Funcionario registado");
         } else {
-            System.out.println("Err ");
+            System.out.println("Erro");
         }
+        return f;
     }
 }
