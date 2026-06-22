@@ -30,42 +30,23 @@ public class ClienteController {
      * @param logado O objeto {@link Utilizador} representa a conta com sessão iniciada no momento utilizado
      * para obter o identificador do utilizador e associar ao novo registo de cliente
      */
-    public static void criarCliente(Scanner sc, Utilizador logado) {
+    public Cliente criarCliente(String nif, String telemovel, String morada, String sector, String escalao, Utilizador logado) {
         System.out.println("\nRegistar Cliente");
 
-        System.out.println("NIF");
-        int nif = sc.nextInt();
-        sc.nextLine();
-/*
-        System.out.println("Telemovel:");
-        int telemovel = sc.nextInt();
-        sc.nextLine();
-*/
-//----------------------------------------------------------
-        int telemovel = 0;
-        boolean contactoValido = false;
+        boolean NumeroValido = false;
 
-        while (!contactoValido) {
+        while (!NumeroValido) {
             System.out.println("Telemovel:");
-            String entrada = sc.nextLine();
+
+            String entrada = telemovel;
 
             if (entrada.matches("[923][0-9]{8}")) {
-                telemovel = Integer.parseInt(entrada); //serve para retornar um número inteiro
-                contactoValido = true;
+                telemovel = String.valueOf(Integer.parseInt(entrada)); //serve para retornar um número inteiro
+                NumeroValido = true;
             } else {
                 System.out.println("Erro: O número de telemovel deve ter 9 dígitos e começar por 9, 2 ou 3.");
             }
         }
-//----------------------------------------------------------
-
-        System.out.println("Morada:");
-        String morada = sc.nextLine();
-
-        System.out.println("Sector:");
-        String sector = sc.nextLine();
-
-        System.out.println("Escalão:");
-        String escalao = sc.nextLine();
 
         int idUtilizador = logado.getId();
 
@@ -73,9 +54,11 @@ public class ClienteController {
         boolean sucesso = dao.RegistarCliente(c);
         if (sucesso) {
             System.out.println("Cliente registado");
+            return c;
         } else {
             System.out.println("Erro");
         }
+        return null;
     }
 
     /**

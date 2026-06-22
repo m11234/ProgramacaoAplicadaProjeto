@@ -1,8 +1,8 @@
 package model;
 
 public class Cliente {
-    private int nif;
-    private int telemovel;
+    private String nif;
+    private String telemovel;
     private String  morada;
     private String sector;
     private String escalao;
@@ -17,7 +17,7 @@ public class Cliente {
      * @param escalao
      * @param idUtilizador
      */
-    public Cliente(int nif, int telemovel, String morada, String sector, String escalao,int idUtilizador) {
+    public Cliente(String nif, String telemovel, String morada, String sector, String escalao, int idUtilizador) {
         this.nif = nif;
         this.telemovel = telemovel;
         this.morada = morada;
@@ -31,12 +31,12 @@ public class Cliente {
     /**
      * @return
      */
-    public int getNif() {return nif;}
+    public String getNif() {return nif;}
 
     /**
      * @return
      */
-    public int getTelemovel() {return telemovel;}
+    public String getTelemovel() {return telemovel;}
     public String getMorada() {return morada;}
 
     /**
@@ -57,8 +57,8 @@ public class Cliente {
 
     //setters
 
-    public void setNif(int nif) { this.nif = nif;}
-    public void setTelemovel(int telemovel) {this.telemovel = telemovel;}
+    public void setNif(String nif) { this.nif = nif;}
+    public void setTelemovel(String telemovel) {this.telemovel = telemovel;}
     public  void setMorada (String morada) {this.morada = morada;}
     public void setSector (String sector) {this.sector = sector;}
     public void setEscalao (String escalao) {this.escalao = escalao;}

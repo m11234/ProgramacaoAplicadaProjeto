@@ -39,7 +39,7 @@ public class RegistarPagina_parte2 extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
 
-                //new RegistarClientePagina(userLoado).setVisible(true);
+                new RegistarClientePagina(userlogado).setVisible(true);
             }
         });
 

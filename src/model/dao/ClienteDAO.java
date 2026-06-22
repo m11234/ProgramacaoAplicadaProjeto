@@ -27,15 +27,15 @@ public class ClienteDAO {
 
         try (Connection conn = DBConnection.getconn();
         PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setInt(1, c.getNif());
-            ps.setInt(2, c.getTelemovel());
+            ps.setString(1, c.getNif());
+            ps.setString(2, c.getTelemovel());
             ps.setString(3, c.getMorada());
             ps.setString(4, c.getSector());
             ps.setString(5, c.getEscalao());
             ps.setInt(6, c.getIdUtilizador());
 
             int criarCliente = ps.executeUpdate();
-            return criarCliente > 0;
+            return true;
 
 
         } catch (SQLException e) {

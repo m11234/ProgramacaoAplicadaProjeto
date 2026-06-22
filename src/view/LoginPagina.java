@@ -1,3 +1,5 @@
+package view;
+
 import controller.UtilizadorController;
 import model.Utilizador;
 import view.RegistarPagina;
