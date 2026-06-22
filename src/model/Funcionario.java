@@ -3,10 +3,10 @@ package model;
 import java.util.Date;
 
 public class Funcionario {
-    private int nif;
-    private int telemovel;
+    private String nif;
+    private String telemovel;
     private String morada;
-    private int nivelE;
+    private String nivelE;
     private Date dataI;
     private int idUtilizador; // FK para o utilizador associado
 
@@ -18,7 +18,7 @@ public class Funcionario {
      * @param dataI
      * @param idUtilizador
      */
-    public Funcionario(int nif, int telemovel, String morada, int nivelE, Date dataI, int idUtilizador) {
+    public Funcionario(String nif, String telemovel, String morada, String nivelE, Date dataI, int idUtilizador) {
         this.nif = nif;
         this.telemovel = telemovel;
         this.morada = morada;
@@ -31,12 +31,12 @@ public class Funcionario {
      * @return
      */
     // getters
-    public int getNif() { return nif; }
+    public String getNif() { return nif; }
 
     /**
      * @return
      */
-    public int getTelemovel() { return telemovel; }
+    public String getTelemovel() { return telemovel; }
 
     /**
      * @return
@@ -46,7 +46,7 @@ public class Funcionario {
     /**
      * @return
      */
-    public int getNivelE() { return nivelE; }
+    public String getNivelE() { return nivelE; }
 
     /**
      * @return

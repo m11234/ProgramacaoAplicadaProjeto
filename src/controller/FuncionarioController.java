@@ -23,34 +23,23 @@ public class FuncionarioController {
      * @param logado O objeto {@link Utilizador} representa a conta com sessão iniciada no momento utilizado
      * para obter o identificador do utilizador e associar ao novo registo de funcionário
      */
-    public static void criarFuncionario(Scanner sc, Utilizador logado) {
+    public static void criarFuncionario(String nif,String telemovel, String morada,String nivelE, Utilizador logado) {
         System.out.println("\n Registar Funcionario");
 
-        System.out.println("NIF");
-        int nif = sc.nextInt();
-        sc.nextLine();
+        boolean NumeroValido = false;
 
-        int telemovel = 0;
-        boolean contactoValido = false;
-
-        while (!contactoValido) {
+        while (!NumeroValido) {
             System.out.println("Telemovel:");
-            String entrada = sc.nextLine();
+
+            String entrada = telemovel;
 
             if (entrada.matches("[923][0-9]{8}")) {
-                telemovel = Integer.parseInt(entrada); //serve para retornar um número inteiro
-                contactoValido = true;
+                telemovel = String.valueOf(Integer.parseInt(entrada)); //serve para retornar um número inteiro
+                NumeroValido = true;
             } else {
                 System.out.println("Erro: O número de telemovel deve ter 9 dígitos e começar por 9, 2 ou 3.");
             }
         }
-
-        System.out.println("Morada:");
-        String morada = sc.nextLine();
-
-        System.out.println("Nivel E:");
-        int nivelE = sc.nextInt();
-        sc.nextLine();
 
         Date dataI = new Date();
         int idUtilizador = logado.getId();
