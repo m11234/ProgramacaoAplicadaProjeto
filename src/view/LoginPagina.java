@@ -10,6 +10,7 @@ import model.dao.UtilizadoresDAO;
 import view.RegistarPagina;
 import view.Menu;
 import view.MenuCliente;
+import view.MenuFuncionario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -97,7 +98,7 @@ public class LoginPagina extends JFrame {
                                                 }
                                                 if(FuncionarioDAO.verSeFuncionario(userLogado.getId())){
                                                         //trocar pelas coisas do menu do funcionario
-                                                        MenuGestor paginaFuncionario = new MenuGestor();
+                                                        MenuFuncionario paginaFuncionario = new MenuFuncionario();
                                                         paginaFuncionario.setVisible(true);
                                                 }
                                                 if(userLogado.getEstado() == 0) {
@@ -106,6 +107,14 @@ public class LoginPagina extends JFrame {
                                                                 "A sua conta ainda nao foi aprovada",
                                                                 "Conta nao aprovada",
                                                                 JOptionPane.ERROR_MESSAGE 
+                                                        );
+                                                }
+                                                if(userLogado.getEstado() == 3 || userLogado.getEstado() == 4) {
+                                                        JOptionPane.showMessageDialog(
+                                                                LoginPagina.this,
+                                                                "A sua conta esta em processo de ser apagada ou apagada",
+                                                                "Conta nao valida",
+                                                                JOptionPane.ERROR_MESSAGE
                                                         );
                                                 }
                                             } catch (SQLException ex) {

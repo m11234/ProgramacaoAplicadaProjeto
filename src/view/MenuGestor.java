@@ -32,7 +32,20 @@ public class MenuGestor extends JFrame {
         JMenuItem ApagarContNot = new JMenuItem("Pedidos de apagamento de conta");
 
         JMenu Reparacoes = new JMenu("Reparacoes");
+        JMenuItem AprovRepar = new JMenuItem("Aprovar reparacoes");
+        JMenuItem PesquisarReparID = new JMenuItem("Pesquisar reparacao pelo ID");
 
+        JMenu CoisasGestor = new JMenu("Coisas de Gestor");
+        JMenuItem UtilizadoresNum = new JMenuItem("Ver numero de utilizadores");
+        JMenuItem UtilizadoresLs = new JMenuItem("Ver lista de utilizadores");
+        JMenuItem UtilizadoresPesq = new JMenuItem("Pesquisar por um utilizador");
+        JMenuItem ConsultarDadosU = new JMenuItem("Consultar dados de outra conta");
+        JMenuItem AlterarDadosU = new JMenuItem("Atualizar dados de outra conta");
+        JMenuItem AtivarContaU = new JMenuItem("Ativar contas");
+        JMenuItem ApagarContaU = new JMenuItem("Apagar contas");
+
+        JMenu Equipamentos = new JMenu("Equipamentos");
+        JMenuItem PesquisarEquipamento = new JMenuItem("Pesquisar");
 
 
         menuConta.add(ConsultarMeusDados);
@@ -47,9 +60,26 @@ public class MenuGestor extends JFrame {
         menuNotificacoes.add(NotificacoesStock);
         menuNotificacoes.add(ApagarContNot);
 
+        Reparacoes.add(AprovRepar);
+        Reparacoes.add(PesquisarReparID);
+
+        CoisasGestor.add(UtilizadoresNum);
+        CoisasGestor.add(UtilizadoresLs);
+        CoisasGestor.add(UtilizadoresPesq);
+        CoisasGestor.add(ConsultarDadosU);
+        CoisasGestor.add(AlterarDadosU);
+        CoisasGestor.add(AtivarContaU);
+        CoisasGestor.add(ApagarContaU);
+
+        Equipamentos.add(PesquisarEquipamento);
+
         menuBar.add(menuConta);
         menuBar.add(menuNotificacoes);
+        menuBar.add(Reparacoes);
+        menuBar.add(CoisasGestor);
+        menuBar.add(Equipamentos);
         setJMenuBar(menuBar);
+
 
         PaineldoMeio = new JPanel();
         PaineldoMeio.setBackground(Color.white);

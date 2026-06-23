@@ -90,28 +90,28 @@ public class Menu {
                             if (adminDAO.VerSeGestor(userLogado.getId())){
                                 do{
                                     System.out.println("\nMenu: Admin");
-                                    System.out.println("21- Numero de utilizadores: ");
+                                    //System.out.println("21- Numero de utilizadores: ");
                                     System.out.println("20- Consultar equipamentos por codigo: ");
-                                    System.out.println("19- Consultar reparação por ID: ");
-                                    System.out.println("18- Ver notificações de reparações a ocorrer á mais de 10 dias");
-                                    System.out.println("17- Ver notificações do stock");
+                                    //System.out.println("19- Consultar reparação por ID: ");
+                                    //System.out.println("18- Ver notificações de reparações a ocorrer á mais de 10 dias");
+                                    //System.out.println("17- Ver notificações do stock");
                                     System.out.println("16- Pesquisar utilizador por email");
                                     System.out.println("15- Pesquisar utilizador por username");
                                     System.out.println("14- Pesquisar utilizador por nome");
-                                    System.out.println("13- Ver lista de utilizadores");
-                                    System.out.println("12- Inserir peca");
-                                    System.out.println("11- Aprovar reparacoes");
-                                    System.out.println("10- Ver notificacoes novas reparacoes");
-                                    System.out.println("9- Atualizar dados de outra conta ");
-                                    System.out.println("8- Consultar dados de outra conta");
-                                    System.out.println("7- Criar outro gestor");
-                                    System.out.println("6- Apagar conta de outro utilizador");
-                                    System.out.println("5- Notificacoes pedidos para apagar conta");
-                                    System.out.println("4- Ativar conta");
-                                    System.out.println("3- Ver notificacoes contas novas");
-                                    System.out.println("2- Alterar Dados");
-                                    System.out.println("1- Consultar Dados");
-                                    System.out.println("0 - Sair");
+                                    //System.out.println("13- Ver lista de utilizadores");
+                                    //System.out.println("12- Inserir peca");
+                                    //System.out.println("11- Aprovar reparacoes");
+                                    //System.out.println("10- Ver notificacoes novas reparacoes");
+                                    //System.out.println("9- Atualizar dados de outra conta ");
+                                    //System.out.println("8- Consultar dados de outra conta");
+                                    //n vai ser preciso System.out.println("7- Criar outro gestor");
+                                    //System.out.println("6- Apagar conta de outro utilizador");
+                                    //System.out.println("5- Notificacoes pedidos para apagar conta");
+                                    //System.out.println("4- Ativar conta");
+                                    //System.out.println("3- Ver notificacoes contas novas");
+                                    //System.out.println("2- Alterar Dados");
+                                    //System.out.println("1- Consultar Dados");
+                                    //System.out.println("0 - Sair");
                                     opcaoAdmin = sc.nextInt();
                                     switch (opcaoAdmin) {
                                         case 0:
