@@ -67,9 +67,6 @@ public class Menu {
                                         case 0:
                                             userLogado = controller.Logout(userLogado);
                                             break theLabel;
-                                        case 1:
-                                            controller.atualizarDados(sc, userLogado);
-                                            break;
                                         case 2:
                                             controller.ConsultarDados(userLogado);
                                             break;
@@ -120,9 +117,9 @@ public class Menu {
                                         case 1:
                                             userLogado = controller.ConsultarDados(userLogado);
                                             break;
-                                        case 2:
-                                            controller.atualizarDados(sc,userLogado);
-                                            break;
+                                        //case 2:
+                                          //  controller.atualizarDados(sc,userLogado);
+                                            //break;
                                         case 3:
                                             controllerAdmin.verContasPorAtivar(userLogado);
                                             break;

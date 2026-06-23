@@ -19,7 +19,7 @@ public class RegistarPagina extends JFrame {
     private JFileChooser foto = new JFileChooser();
     private JButton btnProcurarFoto = new JButton("Procurar Foto");
     private JButton Prosseguir = new JButton("Prosseguir");
-    private final UtilizadorController controller = new UtilizadorController();
+    private  UtilizadorController controller = new UtilizadorController();
     private Utilizador registado = null;
 
     public RegistarPagina() {

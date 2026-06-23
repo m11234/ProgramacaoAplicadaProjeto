@@ -16,7 +16,7 @@ public class UtilizadorController {
 
     //email
     private static final String EMAIL_REGEX = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]{2,}$";
-    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+    public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
     /**
      * Metodo para realizar o registo completo de um novo utilizador no sistema
@@ -202,19 +202,12 @@ public class UtilizadorController {
      */
     public Utilizador ConsultarDados(Utilizador logado) {
         Utilizador u = dao.ConsultarDados(logado);
-
         assert u != null;
         if (u.getEstado() == 1){
-            System.out.println("\n Dados Utilizador");
-            System.out.println("Nome:" + u.getNome());
-            System.out.println("Email:" + u.getEmail());
-            System.out.println("username:" + u.getUsername());
-        } else {
-            System.out.println("Nao foi posssivel encontrar os dados");
+            return u;
+            } else { System.out.println("Nao foi nada encontrada");
+            return null;
         }
-
-
-        return u;
     }
 
 
@@ -232,68 +225,9 @@ public class UtilizadorController {
      * @param logado O objeto {@link Utilizador} que representa a sessão atual, servindo de base para
      * identificar o registo a ser alterado e manter os dados que não serão modificados
      */
-    public void atualizarDados(Scanner sc, Utilizador logado) {
-        int atualizar;
-        boolean atualizadoComSucesso;
-        System.out.println("\n--- Atualizar Dados ---");
-        System.out.println("1 - Atualizar password");
-        System.out.println("2 - Atualizar email");
-        System.out.print("Escolha: ");
-        atualizar = sc.nextInt();
-        sc.nextLine();
-
-        String novaPassword = logado.getPassword();
-        String novoEmail = logado.getEmail();
-
-        switch (atualizar) {
-            case 1:
-                System.out.print("Inserir nova password: ");
-                novaPassword = sc.nextLine();
-                break;
-
-            case 2:
-                boolean emailValido = false;
-                while (!emailValido) {
-                    System.out.print("Inserir novo email: ");
-                    novoEmail = sc.nextLine();
-
-                    if (EMAIL_PATTERN.matcher(novoEmail).matches()) {
-                        emailValido = true;
-                    } else {
-                        System.out.println("Erro: email inválido.");
-                    }
-                }
-                break;
-
-            default:
-                System.out.println("Opção inválida!");
-                return;
-        }
-
-        // Criar objeto com os novos dados
-        Utilizador dadosNovos = new Utilizador(
-                logado.getNome(),
-                logado.getUsername(),
-                novaPassword,
-                novoEmail
-        );
-
-        atualizadoComSucesso = dao.AtualizarDados(logado, dadosNovos);
-
-        if (atualizadoComSucesso) {
-            System.out.println("Dados atualizados com sucesso!");
-            // Consultar e mostrar os dados atualizados
-            Utilizador atualizado = dao.ConsultarDados(logado);
-            if (atualizado != null) {
-                System.out.println("Nome: " + atualizado.getNome());
-                System.out.println("Username: " + atualizado.getUsername());
-                System.out.println("Email: " + atualizado.getEmail());
-            }
-        } else {
-            System.out.println("Erro ao atualizar dados.");
-        }
-    }
-    }
+    public boolean atualizarDados(Utilizador logado, Utilizador dadosNovos) {
+        return dao.AtualizarDados(logado, dadosNovos);
+    }}
 
 
 

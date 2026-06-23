@@ -93,7 +93,7 @@ public class LoginPagina extends JFrame {
                                                         paginaCliente.setVisible(true);
                                                 }
                                                 if(AdminDao.VerSeGestor(userLogado.getId())){
-                                                        MenuGestor paginaGestor = new MenuGestor();
+                                                        MenuGestor paginaGestor = new MenuGestor(userLogado);
                                                         paginaGestor.setVisible(true);
                                                 }
                                                 if(FuncionarioDAO.verSeFuncionario(userLogado.getId())){

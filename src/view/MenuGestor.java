@@ -1,5 +1,7 @@
 package view;
 
+import model.Utilizador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,8 +10,10 @@ import java.awt.event.ActionListener;
 public class MenuGestor extends JFrame {
 
     private JPanel PaineldoMeio;
+    private Utilizador userLogado;
 
-    public MenuGestor() {
+    public MenuGestor(Utilizador u) {
+        this.userLogado = u;
         setTitle("Menu Gestor");
         setSize(900,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,11 +95,38 @@ public class MenuGestor extends JFrame {
 
         add(PaineldoMeio, BorderLayout.CENTER);
 
+
         Logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new LoginPagina().setVisible(true);
+            }
+        });
+
+        ConsultarMeusDados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                PaineldoMeio.removeAll(); //apaga se tiver la alguma coisa
+
+                ConsultarDadosContaGeral dados = new ConsultarDadosContaGeral(userLogado);
+
+                PaineldoMeio.add(dados, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+            }
+        });
+
+        AlterarDados.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+
+                AlterarDadosContaGeral alterar = new AlterarDadosContaGeral(userLogado);
+
+                PaineldoMeio.add(alterar, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
             }
         });
 
@@ -116,9 +147,4 @@ public class MenuGestor extends JFrame {
 
 
     }
-    public static void main(String[] args) {
-        // Testar a interface
-        new MenuGestor().setVisible(true);
-    }
-
 }

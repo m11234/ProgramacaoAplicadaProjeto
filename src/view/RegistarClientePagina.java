@@ -12,7 +12,6 @@ import java.sql.SQLException;
 
 public class RegistarClientePagina extends JFrame {
 
-    private Utilizador utilizadorLogado;
     private JTextField nif = new JTextField(15);
     private JTextField telemovel = new JTextField(15);
     private JTextField morada = new JTextField(15);
