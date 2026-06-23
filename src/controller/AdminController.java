@@ -7,7 +7,7 @@ import model.Utilizador;
 import model.dao.AdminDao;
 
 import java.sql.SQLException;
-import java.util.IllegalFormatCodePointException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -78,18 +78,18 @@ public class AdminController {
      * de privilégios ({@code adminDao.VerSeGestor})  ou durante a query a base de dados ({@code dao.verContasPorAtivar}).
      *
      */
-    public void verContasPorAtivar(Utilizador userLogado) throws SQLException {
+    public List<Utilizador> verContasPorAtivar(Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return null;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return null;
         }
 
-        dao.verContasPorAtivar();
+        return dao.verContasPorAtivar();
     }
 
 
@@ -120,34 +120,37 @@ public class AdminController {
     /**
      * Metodo para ativar contas de utilizadores
      * <p>
-     *     O metodo valida primeiro se o utilizador atual tem permissões (é um gestor) e tem sessão iniciada,
-     *     de seguida pede ao gestor o id da conta a ativar, verifica se a mesma existe e se sim ativa essa
-     *     mesma conta pelo id inserido.
+     * O metodo valida primeiro se o utilizador atual tem permissões (é um gestor) e tem sessão iniciada,
+     * de seguida pede ao gestor o id da conta a ativar, verifica se a mesma existe e se sim ativa essa
+     * mesma conta pelo id inserido.
      * </p>
+     *
      * @param userLogado O objeto {@link Utilizador} representa a conta com sessao iniciada no momento que é utilizado
      *                   para verificar permissões
-     * @param sc O objeto {@link Scanner} é responsavel por capturar a informação introduzida na consola e passar
-     *           para o metodo ({@code dao.verSeContaExiste}) e ({@code dao.mudarEstado})
+     * @param sc         O objeto {@link Scanner} é responsavel por capturar a informação introduzida na consola e passar
+     *                   para o metodo ({@code dao.verSeContaExiste}) e ({@code dao.mudarEstado})
+     * @return
      * @throws SQLException Se exister algum erro na comunicação com a base de dados seja durante o query de pesquisa
-     * ({@code dao.verSeContaExiste}), ({@code dao.mudarEstado}) e ({@code adminDao.VerSeGestor}).
+     *                      ({@code dao.verSeContaExiste}), ({@code dao.mudarEstado}) e ({@code adminDao.VerSeGestor}).
      */
-    public void ativarConta(Utilizador userLogado, Scanner sc) throws SQLException {
+    public boolean ativarConta(Utilizador userLogado, int id) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return false;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return false;
         }
         System.out.println("Inserir id da conta a ativar");
-        int id = sc.nextInt();
+
         if (!dao.verSeContaExiste(id)) {
             System.out.println("Essa conta nao existe!!");
-            return;
+            return false;
         }
         dao.mudarEstado(id);
         System.out.println("Conta atualizada com sucesso para o ID: " + id);
+        return true;
     }
 
     /**

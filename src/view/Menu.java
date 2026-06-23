@@ -124,8 +124,8 @@ public class Menu {
                                             controllerAdmin.verContasPorAtivar(userLogado);
                                             break;
                                         case 4:
-                                            controllerAdmin.ativarConta(userLogado,sc);
-                                            break;
+                                            //controllerAdmin.ativarConta(userLogado,sc);
+                                            //break;
                                         case 5:
                                             controllerAdmin.verContasPorApagar(userLogado);
                                             break;

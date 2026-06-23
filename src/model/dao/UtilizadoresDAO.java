@@ -479,16 +479,18 @@ public class UtilizadoresDAO {
     /**
      * Consulta e exibe a lista de contas de utilizador que se encontram pendentes de ativação.
      * <p>
-     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
-     *      procurando por todos os registos cujo estado seja igual a 0 (indica
-     *      que a conta está inativa). Para cada registo encontrado, o
-     *      método constrói um novo objeto {@link Utilizador} e preenche-o com as informações
-     *      essenciais (nome de utilizador e identificador único), adicionando-o a uma lista.
-     *      No final, a lista completa é impressa na consola, permitindo aos gestores visualizarem rapidamente os perfis que necessitam de intervenção para serem ativados.
+     * O processo começa por executar uma consulta à base de dados na tabela "utilizador",
+     * procurando por todos os registos cujo estado seja igual a 0 (indica
+     * que a conta está inativa). Para cada registo encontrado, o
+     * método constrói um novo objeto {@link Utilizador} e preenche-o com as informações
+     * essenciais (nome de utilizador e identificador único), adicionando-o a uma lista.
+     * No final, a lista completa é impressa na consola, permitindo aos gestores visualizarem rapidamente os perfis que necessitam de intervenção para serem ativados.
      * </p>
+     *
+     * @return
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
-    public void verContasPorAtivar() {
+    public List<Utilizador> verContasPorAtivar() {
         String sql = "Select * from utilizador where estado = 0";
         List<Utilizador> lista = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -505,6 +507,7 @@ public class UtilizadoresDAO {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de utilizadores: " + lista);
+        return lista;
     }
 
     /**

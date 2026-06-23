@@ -114,8 +114,5 @@ public class MenuFuncionario extends JFrame {
 
 
     }
-    public static void main(String[] args) {
-        // Testar a interface
-        new MenuFuncionario().setVisible(true);
-    }
+
 }

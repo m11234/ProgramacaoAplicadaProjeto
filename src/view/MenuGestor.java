@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class MenuGestor extends JFrame {
 
@@ -22,11 +23,13 @@ public class MenuGestor extends JFrame {
 
         JMenuBar menuBar = new JMenuBar();
 
+        //feito a parte geral dos menus
         JMenu menuConta = new JMenu("Conta");
         JMenuItem ConsultarMeusDados = new JMenuItem("Consultar Dados Conta");
         JMenuItem AlterarDados = new JMenuItem("Alterar Dados Conta");
         JMenuItem Logout = new JMenuItem("Logout");
         JMenuItem Sair = new JMenuItem("Sair");
+
 
         JMenu menuNotificacoes = new JMenu("Notificacoes");
         JMenuItem ContasNovas = new JMenuItem("Pedidos aprovacao contas");
@@ -127,6 +130,22 @@ public class MenuGestor extends JFrame {
                 PaineldoMeio.add(alterar, BorderLayout.CENTER);
                 PaineldoMeio.revalidate();
                 PaineldoMeio.repaint();
+            }
+        });
+
+        ContasNovas.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    VerContasPorAtivar porAtivar = new VerContasPorAtivar(userLogado);
+                    PaineldoMeio.add(porAtivar, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
             }
         });
 
