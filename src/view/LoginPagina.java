@@ -89,7 +89,7 @@ public class LoginPagina extends JFrame {
                                             try {
                                                 if(ClienteDAO.VerSeCliente(userLogado.getId())) {
                                                         //trocar depois com o menu do cliente
-                                                        MenuCliente paginaCliente = new MenuCliente();
+                                                        MenuCliente paginaCliente = new MenuCliente(userLogado);
                                                         paginaCliente.setVisible(true);
                                                 }
                                                 if(AdminDao.VerSeGestor(userLogado.getId())){
@@ -98,7 +98,7 @@ public class LoginPagina extends JFrame {
                                                 }
                                                 if(FuncionarioDAO.verSeFuncionario(userLogado.getId())){
                                                         //trocar pelas coisas do menu do funcionario
-                                                        MenuFuncionario paginaFuncionario = new MenuFuncionario();
+                                                        MenuFuncionario paginaFuncionario = new MenuFuncionario(userLogado);
                                                         paginaFuncionario.setVisible(true);
                                                 }
                                                 if(userLogado.getEstado() == 0) {

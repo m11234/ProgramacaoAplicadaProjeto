@@ -1,5 +1,7 @@
 package view;
 
+import model.Utilizador;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,11 +9,11 @@ import java.awt.event.ActionListener;
 
 public class MenuFuncionario extends JFrame {
 
-
-
+    private Utilizador userLogado;
     private JPanel PaineldoMeio;
 
-    public MenuFuncionario() {
+    public MenuFuncionario(Utilizador u) {
+        this.userLogado = u;
         setTitle("Menu Funcionário");
         setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,6 +68,32 @@ public class MenuFuncionario extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new LoginPagina().setVisible(true);
+            }
+        });
+
+        ConsultarMeusDados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                PaineldoMeio.removeAll(); //apaga se tiver la alguma coisa
+
+                ConsultarDadosContaGeral dados = new ConsultarDadosContaGeral(userLogado);
+
+                PaineldoMeio.add(dados, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+            }
+        });
+
+        AlterarDados.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+
+                AlterarDadosContaGeral alterar = new AlterarDadosContaGeral(userLogado);
+
+                PaineldoMeio.add(alterar, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
             }
         });
 
