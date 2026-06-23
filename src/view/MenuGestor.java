@@ -25,9 +25,14 @@ public class MenuGestor extends JFrame {
         JMenuItem Sair = new JMenuItem("Sair");
 
         JMenu menuNotificacoes = new JMenu("Notificacoes");
-        JMenuItem ContasNovas = new JMenuItem("Contas novas");
+        JMenuItem ContasNovas = new JMenuItem("Pedidos aprovacao contas");
         JMenuItem NovasRepar = new JMenuItem("Reparações novas");
-        J
+        JMenuItem AlertasRepar = new JMenuItem("Alertas reparacoes");
+        JMenuItem NotificacoesStock = new JMenuItem("Notificacoes stock");
+        JMenuItem ApagarContNot = new JMenuItem("Pedidos de apagamento de conta");
+
+        JMenu Reparacoes = new JMenu("Reparacoes");
+
 
 
         menuConta.add(ConsultarMeusDados);
@@ -36,7 +41,14 @@ public class MenuGestor extends JFrame {
         menuConta.add(Logout);
         menuConta.add(Sair);
 
+        menuNotificacoes.add(ContasNovas);
+        menuNotificacoes.add(NovasRepar);
+        menuNotificacoes.add(AlertasRepar);
+        menuNotificacoes.add(NotificacoesStock);
+        menuNotificacoes.add(ApagarContNot);
+
         menuBar.add(menuConta);
+        menuBar.add(menuNotificacoes);
         setJMenuBar(menuBar);
 
         PaineldoMeio = new JPanel();

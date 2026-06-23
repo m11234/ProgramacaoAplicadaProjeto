@@ -87,7 +87,7 @@ public class AdminDao {
      * @throws SQLException Se ocorrer um erro durante a ligação ou a execução da consulta SQL
      * na base de dados ({@code DBConnection.getconn} e {@code ps.executeQuery}).
      */
-    public boolean VerSeGestor(int Id) throws SQLException {
+    public static boolean VerSeGestor(int Id) throws SQLException {
         String sql = "SELECT * FROM administrador WHERE id=?";
         boolean GestorSer = false;
         try (Connection conn = DBConnection.getconn();

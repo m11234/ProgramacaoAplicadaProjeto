@@ -1,9 +1,15 @@
 package view;
 
 import controller.UtilizadorController;
+import model.Funcionario;
 import model.Utilizador;
+import model.dao.AdminDao;
+import model.dao.ClienteDAO;
+import model.dao.FuncionarioDAO;
+import model.dao.UtilizadoresDAO;
 import view.RegistarPagina;
-
+import view.Menu;
+import view.MenuCliente;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -79,6 +85,32 @@ public class LoginPagina extends JFrame {
 
                                         if (userLogado != null) {
                                                 dispose();
+                                            try {
+                                                if(ClienteDAO.VerSeCliente(userLogado.getId())) {
+                                                        //trocar depois com o menu do cliente
+                                                        MenuCliente paginaCliente = new MenuCliente();
+                                                        paginaCliente.setVisible(true);
+                                                }
+                                                if(AdminDao.VerSeGestor(userLogado.getId())){
+                                                        MenuGestor paginaGestor = new MenuGestor();
+                                                        paginaGestor.setVisible(true);
+                                                }
+                                                if(FuncionarioDAO.verSeFuncionario(userLogado.getId())){
+                                                        //trocar pelas coisas do menu do funcionario
+                                                        MenuGestor paginaFuncionario = new MenuGestor();
+                                                        paginaFuncionario.setVisible(true);
+                                                }
+                                                if(userLogado.getEstado() == 0) {
+                                                        JOptionPane.showMessageDialog(
+                                                                LoginPagina.this,
+                                                                "A sua conta ainda nao foi aprovada",
+                                                                "Conta nao aprovada",
+                                                                JOptionPane.ERROR_MESSAGE 
+                                                        );
+                                                }
+                                            } catch (SQLException ex) {
+                                                throw new RuntimeException(ex);
+                                            }
                                         } else {
                                                 JOptionPane.showMessageDialog(
                                                         LoginPagina.this,
