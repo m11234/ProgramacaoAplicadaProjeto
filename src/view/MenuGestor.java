@@ -22,11 +22,19 @@ public class MenuGestor extends JFrame {
         JMenuItem ConsultarMeusDados = new JMenuItem("Consultar Dados Conta");
         JMenuItem AlterarDados = new JMenuItem("Alterar Dados Conta");
         JMenuItem Logout = new JMenuItem("Logout");
+        JMenuItem Sair = new JMenuItem("Sair");
+
+        JMenu menuNotificacoes = new JMenu("Notificacoes");
+        JMenuItem ContasNovas = new JMenuItem("Contas novas");
+        JMenuItem NovasRepar = new JMenuItem("Reparações novas");
+        J
+
 
         menuConta.add(ConsultarMeusDados);
         menuConta.add(AlterarDados);
         menuConta.addSeparator();
         menuConta.add(Logout);
+        menuConta.add(Sair);
 
         menuBar.add(menuConta);
         setJMenuBar(menuBar);
@@ -46,6 +54,20 @@ public class MenuGestor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new LoginPagina().setVisible(true);
+            }
+        });
+
+        Sair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int valor = JOptionPane.showConfirmDialog(
+                        MenuGestor.this,
+                        "Deseja sair da aplicacao?",
+                        "Fechar programa",
+                        JOptionPane.OK_CANCEL_OPTION
+                );
+                if (valor == JOptionPane.OK_OPTION) {
+                    dispose();
+                }
             }
         });
 
