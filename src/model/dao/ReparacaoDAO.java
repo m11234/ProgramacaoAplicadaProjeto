@@ -45,17 +45,19 @@ public class ReparacaoDAO {
     /**
      * Metodo para consultar e listar na consola todas as reparações pendentes de aprovação inicial
      * <p>
-     *      O metodo executa uma consulta SQL na tabela "reparacao" para selecionar todos os registos
-     *      que se encontram no estado 1 (geralmente correspondente a "Aguardar Aprovação"),
-     *      ordenando-os pelo identificador único (idR). Para cada registo encontrado, é instanciado um
-     *      objeto {@link Reparacao} contendo o ID do equipamento e as observações. No final, a lista
-     *      completa é impressa na consola para visualização por parte dos utilizadores autorizados.
+     * O metodo executa uma consulta SQL na tabela "reparacao" para selecionar todos os registos
+     * que se encontram no estado 1 (geralmente correspondente a "Aguardar Aprovação"),
+     * ordenando-os pelo identificador único (idR). Para cada registo encontrado, é instanciado um
+     * objeto {@link Reparacao} contendo o ID do equipamento e as observações. No final, a lista
+     * completa é impressa na consola para visualização por parte dos utilizadores autorizados.
      * </p>
+     *
+     * @return
      * @throws RuntimeException Se ocorrer um erro crítico durante a ligação ou a execução da consulta
-     * SQL na base de dados ({@code DBConnection.getconn} e {@code ps.executeQuery}), encapsulando
-     * a respetiva {@link SQLException}.
+     *                          SQL na base de dados ({@code DBConnection.getconn} e {@code ps.executeQuery}), encapsulando
+     *                          a respetiva {@link SQLException}.
      */
-    public void verReparacoesPorAprovar() {
+    public List<Reparacao> verReparacoesPorAprovar() {
         String sql = "Select * from reparacao where estado = 1 order by idR";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -72,6 +74,7 @@ public class ReparacaoDAO {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de reparacoes por aprovar: " + listaR);
+        return listaR;
     }
 
     /**

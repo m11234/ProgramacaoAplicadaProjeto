@@ -180,6 +180,20 @@ public class MenuGestor extends JFrame {
             }
         });
 
+        NovasRepar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    ReparacoesAprovarA porAceitar = new ReparacoesAprovarA(userLogado);
+                    PaineldoMeio.add(porAceitar, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
 
         Sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

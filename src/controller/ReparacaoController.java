@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class ReparacaoController {
     private static final ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
     private final EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
-    private final AdminDao adminDao = new AdminDao();
+    private static final AdminDao adminDao = new AdminDao();
 
     /**
      * Método para criar e submeter um novo pedido de reparação
@@ -73,18 +73,18 @@ public class ReparacaoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
      * ({@code adminDao.VerSeGestor}) e ({@code reparacaoDAO.verReparacoesPorAprovar}).
      */
-    public void verReparacoesPorAprovar(Utilizador userLogado) throws SQLException {
+    public static List<Reparacao> verReparacoesPorAprovar(Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return null;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return null;
         }
 
-        reparacaoDAO.verReparacoesPorAprovar();
+        return reparacaoDAO.verReparacoesPorAprovar();
     }
 
     /**
@@ -130,36 +130,28 @@ public class ReparacaoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa ou atualização
      * ({@code adminDao.VerSeGestor}), ({@code reparacaoDAO.verReparacoesPorAprovar}) e ({@code reparacaoDAO.AceitarReparacaoDAO}).
      */
-    public void aceitarReparacao(Scanner sc,Utilizador userLogado) throws SQLException {
+    public static boolean aceitarReparacao(Utilizador userLogado, int idReparacao, int FuncionarioA) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return false;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return false;
         }
 
         reparacaoDAO.verReparacoesPorAprovar();
-        System.out.print("Inserir id da reparacao a aprovar:");
-        int idReparacao = sc.nextInt();
-        sc.nextLine();
-        System.out.print("Associar reparacao com funcionario:");
-        // se der tempo imprimir lista de funcionarios
-        int FuncionarioA = sc.nextInt();
-        sc.nextLine();
 
         Reparacao r = new Reparacao(FuncionarioA, idReparacao);
         boolean sucesso = reparacaoDAO.AceitarReparacaoDAO(r);
 
         if  (sucesso) {
             System.out.println("Reparacao aprovado");
-
         }
         else {
             System.out.println("Erro a aprovar reparacao");
         }
-
+        return sucesso;
     }
 
     /**
