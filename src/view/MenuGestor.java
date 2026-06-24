@@ -8,11 +8,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * Classe responsável por criar a interface do menu principal para os utilizadores com perfil de Gestor
+ * <p>
+ * Esta classe estende {@link JFrame} e centraliza todas as operações administrativas avançadas do sistema.
+ * Disponibiliza uma barra de menus complexa estruturada para a gestão global de contas de utilizadores,
+ * consulta de notificações de stock, monitorização de alertas e administração de reparações e equipamentos.
+ * </p>
+ */
 public class MenuGestor extends JFrame {
 
     private JPanel PaineldoMeio;
     private Utilizador userLogado;
 
+    /**
+     * Construtor da classe que inicializa, configura e monta a interface do menu do gestor
+     * <p>
+     * O construtor define as propriedades geométricas da interface, garante a sua centralização no ecrã e constrói
+     * uma árvore hierárquica de menus ({@link JMenuBar}, {@link JMenu} e {@link JMenuItem}). Configura ainda os
+     * ouvintes de eventos ({@link ActionListener}) que gerem a navegação interativa da aplicação, limpando o
+     * contentor central ({@code PaineldoMeio}) para injetar painéis administrativos como {@link AtivarContas} e {@link ApagarContas}.
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa o gestor com sessão iniciada no momento, utilizado para
+     * validar e propagar credenciais de administração às operações críticas de modificação de dados na base de dados.
+     */
     public MenuGestor(Utilizador u) {
         this.userLogado = u;
         setTitle("Menu Gestor");

@@ -8,11 +8,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * Classe responsável por criar a interface do menu principal para os utilizadores com perfil de Funcionário
+ * <p>
+ * Esta classe estende {@link JFrame} e serve como a área de trabalho central do funcionário, disponibilizando
+ * uma barra de menus estruturada para consulta e alteração de dados de conta, bem como para o fluxo de aceitação,
+ * rejeição e finalização de reparações atribuídas.
+ * </p>
+ */
 public class MenuFuncionario extends JFrame {
 
     private Utilizador userLogado;
     private JPanel PaineldoMeio;
 
+    /**
+     * Construtor da classe que inicializa, configura e monta a interface do menu do funcionário
+     * <p>
+     * O construtor define os parâmetros visuais da janela, centraliza a interface no ecrã e monta a barra de menus
+     * ({@link JMenuBar}). Configura ainda os ouvintes de eventos ({@link ActionListener}) para os itens do menu,
+     * permitindo que o funcionário navegue entre as opções ao limpar o contentor central ({@code PaineldoMeio}) e
+     * injetar dinamicamente os novos painéis, como o ecrã de aprovação de reparações ({@link ReparacoesAprovarF}).
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
+     * validar permissões e filtrar as reparações que lhe estão diretamente atribuídas.
+     */
     public MenuFuncionario(Utilizador u) {
         this.userLogado = u;
         setTitle("Menu Funcionário");
