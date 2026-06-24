@@ -6,10 +6,30 @@ import controller.UtilizadorController;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe responsável por criar a interface gráfica para consulta de dados gerais da conta
+ * <p>
+ * Esta classe estende {@link JPanel} e constrói uma vista que apresenta as informações pessoais do utilizador
+ * atualmente logado (como nome, username e email), acompanhado pela exibição da foto de perfil.
+ * </p>
+ */
 public class ConsultarDadosContaGeral extends JPanel {
 
     private Utilizador userLogado;
     private UtilizadorController controller = new UtilizadorController();
+
+
+    /**
+     * Construtor da classe que inicializa a interface e carrega os dados e a fotografia do utilizador
+     * <p>
+     * O construtor obtém os dados atualizados do utilizador invocando o método ({@code controller.ConsultarDados})
+     * e configura o aspeto visual do painel. Define uma imagem de perfil padrão (caso não exista uma personalizada),
+     * carrega o recurso gráfico da imagem com recurso ao {@link Toolkit} e organiza os dados textuais numa {@link JTable}
+     * não editável posicionada no centro da interface.
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa a conta com sessão iniciada no momento, utilizado como
+     * parâmetro de pesquisa para recuperar o conjunto completo de dados e caminhos de ficheiros associados ao perfil.
+     */
 
     public ConsultarDadosContaGeral(Utilizador u) {
         this.userLogado = u;
