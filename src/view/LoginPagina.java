@@ -17,6 +17,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * Classe responsável por criar a interface gráfica principal do login da aplicação
+ * <p>
+ * Esta classe estende {@link JFrame} e gere a interface de Login, validando as credenciais dos utilizadores,
+ * avaliando os seus estados e redirecionando-os para os respetivos menus específicos (Cliente, Gestor ou Funcionário)
+ * com base no seu perfil guardado na base de dados.
+ * </p>
+ */
+
 public class LoginPagina extends JFrame {
 
         private JTextField username = new JTextField(15);
@@ -27,6 +36,16 @@ public class LoginPagina extends JFrame {
         private final UtilizadorController controller = new UtilizadorController();
         private Utilizador userLogado = null;
 
+
+    /**
+     * Construtor da classe que inicializa, configura e monta a interface de login
+     * <p>
+     * O construtor define as propriedades básicas do {@link JFrame}, cria e organiza os painéis para os campos
+     * de texto e botões, e adiciona 2 ouvintes de eventos ({@link ActionListener}): 1 para processar a tentativa
+     * de início de sessão (({@code loginButao})) e outro para permitir o encaminhamento do utilizador para a
+     * página de registo de novas contas (({@code IrRegistoButao})).
+     * </p>
+     */
         public LoginPagina()  {
 
                 setTitle("Login");
@@ -151,6 +170,15 @@ public class LoginPagina extends JFrame {
                 });
         }
 
+        /**
+         * Método principal (ponto de entrada) utilizado para executar a aplicação de forma independente
+         * <p>
+         * Este método garante que a criação e visualização da janela gráfica ocorrem de forma segura dentro da
+         * linha de execução de despacho de eventos do Swing (Event Dispatch Thread), chamando o método
+         * ({@code SwingUtilities.invokeLater}).
+         * </p>
+         * @param args Os argumentos de linha de comando passados durante a inicialização do programa (não utilizados).
+         */
         public static void main(String[] args) {
                 SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
