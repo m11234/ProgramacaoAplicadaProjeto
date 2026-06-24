@@ -102,30 +102,17 @@ public class ReparacaoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
      * ({@code FuncionarioDAO.verSeFuncionario}) e ({@code reparacaoDAO.verReparacoesPorAprovarF}).
      */
-    public void verReparacoesPorAprovarF(Utilizador userLogado) throws SQLException {
+    public List<Reparacao> verReparacoesPorAprovarF(Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return null;
         }
         if (!FuncionarioDAO.verSeFuncionario(userLogado.getId())) {
             System.out.println("So funcionários podem fazer isto!!!!");
-            return;
+            return null;
         }
-
-        List<Reparacao> listaPorAceitar = reparacaoDAO.verReparacoesPorAprovarF(userLogado);
-
-        if (listaPorAceitar == null || listaPorAceitar.isEmpty()) {
-            System.out.println("Não tem reparações pendentes para aprovar neste momento.");
-            return;
-        }
-
-        for (Reparacao rep : listaPorAceitar) {
-            System.out.println("ID Reparação: " + rep.getIdR() +
-                    " | ID Equipamento: " + rep.getIdEquip() +
-                    " | Observações: " + rep.getObservacao());
-        }
-
+        return reparacaoDAO.verReparacoesPorAprovarF(userLogado);
     }
 
     /**
@@ -190,7 +177,7 @@ public class ReparacaoController {
      * para verificar permissões de acesso através do metodo ({@code FuncionarioDAO.verSeFuncionario}) e para obter
      * as reparações específicas a aprovar através de ({@code reparacaoDAO.verReparacoesPorAprovarF})
      */
-    public void aceitarReparacaoF(Scanner sc, Utilizador userLogado) {
+    public void aceitarReparacaoF(int idReparacao,int Estado, Utilizador userLogado) {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
@@ -217,12 +204,6 @@ public class ReparacaoController {
         }
 
         System.out.println("Inserir reparacao a aprovar");
-        int idReparacao = sc.nextInt();
-        sc.nextLine();
-
-        System.out.print("Para aceitar 3 para rejeitar 1");
-        int Estado = sc.nextInt();
-        sc.nextLine();
 
         Reparacao r = new Reparacao(Estado, idReparacao, idFuncionario);
         boolean sucesso = reparacaoDAO.AceitarReparacaoFDAO(r,idFuncionario);

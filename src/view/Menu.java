@@ -201,8 +201,8 @@ public class Menu {
                                             controllerReparacao.verReparacoesPorAprovarF(userLogado);
                                             break;
                                         case 2:
-                                            controllerReparacao.aceitarReparacaoF(sc,userLogado);
-                                            break;
+                                            //controllerReparacao.aceitarReparacaoF(sc,userLogado);
+                                            //break;
                                         case 3:
                                             controllerTestes.submeterTesteF(sc,userLogado);
                                             break;
