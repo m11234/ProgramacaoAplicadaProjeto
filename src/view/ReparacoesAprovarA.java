@@ -10,10 +10,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+
+
+/**
+ * Classe responsável por criar a interface gráfica para aprovação de reparações por parte da administração
+ * <p>
+ * Esta classe estende {@link JPanel} e disponibiliza uma tabela visual contendo todas as reparações que deram entrada
+ * no sistema e que aguardam validação, permitindo aos gestores aceitar ou rejeitar pedidos e associar funcionários.
+ * </p>
+ */
 public class ReparacoesAprovarA extends JPanel {
     private Utilizador userLogado;
     private ReparacaoController reparacaoController =  new ReparacaoController();
 
+
+    /**
+     * Construtor da classe que inicializa a interface gráfica e carrega a listagem de reparações pendentes
+     * <p>
+     * O construtor configura o aspeto visual do painel e invoca o método ({@code reparacaoController.verReparacoesPorAprovar})
+     * para preencher uma {@link JTable} com os dados das reparações. Adicionalmente, regista um ouvinte de eventos
+     * ({@link ActionListener}) no botão de ação que abre uma caixa de diálogo costumizada para capturar o ID da reparação
+     * e o ID do funcionário, tratando o fluxo de aceitação ou rejeição através do método ({@code ReparacaoController.aceitarReparacao}).
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa o administrador ou gestor com sessão iniciada, utilizado para
+     * validar as permissões de acesso necessárias para visualizar e alterar os estados das reparações.
+     * @throws SQLException Se existir algum erro na comunicação com a base de dados ao tentar obter a lista de
+     * reparações por aprovar através do método ({@code reparacaoController.verReparacoesPorAprovar}).
+     */
     public ReparacoesAprovarA(Utilizador u) throws SQLException {
         this.userLogado = u;
 
@@ -49,10 +72,10 @@ public class ReparacoesAprovarA extends JPanel {
             add(scrollPane, BorderLayout.CENTER);
             add(Aceitar, BorderLayout.NORTH);
 
-               /*
-              Aceitar ou rejeitar reparacoes.
-              Solucao adaptada dos slides 16 e 17 do powerpoint 6.3 do Professor Marco Veloso
-              Acedido em: 24 de Junho de 2026.
+            /*
+              Nota: Aceitar ou rejeitar reparacoes.
+              Solução adaptada dos slides 16 e 17 do powerpoint 6.3 do Professor Marco Veloso.
+              Consulta relizada: 24 de Junho de 2026.
              */
 
             ButaoAceitar.addActionListener(new ActionListener() {
