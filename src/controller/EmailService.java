@@ -11,10 +11,10 @@ import java.util.Properties;
 
 public class EmailService {
 
-    private static final String brevo_user = "af9586001@smtp-brevo.com";
+    private static final String brevo_user = "";
     private static final String brevo_password = "";
 
-    private static final String sender = "miguelafonsoplacido@gmail.com";
+    private static final String sender = "";
 
     public static boolean enviarEmailConfirmacao(String emailDestino, String usernameDestino) {
 
