@@ -10,10 +10,32 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
+
+/**
+ * Classe responsável por criar a interface gráfica para a ativação de contas de utilizadores
+ * <p>
+ * Esta classe estende {@link JPanel} e disponibiliza aos administradores uma tabela contendo os utilizadores
+ * cujos registos se encontram pendentes da sua ativação, permitindo-lhes validar e ativar contas específicas através de um ID.
+ * </p>
+ */
 public class AtivarContas extends JPanel {
     private Utilizador userLogado;
     private AdminController adminController =  new AdminController();
 
+
+    /**
+     * Construtor da classe que inicializa a interface gráfica e carrega a listagem de contas pendentes de ativação
+     * <p>
+     * O construtor configura o layout do painel, exibe os dados numa {@link JTable} obtidos através do método
+     * ({@code adminController.verContasPorAtivar}) e regista um ouvinte de eventos ({@link ActionListener}) no botão.
+     * Ao acionar o botão, é solicitada uma caixa de introdução de dados para capturar o ID do utilizador e,
+     * posteriormente, invoca o método ({@code adminController.ativarConta}) para efetivar a ativação na base de dados.
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa o administrador com sessão iniciada, utilizado para
+     * verificar e confirmar os privilégios administrativos necessários para listar e ativar contas.
+     * @throws SQLException Se ocorrer alguma falha de comunicação ou erro na consulta com a base de dados
+     * ao invocar o método ({@code adminController.verContasPorAtivar}).
+     */
     public AtivarContas(Utilizador u) throws SQLException {
         this.userLogado = u;
         //so precisa de ir o userLogado para o controller confirmar mesmo que é admin
