@@ -13,10 +13,9 @@ import java.util.List;
 
 
 /**
- * Classe responsável por criar a interface gráfica para aprovação de reparações por parte da administração
+ * Classe responsável por criar a interface gráfica para aprovação de reparações por parte dos gestores/admins
  * <p>
- * Esta classe estende {@link JPanel} e disponibiliza uma tabela visual contendo todas as reparações que deram entrada
- * no sistema e que aguardam validação, permitindo aos gestores aceitar ou rejeitar pedidos e associar funcionários.
+ * Esta classe estende {@link JPanel}
  * </p>
  */
 public class ReparacoesAprovarA extends JPanel {
@@ -25,17 +24,10 @@ public class ReparacoesAprovarA extends JPanel {
 
 
     /**
-     * Construtor da classe que inicializa a interface gráfica e carrega a listagem de reparações pendentes
-     * <p>
-     * O construtor configura o aspeto visual do painel e invoca o método ({@code reparacaoController.verReparacoesPorAprovar})
-     * para preencher uma {@link JTable} com os dados das reparações. Adicionalmente, regista um ouvinte de eventos
-     * ({@link ActionListener}) no botão de ação que abre uma caixa de diálogo costumizada para capturar o ID da reparação
-     * e o ID do funcionário, tratando o fluxo de aceitação ou rejeição através do método ({@code ReparacaoController.aceitarReparacao}).
-     * </p>
-     * @param u O objeto {@link Utilizador} que representa o administrador ou gestor com sessão iniciada, utilizado para
-     * validar as permissões de acesso necessárias para visualizar e alterar os estados das reparações.
-     * @throws SQLException Se existir algum erro na comunicação com a base de dados ao tentar obter a lista de
-     * reparações por aprovar através do método ({@code reparacaoController.verReparacoesPorAprovar}).
+     * Aqui o metodo apresenta a tabela ao user ao chamar o metodo do controller das reparacoes para preencher a mesma
+     * ({@code reparacaoController.verReparacoesPorAprovar}
+     * @param u
+     * @throws SQLException
      */
     public ReparacoesAprovarA(Utilizador u) throws SQLException {
         this.userLogado = u;

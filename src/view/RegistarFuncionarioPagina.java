@@ -10,11 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Classe responsável por criar a interface gráfica para a conclusão do registo com perfil de Funcionário
+ * Classe responsável por criar a interface gráfica para a conclusão do registo com conta de Funcionário
  * <p>
- * Esta classe estende {@link JFrame} e disponibiliza um formulário estruturado que recolhe dados profissionais
- * e pessoais específicos do funcionário, tais como NIF, número de telemóvel, morada e nível de especialização,
- * vinculando-os diretamente à conta de utilizador criada na fase inicial do registo.
+ * Esta classe estende {@link JFrame}
  * </p>
  */
 public class RegistarFuncionarioPagina extends JFrame {
@@ -32,16 +30,15 @@ public class RegistarFuncionarioPagina extends JFrame {
 
 
     /**
-     * Construtor da classe que inicializa, configura e monta o formulário de registo do funcionário
+     * Construtor da classe que inicializa, configura e monta a interface do menu do funcionário
      * <p>
-     * O construtor define os parâmetros de exibição da janela, organiza os elementos visuais em linhas estruturadas
-     * através de um {@link GridLayout} e configura os ouvintes de eventos ({@link ActionListener}) para os botões.
-     * O botão ({@code voltar}) desativa o ecrã atual após confirmação e redireciona para a página anterior, enquanto o
-     * botão ({@code registar}) valida a integridade dos campos de texto e invoca o método ({@code funcionarioController.criarFuncionario})
-     * para submeter e validar a criação do perfil na base de dados.
+     * O construtor define os parâmetros visuais da janela, centraliza a interface no ecrã e monta a barra de menus
+     * ({@link JMenuBar}). Configura ainda os ouvintes de eventos ({@link ActionListener}) para os itens do menu,
+     * permitindo que o funcionário navegue entre as opções ao limpar o contentor central ({@code PaineldoMeio}) e
+     * injetar dinamicamente os novos painéis, como o ecrã de aprovação de reparações ({@link ConsultarDadosContaGeral}).
      * </p>
-     * @param u O objeto {@link Utilizador} que representa a conta de utilizador genérica criada anteriormente, necessária
-     * como chave de ligação para construir e registar o novo perfil de funcionário no sistema.
+     * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
+     * validar permissões e filtrar as reparações que lhe estão diretamente atribuídas.
      */
 
     public RegistarFuncionarioPagina(Utilizador u) {

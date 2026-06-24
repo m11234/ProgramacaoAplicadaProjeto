@@ -204,4 +204,25 @@ public class AdminDao {
         System.out.println("Equipamento: ");
         return null;
     }
-}
+    public int notificacoes() {
+        int counterFinal = 0;
+
+        String sql = "SELECT " +
+                "(SELECT count(*) FROM reparacao WHERE estado = 2) + " +
+                "(SELECT count(*) FROM utilizador WHERE estado = 0) + " +
+                "(SELECT count(*) FROM utilizador WHERE estado = 3) AS Notificacoes";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                counterFinal = rs.getInt("Notificacoes");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return counterFinal;
+    }}

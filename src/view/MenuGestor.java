@@ -1,5 +1,6 @@
 package view;
 
+import controller.AdminController;
 import model.Utilizador;
 
 import javax.swing.*;
@@ -20,19 +21,20 @@ public class MenuGestor extends JFrame {
 
     private JPanel PaineldoMeio;
     private Utilizador userLogado;
+    private AdminController adminController = new AdminController();
 
     /**
-     * Construtor da classe que inicializa, configura e monta a interface do menu do gestor
+     * Construtor da classe que inicializa, configura e monta a interface do menu do funcionário
      * <p>
-     * O construtor define as propriedades geométricas da interface, garante a sua centralização no ecrã e constrói
-     * uma árvore hierárquica de menus ({@link JMenuBar}, {@link JMenu} e {@link JMenuItem}). Configura ainda os
-     * ouvintes de eventos ({@link ActionListener}) que gerem a navegação interativa da aplicação, limpando o
-     * contentor central ({@code PaineldoMeio}) para injetar painéis administrativos como {@link AtivarContas} e {@link ApagarContas}.
+     * O construtor define os parâmetros visuais da janela, centraliza a interface no ecrã e monta a barra de menus
+     * ({@link JMenuBar}). Configura ainda os ouvintes de eventos ({@link ActionListener}) para os itens do menu,
+     * permitindo que o funcionário navegue entre as opções ao limpar o contentor central ({@code PaineldoMeio}) e
+     * injetar dinamicamente os novos painéis, como o ecrã de aprovação de reparações ({@link ReparacoesAprovarA}).
      * </p>
-     * @param u O objeto {@link Utilizador} que representa o gestor com sessão iniciada no momento, utilizado para
-     * validar e propagar credenciais de administração às operações críticas de modificação de dados na base de dados.
+     * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
+     * validar permissões e filtrar as reparações que lhe estão diretamente atribuídas.
      */
-    public MenuGestor(Utilizador u) {
+    public MenuGestor(Utilizador u) throws SQLException {
         this.userLogado = u;
         setTitle("Menu Gestor");
         setSize(900,600);
@@ -116,6 +118,12 @@ public class MenuGestor extends JFrame {
         menuBar.add(labelSemOpcaoEscolhida);
 
         add(PaineldoMeio, BorderLayout.CENTER);
+
+        if (adminController.contadorNotificacoes(userLogado)) {
+            menuNotificacoes.setForeground(Color.red);
+        } else {
+            menuNotificacoes.setForeground(Color.black);
+        }
 
 
         Logout.addActionListener(new ActionListener() {

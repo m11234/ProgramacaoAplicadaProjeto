@@ -33,16 +33,15 @@ public class RegistarClientePagina extends JFrame {
 
 
     /**
-     * Construtor da classe que inicializa, configura e monta o formulário de registo do cliente
+     * Construtor da classe que inicializa, configura e monta a interface do menu do funcionário
      * <p>
-     * O construtor cria a disposição dos painéis e campos de texto com recurso ao {@link GridLayout} e
-     * associa os respetivos ouvintes de eventos ({@link ActionListener}) aos botões. O botão ({@code botaoVoltar})
-     * permite cancelar a operação e regressar ao ecrã anterior de registo, enquanto o botão ({@code botaoRegistar})
-     * valida a presença de campos vazios e invoca o método ({@code clienteController.criarCliente}) para submeter
-     * a informação de perfil para a base de dados.
+     * O construtor define os parâmetros visuais da janela, centraliza a interface no ecrã e monta a barra de menus
+     * ({@link JMenuBar}). Configura ainda os ouvintes de eventos ({@link ActionListener}) para os itens do menu,
+     * permitindo que o funcionário navegue entre as opções ao limpar o contentor central ({@code PaineldoMeio}) e
+     * injetar dinamicamente os novos painéis, como o ecrã de aprovação de reparações ({@link ConsultarDadosContaGeral}).
      * </p>
-     * @param u O objeto {@link Utilizador} que representa a conta de utilizador genérica acabada de criar, utilizada
-     * como chave de associação para a criação do registo específico na tabela de clientes.
+     * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
+     * validar permissões e filtrar as reparações que lhe estão diretamente atribuídas.
      */
     public RegistarClientePagina(Utilizador u) {
         this.userLogado = u;

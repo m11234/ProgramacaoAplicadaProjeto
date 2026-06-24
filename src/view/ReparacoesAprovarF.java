@@ -26,19 +26,11 @@ public class ReparacoesAprovarF extends JPanel {
     private ReparacaoController reparacaoController =  new ReparacaoController();
     int Estado;
 
-
     /**
-     * Construtor da classe que inicializa a interface gráfica e carrega a listagem de reparações atribuídas ao funcionário
-     * <p>
-     * O construtor define as propriedades visuais do painel e invoca o método ({@code reparacaoController.verReparacoesPorAprovarF})
-     * para preencher uma {@link JTable} com os identificadores e observações das reparações pendentes. Configura também um
-     * ouvinte de eventos ({@link ActionListener}) no botão de ação, gerando uma caixa de diálogo personalizada que permite
-     * ao funcionário definir o novo estado do pedido e submeter a decisão através do método ({@code ReparacaoController.aceitarReparacaoF}).
-     * </p>
-     * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
-     * filtrar as reparações que se encontram associadas ao seu identificador.
-     * @throws SQLException Se ocorrer alguma falha ou erro na comunicação com a base de dados ao tentar obter a
-     * lista de reparações pendentes do funcionário.
+     * Aqui o metodo apresenta a tabela ao user ao chamar o metodo do controller das reparacoes para preencher a mesma
+     * ({@code reparacaoController.verReparacoesPorAprovar}
+     * @param u
+     * @throws SQLException
      */
 
     public ReparacoesAprovarF(Utilizador u) throws SQLException {

@@ -605,4 +605,21 @@ public class AdminController {
         }
         System.out.println("Numero de Reparacoes: " + numRaparacoesEmCurso);
     }
+
+    public Boolean contadorNotificacoes(Utilizador userLogado) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return false;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return false;
+        }
+        if (adminDao.notificacoes() > 0) {
+            System.out.println("Existem notificacoe");
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

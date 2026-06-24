@@ -10,10 +10,9 @@ import java.awt.event.ActionListener;
 
 
 /**
- * Classe responsável por criar a interface do menu principal para os utilizadores com perfil de Cliente
+ * Classe responsável por criar a interface do menu principal para os utilizadores com conta de Cliente
  * <p>
- * Esta classe estende {@link JFrame} e funciona como o painel de navegação central do cliente, contendo uma
- * barra de menus estruturada para gestão de conta, consulta de notificações e submissão de pedidos de reparação.
+ * Esta classe estende {@link JFrame}
  * </p>
  */
 
@@ -26,13 +25,12 @@ public class MenuCliente extends JFrame {
     /**
      * Construtor da classe que inicializa, configura e monta a interface do menu do cliente
      * <p>
-     * O construtor define as dimensões e propriedades da janela, centraliza a interface no ecrã e constrói
-     * dinamicamente a barra de menus ({@link JMenuBar}) com as respetivas opções ({@link JMenuItem}). Adicionalmente,
-     * configura os ouvintes de eventos ({@link ActionListener}) para permitir a navegação entre ecrãs, limpando
-     * e injetando novos painéis (como {@link ConsultarDadosContaGeral} ou {@link AlterarDadosContaGeral}) no contentor central.
+     * O construtor define as dimensões e propriedades da janela, e constrói
+     * a barra de menus ({@link JMenuBar}) com as respetivas opções ({@link JMenuItem}). Adicionalmente,
+     * configura os listeners de ({@link ActionListener}) para permitir a navegação entre ecrãs (como {@link ConsultarDadosContaGeral} ou {@link AlterarDadosContaGeral}) no contentor central.
      * </p>
      * @param u O objeto {@link Utilizador} que representa o cliente com sessão iniciada no momento, utilizado para
-     * propagar as informações de perfil para as subtelas e operações internas.
+     * propagar as informações da conta atualmente "logada" autenficada
      */
 
     public MenuCliente(Utilizador u) {

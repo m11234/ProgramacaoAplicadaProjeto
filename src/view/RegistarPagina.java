@@ -13,8 +13,8 @@ import java.sql.SQLException;
  * Classe responsável por criar a primeira interface do processo de registo de novas contas de utilizador
  * <p>
  * Esta classe estende {@link JFrame} e disponibiliza um formulário inicial para a recolha de dados comuns
- * a todos os perfis do sistema, incluindo nome, username, email, palavra-passe e carregamento de uma foto
- * de perfil através de um seletor de ficheiros.
+ * a todos os tipos de conta, incluindo nome, username, email, palavra-passe e uma foto
+ * de perfil
  * </p>
  */
 public class RegistarPagina extends JFrame {
@@ -35,7 +35,7 @@ public class RegistarPagina extends JFrame {
      * <p>
      * O construtor define as propriedades geométricas da janela e estrutura os componentes utilizando layouts
      * combinados. Configura um ouvinte de eventos ({@link ActionListener}) no botão ({@code btnProcurarFoto})
-     * para abrir a caixa de diálogo nativa do {@link JFileChooser} restringindo a seleção a ficheiros simples.
+     * para abrir a caixa de diálogo nativa do {@link JFileChooser}.
      * Configura também o botão ({@code Prosseguir}) para validar o preenchimento integral dos campos, verificar
      * a correspondência das palavras-passe e invocar o método ({@code controller.registar}), reencaminhando o
      * utilizador para o ecrã subsequente ({@code RegistarPagina_parte2}).
@@ -154,23 +154,6 @@ public class RegistarPagina extends JFrame {
                         );
                     }
                 }
-            }
-        });
-    }
-
-    /**
-     * Método principal (ponto de entrada) utilizado para executar de forma autónoma a interface inicial de registo
-     * <p>
-     * Este método garante que a criação do formulário é executada na linha de despacho de eventos assíncronos
-     * do Swing (Event Dispatch Thread) invocando ({@code SwingUtilities.invokeLater}), assegurando a estabilidade gráfica.
-     * </p>
-     * @param args Os argumentos de linha de comando fornecidos durante o arranque do programa (não utilizados).
-     */
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new RegistarPagina().setVisible(true);
             }
         });
     }

@@ -9,11 +9,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**
- * Classe responsável por criar a interface do menu principal para os utilizadores com perfil de Funcionário
+ * Classe responsável por criar a interface do menu principal para os utilizadores com conta de Funcionário
  * <p>
- * Esta classe estende {@link JFrame} e serve como a área de trabalho central do funcionário, disponibilizando
- * uma barra de menus estruturada para consulta e alteração de dados de conta, bem como para o fluxo de aceitação,
- * rejeição e finalização de reparações atribuídas.
+ * Esta classe estende {@link JFrame}
  * </p>
  */
 public class MenuFuncionario extends JFrame {

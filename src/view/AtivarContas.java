@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * Classe responsável por criar a interface gráfica para a ativação de contas de utilizadores
  * <p>
  * Esta classe estende {@link JPanel} e disponibiliza aos administradores uma tabela contendo os utilizadores
- * cujos registos se encontram pendentes da sua ativação, permitindo-lhes validar e ativar contas específicas através de um ID.
+ * cujos registos se encontram pendentes de ativação e permite tambem ativar as mesmas
  * </p>
  */
 public class AtivarContas extends JPanel {
@@ -24,10 +24,10 @@ public class AtivarContas extends JPanel {
 
 
     /**
-     * Construtor da classe que inicializa a interface gráfica e carrega a listagem de contas pendentes de ativação
+     * Construtor da classe que inicializa a interface gráfica e carrega a lista das contas pendentes de ativação
      * <p>
      * O construtor configura o layout do painel, exibe os dados numa {@link JTable} obtidos através do método
-     * ({@code adminController.verContasPorAtivar}) e regista um ouvinte de eventos ({@link ActionListener}) no botão.
+     * ({@code adminController.verContasPorAtivar}) e chama um listener para ({@link ActionListener})  botão.
      * Ao acionar o botão, é solicitada uma caixa de introdução de dados para capturar o ID do utilizador e,
      * posteriormente, invoca o método ({@code adminController.ativarConta}) para efetivar a ativação na base de dados.
      * </p>

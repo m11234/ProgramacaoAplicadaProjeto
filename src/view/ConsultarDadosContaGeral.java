@@ -9,8 +9,8 @@ import java.awt.*;
 /**
  * Classe responsável por criar a interface gráfica para consulta de dados gerais da conta
  * <p>
- * Esta classe estende {@link JPanel} e constrói uma vista que apresenta as informações pessoais do utilizador
- * atualmente logado (como nome, username e email), acompanhado pela exibição da foto de perfil.
+ * Esta classe estende {@link JPanel} e constrói um view que apresenta as informações do utilizador
+ * atualmente logado (como nome, username e email), e da foto de perfil
  * </p>
  */
 public class ConsultarDadosContaGeral extends JPanel {
@@ -23,9 +23,8 @@ public class ConsultarDadosContaGeral extends JPanel {
      * Construtor da classe que inicializa a interface e carrega os dados e a fotografia do utilizador
      * <p>
      * O construtor obtém os dados atualizados do utilizador invocando o método ({@code controller.ConsultarDados})
-     * e configura o aspeto visual do painel. Define uma imagem de perfil padrão (caso não exista uma personalizada),
-     * carrega o recurso gráfico da imagem com recurso ao {@link Toolkit} e organiza os dados textuais numa {@link JTable}
-     * não editável posicionada no centro da interface.
+     * e configura o aspeto visual do painel. Define uma imagem de perfil padrão (caso não exista uma insirida),
+     * carrega a imagem com recurso ao {@link Toolkit} e organiza os dados numa {@link JTable}
      * </p>
      * @param u O objeto {@link Utilizador} que representa a conta com sessão iniciada no momento, utilizado como
      * parâmetro de pesquisa para recuperar o conjunto completo de dados e caminhos de ficheiros associados ao perfil.
@@ -47,7 +46,6 @@ public class ConsultarDadosContaGeral extends JPanel {
 
         if (dados.getNome().isEmpty()) {
             caminho = "CoisasFeitas/meow_meow/IMG_0373.jpg";
-            System.out.println("A foto por defeito existe? " + new java.io.File("CoisasFeitas/meow_meow/IMG_0373.jpg").exists());
         } else {
             caminho = dados.getFoto();
         }

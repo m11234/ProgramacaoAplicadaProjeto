@@ -11,9 +11,8 @@ import java.awt.event.ActionListener;
 /**
  * Classe responsável por criar a segunda janela do processo de registo de conta
  * <p>
- * Esta classe estende {@link JFrame} e atua como um ecrã intermediário de tomada da decisão,
- * permitindo ao utilizador escolher o tipo de perfil específico (Cliente ou Funcionário)
- * que deseja associar aos dados comuns introduzidos na etapa anterior.
+ * Esta classe estende {@link JFrame} e atua como um ecrã intermediário
+ * permitindo ao utilizador escolher o tipo de conta(Cliente ou Funcionário)
  * </p>
  */
 public class RegistarPagina_parte2 extends JFrame {
@@ -23,15 +22,10 @@ public class RegistarPagina_parte2 extends JFrame {
     private Utilizador userlogado;
 
     /**
-     * Construtor da classe que inicializa a interface de seleção de perfil e configura a navegação
-     * <p>
-     * O construtor define as propriedades da janela, organiza os botões de seleção de perfil e
-     * regista os respetivos ouvintes de eventos ({@link ActionListener}). Ao selecionar uma das opções,
-     * a janela atual é fechada através do método ({@code dispose()}) e o objeto {@link Utilizador} é
-     * encaminhado para o formulário final correspondente ({@link RegistarClientePagina} ou {@link RegistarFuncionarioPagina}).
-     * </p>
-     * @param u O objeto {@link Utilizador} que contém os dados comuns da conta capturados no ecrã
-     * anterior, essencial para propagar e vincular o utilizador ao seu novo perfil específico.
+     * Continua o processo de registo funciona com uma ponte entre os diferentes tipos de registo
+     * possiveis apenas mantem o objeto do utilizador criado e "envia" para o menu de registo correto
+     * para continuar.
+     * @param u
      */
     public RegistarPagina_parte2(Utilizador u) {
         this.userlogado = u;
