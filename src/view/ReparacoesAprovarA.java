@@ -121,14 +121,13 @@ public class ReparacoesAprovarA extends JPanel {
                             boolean sucesso = ReparacaoController.aceitarReparacao(userLogado,idRAceite,idFAcceite);
                             if (sucesso) {
                                 JOptionPane.showMessageDialog(ReparacoesAprovarA.this,
-                                        "Reparação ID " + idR + " ativada com sucesso!)",
+                                        "Reparação ID " + idRAceite + " ativada com sucesso!)",
                                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(ReparacoesAprovarA.this,
                                         "Erro: O ID não existe.",
                                         "Erro", JOptionPane.ERROR_MESSAGE);
                             }
-
                         } catch (SQLException ex) {
                             throw new RuntimeException(ex);
                         }
