@@ -13,6 +13,13 @@ public class RegistarPagina_parte2 extends JFrame {
 
     private Utilizador userlogado;
 
+    /**
+     * Esta JFrame recebe do JFrame anterior os dados do utilizador
+     * que se acabou de registar pelo objeto Utilizador u de seguida passa o
+     * objeto com a respetiva opcao escolhida para a proxima e ultima pagina de login
+     *
+     * @param u
+     */
     public RegistarPagina_parte2(Utilizador u) {
         this.userlogado = u;
         System.out.println(userlogado);
