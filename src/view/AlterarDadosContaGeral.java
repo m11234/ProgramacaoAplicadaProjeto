@@ -11,6 +11,14 @@ import java.util.regex.Pattern;
 
 import static controller.UtilizadorController.EMAIL_PATTERN;
 
+/**
+ * Classe responsável por criar a interface gráfica para a alteração dos dados
+ *<p>
+ *Esta classe estende {@link JPanel} e disponibiliza ao utilizador inputs de texto para atualizar
+ *o email e a palavra-passe, dessa forma validando os dados antes de os submeter.
+ * </p>
+ */
+
 public class AlterarDadosContaGeral extends JPanel {
 
     private JTextField email = new JTextField(15);
@@ -19,6 +27,19 @@ public class AlterarDadosContaGeral extends JPanel {
     private JButton botaoGuardar = new JButton("Guardar Alterações");
     private UtilizadorController controller = new UtilizadorController();
 
+
+    /**
+     * Construtor da classe que inicializa e configura todos os componentes da interface gráfica
+     * <p>
+     * O construtor define o layout do painel, preenche os campos com os dados atuais do utilizador que se
+     * encontra logado e configura o ouvinte de eventos ({@link ActionListener}) para o botão de guardar alterações.
+     * Ao clicar no botão, o método valida se os campos estão vazios e se o formato do email coincide
+     * com o padrão definido em ({@code UtilizadorController.EMAIL_PATTERN}). Se as validações passarem,
+     * invoca o método ({@code controller.atualizarDados}) para persistir as alterações na base de dados.
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa a conta do utilizador que iniciou sessão no momento,
+     * utilizado para preencher os campos iniciais e para identificar o registo a ser atualizado.
+     */
     public AlterarDadosContaGeral(Utilizador u) {
         this.userLogado = u;
 
