@@ -10,11 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 
-public class VerContasPorAtivar extends JPanel {
+public class AtivarContas extends JPanel {
     private Utilizador userLogado;
     private AdminController adminController =  new AdminController();
 
-    public VerContasPorAtivar(Utilizador u) throws SQLException {
+    public AtivarContas(Utilizador u) throws SQLException {
         this.userLogado = u;
         //so precisa de ir o userLogado para o controller confirmar mesmo que é admin
 
@@ -32,9 +32,9 @@ public class VerContasPorAtivar extends JPanel {
             String[][] data = new String[porAtivar.size()][2];
 
             for (int i = 0; i < porAtivar.size(); i++) {
-                Utilizador pendente = porAtivar.get(i);
-                data[i][0] = String.valueOf(pendente.getId());
-                data[i][1] = String.valueOf(pendente.getUsername());
+                Utilizador Ativar = porAtivar.get(i);
+                data[i][0] = String.valueOf(Ativar.getId());
+                data[i][1] = String.valueOf(Ativar.getUsername());
             }
 
             JTable table = new JTable(data, columnNames);
@@ -56,7 +56,7 @@ public class VerContasPorAtivar extends JPanel {
                 public void actionPerformed(ActionEvent e) {
 
                     String input = JOptionPane.showInputDialog(
-                            VerContasPorAtivar.this,
+                            AtivarContas.this,
                             "Introduza o ID da conta a ativar",
                             "Ativar Conta",
                             JOptionPane.QUESTION_MESSAGE
@@ -68,12 +68,12 @@ public class VerContasPorAtivar extends JPanel {
                         try {
                             boolean sucesso = adminController.ativarConta(userLogado, idContaAtivar);
                             if (sucesso) {
-                                JOptionPane.showMessageDialog(VerContasPorAtivar.this,
+                                JOptionPane.showMessageDialog(AtivarContas.this,
                                         "Conta ID " + idContaAtivar + " ativada com sucesso!)",
                                         "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                             } else {
-                                JOptionPane.showMessageDialog(VerContasPorAtivar.this,
-                                        "Erro: O ID inserido não existe ou não está pendente.",
+                                JOptionPane.showMessageDialog(AtivarContas.this,
+                                        "Erro: O ID não existe.",
                                         "Erro", JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (SQLException ex) {

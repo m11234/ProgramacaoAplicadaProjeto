@@ -130,8 +130,8 @@ public class Menu {
                                             controllerAdmin.verContasPorApagar(userLogado);
                                             break;
                                         case 6:
-                                            controllerAdmin.apagarContas(userLogado,sc);
-                                            break;
+                                            //controllerAdmin.apagarContas(userLogado,sc);
+                                            //break;
                                         case 7:
                                             controllerAdmin.CriarOutroGestor(userLogado,sc);
                                             break;

@@ -137,17 +137,30 @@ public class MenuGestor extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 PaineldoMeio.removeAll();
                 try {
-                    VerContasPorAtivar porAtivar = new VerContasPorAtivar(userLogado);
+                    AtivarContas porAtivar = new AtivarContas(userLogado);
                     PaineldoMeio.add(porAtivar, BorderLayout.CENTER);
                     PaineldoMeio.revalidate();
                     PaineldoMeio.repaint();
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-
-
             }
         });
+
+        ApagarContNot.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    ApagarContas porApagar = new ApagarContas(userLogado);
+                    PaineldoMeio.add(porApagar, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
 
         Sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

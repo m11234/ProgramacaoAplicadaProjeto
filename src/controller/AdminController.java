@@ -103,18 +103,18 @@ public class AdminController {
      * @throws SQLException Se ocorrer algum erro na comunicação com a base de dados seja durante a verificação
      *de privilégios ({@code adminDao.VerSeGestor})  ou durante a query a base de dados ({@code dao.verContasPorApagar}).
      */
-    public void verContasPorApagar(Utilizador userLogado) throws SQLException {
+    public List<Utilizador> verContasPorApagar(Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+             return null;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return null;
         }
 
-        dao.verContasPorApagar();
+        return dao.verContasPorApagar();
     }
 
     /**
@@ -170,27 +170,27 @@ public class AdminController {
      * ({@code dao.verSeContaExiste}) ou na eliminação efetiva da conta ({@code dao.ApagarContaAdmin}).
      */
 
-    public void apagarContas(Utilizador userLogado, Scanner sc) throws SQLException {
+    public boolean apagarContas(Utilizador userLogado, int id) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return false;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return false;
         }
         System.out.println("Inserir id da conta a apagar 0 para abortar");
-        int id = sc.nextInt();
         if (id == 0) {
             System.out.println("A abortar processo....");
-            return;
+            return false;
         }
         if (!dao.verSeContaExiste(id)) {
             System.out.println("Essa conta nao existe!!");
-            return;
+            return false;
         }
         dao.ApagarContaAdmin(id);
         System.out.println("Conta apagada com sucesso para o ID: " + id);
+        return true;
     }
 
     /**
