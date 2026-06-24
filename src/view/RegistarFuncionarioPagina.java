@@ -9,6 +9,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe responsável por criar a interface gráfica para a conclusão do registo com perfil de Funcionário
+ * <p>
+ * Esta classe estende {@link JFrame} e disponibiliza um formulário estruturado que recolhe dados profissionais
+ * e pessoais específicos do funcionário, tais como NIF, número de telemóvel, morada e nível de especialização,
+ * vinculando-os diretamente à conta de utilizador criada na fase inicial do registo.
+ * </p>
+ */
 public class RegistarFuncionarioPagina extends JFrame {
 
     //String nif,String telemovel, String morada,String nivelE, Utilizador logado
@@ -21,6 +29,20 @@ public class RegistarFuncionarioPagina extends JFrame {
     private Utilizador userLogado;
     private FuncionarioController funcionarioController = new FuncionarioController();
     private Funcionario funcionarioCriado = null;
+
+
+    /**
+     * Construtor da classe que inicializa, configura e monta o formulário de registo do funcionário
+     * <p>
+     * O construtor define os parâmetros de exibição da janela, organiza os elementos visuais em linhas estruturadas
+     * através de um {@link GridLayout} e configura os ouvintes de eventos ({@link ActionListener}) para os botões.
+     * O botão ({@code voltar}) desativa o ecrã atual após confirmação e redireciona para a página anterior, enquanto o
+     * botão ({@code registar}) valida a integridade dos campos de texto e invoca o método ({@code funcionarioController.criarFuncionario})
+     * para submeter e validar a criação do perfil na base de dados.
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa a conta de utilizador genérica criada anteriormente, necessária
+     * como chave de ligação para construir e registar o novo perfil de funcionário no sistema.
+     */
 
     public RegistarFuncionarioPagina(Utilizador u) {
         this.userLogado = u;
