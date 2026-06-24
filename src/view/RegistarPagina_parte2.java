@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 /**
  * Classe responsável por criar a segunda janela do processo de registo de conta
  * <p>
- * Esta classe estende {@link JFrame} e atua como um ecrã intermediário de tomada de decisão,
+ * Esta classe estende {@link JFrame} e atua como um ecrã intermediário de tomada da decisão,
  * permitindo ao utilizador escolher o tipo de perfil específico (Cliente ou Funcionário)
  * que deseja associar aos dados comuns introduzidos na etapa anterior.
  * </p>
