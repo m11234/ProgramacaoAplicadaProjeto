@@ -10,6 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * Classe responsável por criar a interface gráfica para a conclusão do registo com perfil de Cliente
+ * <p>
+ * Esta classe estende {@link JFrame} e disponibiliza um formulário detalhado que recolhe dados específicos
+ * do cliente, tais como NIF, número de telemóvel, morada, setor de atividade e escalão, associando-os
+ * à conta de utilizador criada previamente.
+ * </p>
+ */
 public class RegistarClientePagina extends JFrame {
 
     private JTextField nif = new JTextField(15);
@@ -24,6 +32,18 @@ public class RegistarClientePagina extends JFrame {
     private Cliente clienteCriado = null;
 
 
+    /**
+     * Construtor da classe que inicializa, configura e monta o formulário de registo do cliente
+     * <p>
+     * O construtor cria a disposição dos painéis e campos de texto com recurso ao {@link GridLayout} e
+     * associa os respetivos ouvintes de eventos ({@link ActionListener}) aos botões. O botão ({@code botaoVoltar})
+     * permite cancelar a operação e regressar ao ecrã anterior de registo, enquanto o botão ({@code botaoRegistar})
+     * valida a presença de campos vazios e invoca o método ({@code clienteController.criarCliente}) para submeter
+     * a informação de perfil para a base de dados.
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa a conta de utilizador genérica acabada de criar, utilizada
+     * como chave de associação para a criação do registo específico na tabela de clientes.
+     */
     public RegistarClientePagina(Utilizador u) {
         this.userLogado = u;
         System.out.println(userLogado);
