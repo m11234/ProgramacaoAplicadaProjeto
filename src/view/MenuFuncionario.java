@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class MenuFuncionario extends JFrame {
 
@@ -107,6 +108,20 @@ public class MenuFuncionario extends JFrame {
                 );
                 if (valor == JOptionPane.OK_OPTION) {
                     dispose();
+                }
+            }
+        });
+
+        PedidoApagar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    ReparacoesAprovarF porAtivar = new ReparacoesAprovarF(userLogado);
+                    PaineldoMeio.add(porAtivar, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });

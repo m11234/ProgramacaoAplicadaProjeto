@@ -111,6 +111,7 @@ public class RegistarFuncionarioPagina extends JFrame {
                     } if (funcionarioCriado != null) {
                         dispose();
                         JOptionPane.showMessageDialog(RegistarFuncionarioPagina.this, "Funcionario criado com sucesso podera fazer login quando a sua conta for ativada");
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(
                                 RegistarFuncionarioPagina.this,

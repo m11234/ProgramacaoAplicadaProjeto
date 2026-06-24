@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ReparacaoController {
-    private final ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
+    private static final ReparacaoDAO reparacaoDAO = new ReparacaoDAO();
     private final EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
     private final AdminDao adminDao = new AdminDao();
 
@@ -102,7 +102,7 @@ public class ReparacaoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
      * ({@code FuncionarioDAO.verSeFuncionario}) e ({@code reparacaoDAO.verReparacoesPorAprovarF}).
      */
-    public List<Reparacao> verReparacoesPorAprovarF(Utilizador userLogado) throws SQLException {
+    public static List<Reparacao> verReparacoesPorAprovarF(Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
@@ -165,27 +165,29 @@ public class ReparacaoController {
     /**
      * Metodo para um funcionário aceitar ou rejeitar uma reparação que lhe foi atribuída
      * <p>
-     *     O metodo valida primeiro se o utilizador atual tem sessão iniciada e se tem permissões (é um funcionário).
-     *     De seguida, apresenta a lista de reparações que lhe foram atribuídas e que se encontram pendentes de aprovação.
-     *     Após a listagem, pede ao funcionário o ID da reparação que deseja processar e solicita a escolha do novo estado
-     *     (3 para aceitar, 1 para rejeitar). Por fim, o estado da reparação é atualizado na base de dados e é apresentada
-     *     uma mensagem de sucesso ou falha da operação.
+     * O metodo valida primeiro se o utilizador atual tem sessão iniciada e se tem permissões (é um funcionário).
+     * De seguida, apresenta a lista de reparações que lhe foram atribuídas e que se encontram pendentes de aprovação.
+     * Após a listagem, pede ao funcionário o ID da reparação que deseja processar e solicita a escolha do novo estado
+     * (3 para aceitar, 1 para rejeitar). Por fim, o estado da reparação é atualizado na base de dados e é apresentada
+     * uma mensagem de sucesso ou falha da operação.
      * </p>
-     * @param sc O objeto {@link Scanner} é responsável por capturar a informação introduzida na consola e passar
-     * para a criação do objeto {@link Reparacao} e posteriormente para o método ({@code reparacaoDAO.AceitarReparacaoFDAO})
+     *
+     * @param sc         O objeto {@link Scanner} é responsável por capturar a informação introduzida na consola e passar
+     *                   para a criação do objeto {@link Reparacao} e posteriormente para o método ({@code reparacaoDAO.AceitarReparacaoFDAO})
      * @param userLogado O objeto {@link Utilizador} representa a conta com sessão iniciada no momento utilizado
-     * para verificar permissões de acesso através do metodo ({@code FuncionarioDAO.verSeFuncionario}) e para obter
-     * as reparações específicas a aprovar através de ({@code reparacaoDAO.verReparacoesPorAprovarF})
+     *                   para verificar permissões de acesso através do metodo ({@code FuncionarioDAO.verSeFuncionario}) e para obter
+     *                   as reparações específicas a aprovar através de ({@code reparacaoDAO.verReparacoesPorAprovarF})
+     * @return
      */
-    public void aceitarReparacaoF(int idReparacao,int Estado, Utilizador userLogado) {
+    public static boolean aceitarReparacaoF(int idReparacao, int Estado, Utilizador userLogado) {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return false;
         }
         if (!FuncionarioDAO.verSeFuncionario(userLogado.getId())) {
             System.out.println("So funcionarios podem fazer isto!!!!");
-            return;
+            return false;
         }
 
         int idFuncionario = userLogado.getId();
@@ -194,7 +196,7 @@ public class ReparacaoController {
 
         if (listaPorAceitar == null || listaPorAceitar.isEmpty()) {
             System.out.println("Não tem reparações pendentes para aprovar neste momento.");
-            return;
+            return false;
         }
 
         for (Reparacao rep : listaPorAceitar) {
@@ -214,6 +216,7 @@ public class ReparacaoController {
         else {
             System.out.println("Erro a aprovar reparacao");
         }
+        return sucesso;
     }
 
     /**
