@@ -1,6 +1,6 @@
 package model.dao;
 import java.sql.*;
-
+import model.Utilizador;
 import model.Funcionario;
 import model.db.DBConnection;
 
@@ -72,5 +72,28 @@ public class FuncionarioDAO {
             throw new RuntimeException(e);
         }
         return existeFuncionario;
+    }
+
+    public static int notificacoes(Utilizador userlogado) {
+        int counterFinal = 0;
+
+        String sql = "Select count(*) from reparacao where estado = 2 and FuncionarioA = ?";
+
+        try (Connection conn = DBConnection.getconn();
+             PreparedStatement ps = conn.prepareStatement(sql))
+        {
+            ps.setInt(1, userlogado.getId());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                counterFinal = rs.getInt(1);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return counterFinal;
     }
 }

@@ -1,4 +1,5 @@
 package controller;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -70,5 +71,23 @@ public class FuncionarioController {
             System.out.println("Erro");
         }
         return f;
+    }
+
+    //juro q n sei porque mas tive de meter static para funcionar
+    public static Boolean contadorNotificacoes(Utilizador userLogado) {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return false;
+        }
+        if (!FuncionarioDAO.verSeFuncionario(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return false;
+        }
+        if (FuncionarioDAO.notificacoes(userLogado) > 0) {
+            System.out.println("Existem notificacoe");
+            return true;
+        } else {
+            return false;
+        }
     }
 }

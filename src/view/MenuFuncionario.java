@@ -1,5 +1,6 @@
 package view;
 
+import controller.FuncionarioController;
 import model.Utilizador;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class MenuFuncionario extends JFrame {
      * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
      * validar permissões e filtrar as reparações que lhe estão diretamente atribuídas.
      */
-    public MenuFuncionario(Utilizador u) {
+    public MenuFuncionario(Utilizador u) throws SQLException {
         this.userLogado = u;
         setTitle("Menu Funcionário");
         setSize(900, 600);
@@ -80,6 +81,14 @@ public class MenuFuncionario extends JFrame {
         menuBar.add(labelSemOpcaoEscolhida);
 
         add(PaineldoMeio, BorderLayout.CENTER);
+
+        if (FuncionarioController.contadorNotificacoes(userLogado)) {
+            NoticacoesPedidos.setForeground(Color.red);
+            NoticacoesPedidos.setEnabled(true);
+        } else {
+            NoticacoesPedidos.setForeground(Color.gray);
+            NoticacoesPedidos.setEnabled(false);
+        }
 
         Logout.addActionListener(new ActionListener() {
             @Override
@@ -143,7 +152,22 @@ public class MenuFuncionario extends JFrame {
             }
         });
 
-
+        //n é repetido pois o menu das notificacoes so funciona quando
+        //existe uma e pode ser necessario entrar no menu de aceitar reparacoes
+        //mesmo sem qualquer uma
+        ConsultarPedidos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    ReparacoesAprovarF porAtivar = new ReparacoesAprovarF(userLogado);
+                    PaineldoMeio.add(porAtivar, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
     }
 
