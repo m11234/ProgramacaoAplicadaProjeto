@@ -15,7 +15,7 @@ public class ApagarContas extends JPanel {
 
     public ApagarContas(Utilizador u) throws SQLException {
         this.userLogado = u;
-        //mesma coisa que no de ativar contas o controller so precisava de recebe o id do user atual
+        //mesma coisa que no de ativar contas o controller so precisava de receber o id do user atual
         //para confirmar que ele é admin
 
         setLayout(new BorderLayout());

@@ -15,6 +15,7 @@ import java.util.List;
 public class ReparacoesAprovarF extends JPanel {
     private Utilizador userLogado;
     private ReparacaoController reparacaoController =  new ReparacaoController();
+    int Estado;
 
     public ReparacoesAprovarF(Utilizador u) throws SQLException {
         this.userLogado = u;
@@ -29,8 +30,8 @@ public class ReparacoesAprovarF extends JPanel {
         List<Reparacao> porAtivar = reparacaoController.verReparacoesPorAprovarF(userLogado);
 
         if (porAtivar != null) {
-            String[] columnNames = {"id", "nome"};
-            String[][] data = new String[porAtivar.size()][2];
+            String[] columnNames = {"id", "nome","obs"};
+            String[][] data = new String[porAtivar.size()][3];
 
             for (int i = 0; i < porAtivar.size(); i++) {
                 Reparacao Ativar = porAtivar.get(i);
@@ -46,33 +47,49 @@ public class ReparacoesAprovarF extends JPanel {
             JPanel Ativar = new JPanel();
             Ativar.setBackground(Color.WHITE);
 
-            JButton ButaoAtivar = new JButton("Aceitar reparação");
+            JButton ButaoAtivar = new JButton("Aceitar/Rejeitar reparação");
             Ativar.add(ButaoAtivar, BorderLayout.SOUTH);
 
             add(scrollPane, BorderLayout.CENTER);
             add(Ativar, BorderLayout.NORTH);
 
 
+                 /*
+              Aceitar ou rejeitar reparacoes.
+              Solucao adaptada dos slides 16 e 17 do powerpoint 6.3 do Professor Marco Veloso
+              Acedido em: 24 de Junho de 2026.
+             */
+
             ButaoAtivar.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    JTextField myText1 = new JTextField(10);
+                    JLabel myLabel1 = new JLabel("Insira o ID da reparacao que pretender aceitar/rejeitar");
+                    JComponent[] inputs = new JComponent[]
+                                {
+                                    myLabel1,
+                                    myText1,};
 
-                    String input = JOptionPane.showInputDialog(
+                    UIManager.put("OptionPane.cancelButtonText", "Rejeitar");
+                    UIManager.put("OptionPane.okButtonText", "Aceitar");
+
+                    int valor = JOptionPane.showConfirmDialog(
                             ReparacoesAprovarF.this,
-                            "Introduza o ID da reparação",
-                            "Aceitar reparação",
-                            JOptionPane.QUESTION_MESSAGE
-                    );
+                            inputs,
+                            "Aceitar reparacao",
+                            JOptionPane.OK_CANCEL_OPTION);
 
-                    String input2 = JOptionPane.showInputDialog(
-                            ReparacoesAprovarF.this,
-                            "Introduza o ID da reparação",
-                            "Aceitar reparação",
-                            JOptionPane.QUESTION_MESSAGE
-                    );
+                    String text = myText1.getText();
 
-                    if (input != null) {
-                        int idR = Integer.parseInt(input);
-                        int Estado = Integer.parseInt(input2);
+                    if (text != null) {
+                        int idR = Integer.parseInt(myText1.getText());
+                        if(valor == JOptionPane.OK_OPTION){
+                            Estado = 3;
+                            System.out.println("Reparacao aceite");
+
+                        } else if (valor == JOptionPane.CANCEL_OPTION) {
+                            Estado = 1;
+                            System.out.println("Reparacao rejeitada");
+                        }
 
                         boolean sucesso = ReparacaoController.aceitarReparacaoF(idR, Estado, userLogado);
                         if (sucesso) {
