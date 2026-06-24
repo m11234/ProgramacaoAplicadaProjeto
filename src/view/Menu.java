@@ -145,8 +145,8 @@ public class Menu {
                                             controllerReparacao.verReparacoesPorAprovar(userLogado);
                                             break;
                                         case 11:
-                                            controllerReparacao.aceitarReparacao(sc, userLogado);
-                                            break;
+                                           // controllerReparacao.aceitarReparacao(sc, userLogado);
+                                            //break;
                                         case 12:
                                             controllerPeca.inserirPecaController(sc,userLogado);
                                             break;

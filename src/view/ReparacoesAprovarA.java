@@ -13,7 +13,6 @@ import java.util.List;
 public class ReparacoesAprovarA extends JPanel {
     private Utilizador userLogado;
     private ReparacaoController reparacaoController =  new ReparacaoController();
-    int Estado;
 
     public ReparacoesAprovarA(Utilizador u) throws SQLException {
         this.userLogado = u;
@@ -28,7 +27,7 @@ public class ReparacoesAprovarA extends JPanel {
         List<Reparacao> porAceitar = reparacaoController.verReparacoesPorAprovar(userLogado);
 
         if (porAceitar != null) {
-            String[] columnNames = {"id","nome","obs"};
+            String[] columnNames = {"idReparacao","idEquipamento","obs"};
             String[][] data = new String[porAceitar.size()][3];
 
             for(int i = 0; i < porAceitar.size(); i++) {
