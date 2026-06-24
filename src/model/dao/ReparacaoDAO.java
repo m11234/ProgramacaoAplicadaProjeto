@@ -65,6 +65,7 @@ public class ReparacaoDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Reparacao r = new Reparacao();
+                r.setIdR(rs.getInt("idR"));
                 r.setIdEquip(rs.getInt("idEquip"));
                 r.setObservacao(rs.getString("Observacao"));
                 listaR.add(r);
