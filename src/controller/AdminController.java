@@ -368,16 +368,16 @@ public class AdminController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
      * ({@code adminDao.VerSeGestor}) e ({@code AdminDao.verUtilizadores}).
      */
-    public void verUtilizador(Utilizador userLogado) throws SQLException {
+    public List<Utilizador> verUtilizador(Utilizador userLogado) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return null;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return null;
         }
-        AdminDao.verUtilizadores();
+         return AdminDao.verUtilizadores();
     }
 
     /**

@@ -114,8 +114,8 @@ public class AdminDao {
      * na base de dados ({@code DBConnection.getconn} e {@code ps.executeQuery}), encapsulando
      * a respetiva {@link SQLException}.
      */
-    public static void verUtilizadores() {
-        String sql = "Select * from utilizador order by nome asc";
+    public static List<Utilizador> verUtilizadores() {
+        String sql = "Select * from utilizador";
         List<Utilizador> listaA = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -130,6 +130,7 @@ public class AdminDao {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de utilizadores: " + listaA);
+        return listaA;
     }
 
     /**

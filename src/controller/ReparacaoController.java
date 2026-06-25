@@ -115,6 +115,21 @@ public class ReparacaoController {
         return reparacaoDAO.verReparacoesPorAprovarF(userLogado);
     }
 
+    public static List<Reparacao> verReparacoesPorFinalizarF(Utilizador userLogado) throws SQLException {
+
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return null;
+        }
+        if (!FuncionarioDAO.verSeFuncionario(userLogado.getId())) {
+            System.out.println("So funcionários podem fazer isto!!!!");
+            return null;
+        }
+        return reparacaoDAO.verReparacoesPorFinalizarF(userLogado);
+    }
+
+
+
     /**
      * Metodo para aprovar uma reparação e associá-la a um funcionário
      * <p>
