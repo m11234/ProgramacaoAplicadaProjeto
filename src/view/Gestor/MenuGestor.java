@@ -95,7 +95,6 @@ public class MenuGestor extends JFrame {
         CoisasGestor.add(UtilizadoresNum);
         CoisasGestor.add(UtilizadoresLs);
         CoisasGestor.add(UtilizadoresPesq);
-        CoisasGestor.add(ConsultarDadosU);
         CoisasGestor.add(AlterarDadosU);
         // o apagar conta faz sentido estar em dois lugares pois pode ser
         // preciso apagar uma conta a qualquer momento mesmo q nao tenho sido
@@ -299,6 +298,15 @@ public class MenuGestor extends JFrame {
             }
         });
 
+        UtilizadoresPesq.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                PesquisarUtilizadores pesquisa = new PesquisarUtilizadores(userLogado);
+                PaineldoMeio.add(pesquisa, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+            }
+        });
         Sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int valor = JOptionPane.showConfirmDialog(

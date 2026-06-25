@@ -187,100 +187,34 @@ public class UtilizadoresDAO {
      * @return Um objeto {@link Utilizador} com os dados recuperados da base de dados, ou {@code null} caso o registo não exista.
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
-    public Utilizador ConsultarNomeUtilizador(String nome) {
-        String sql = "Select nome, username, email from utilizador where nome = ?";
+    public List<Utilizador> Consultar(String pesquisa, String coisaPesquisada) {
 
+        //whitelist do que pode ser pesquisado assim nao da para injetar sql e evita
+        // codigo repetido falamos sobre isto na micro de cyber
+
+        if (!pesquisa.equals("nome") && !pesquisa.equals("username") && !pesquisa.equals("email"))
+        {
+            return null;
+        }
+        String sql = "SELECT id,nome, username, email FROM utilizador WHERE " + pesquisa + " = ?";
+        List<Utilizador> listaP = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, nome);
+            ps.setString(1, coisaPesquisada);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                Utilizador Dados = new Utilizador();
-                Dados.setNome(rs.getString("nome"));
-                Dados.setUsername(rs.getString("username"));
-                Dados.setEmail(rs.getString("email"));
-                return Dados;
+                Utilizador dados = new Utilizador();
+                dados.setId(rs.getInt("id"));
+                dados.setNome(rs.getString("nome"));
+                dados.setUsername(rs.getString("username"));
+                dados.setEmail(rs.getString("email"));
+                listaP.add(dados);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null ;
+        return listaP;
     }
-
-    /**
-     * Consulta as informações básicas de um utilizador através do seu username.
-     * <p>
-     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
-     *      procurando pelo registo que corresponda de forma exata ao username fornecido. Se o
-     *      registo for encontrado, o método constrói um novo objeto {@link Utilizador} e
-     *      preenche-o apenas com as informações essenciais de identificação e contacto
-     *      (nome, username e email), devolvendo este objeto. Caso a consulta não retorne
-     *      nenhum resultado, o método conclui a operação devolvendo {@code null}.
-     * </p>
-     * @param username O nome completo ou designação do utilizador a ser pesquisado na base de dados.
-     * @return Um objeto {@link Utilizador} com os dados recuperados da base de dados, ou {@code null} caso o registo não exista.
-     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
-     */
-    public Utilizador ConsultarUsername(String username) {
-        String sql = "Select nome, username, email from utilizador where username = ?";
-
-        try (Connection conn = DBConnection.getconn();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                Utilizador Dados = new Utilizador();
-                Dados.setNome(rs.getString("nome"));
-                Dados.setUsername(rs.getString("username"));
-                Dados.setEmail(rs.getString("email"));
-                return Dados;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null ;
-    }
-
-    /**
-     * Consulta as informações básicas de um utilizador através do seu email.
-     * <p>
-     *      O processo começa por executar uma consulta à base de dados na tabela "utilizador",
-     *      procurando pelo registo que corresponda de forma exata ao email fornecido. Se o
-     *      registo for encontrado, o método constrói um novo objeto {@link Utilizador} e
-     *      preenche-o apenas com as informações essenciais de identificação e contacto
-     *      (nome, username e email), devolvendo este objeto. Caso a consulta não retorne
-     *      nenhum resultado, o método conclui a operação devolvendo {@code null}.
-     * </p>
-     * @param email O nome completo ou designação do utilizador a ser pesquisado na base de dados.
-     * @return Um objeto {@link Utilizador} com os dados recuperados da base de dados, ou {@code null} caso o registo não exista.
-     * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
-     */
-    public Utilizador ConsultarEmailUtilizador(String email) {
-        String sql = "Select nome, username, email from utilizador where email = ?";
-
-        try (Connection conn = DBConnection.getconn();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                Utilizador Dados = new Utilizador();
-                Dados.setNome(rs.getString("nome"));
-                Dados.setUsername(rs.getString("username"));
-                Dados.setEmail(rs.getString("email"));
-                return Dados;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null ;
-    }
-
     /**
      * Atualiza as credenciais e informações de contacto de um utilizador autenticado.
      * <p>

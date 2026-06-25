@@ -380,118 +380,16 @@ public class AdminController {
          return AdminDao.verUtilizadores();
     }
 
-    /**
-     * Método para consultar os dados de um utilizador através do seu nome
-     * <p>
-     *     O método valida primeiro se o utilizador atual tem permissões (é um gestor) e tem sessão iniciada,
-     *     de seguida pede ao gestor o nome do utilizador que pretende pesquisar, procura os seus dados e imprime
-     *     as suas informações detalhadas (nome, username e email) na consola caso o utilizador exista
-     * </p>
-     * @param userLogado O objeto {@link Utilizador} representa a conta com sessao iniciada no momento utilizado
-     * para verificar permissões
-     * @param sc O objeto {@link Scanner} é responsável por capturar a informação introduzida na consola e passar
-     * para o método ({@code dao.ConsultarNomeUtilizador})
-     * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
-     * ({@code adminDao.VerSeGestor}) e ({@code dao.ConsultarNomeUtilizador}).
-     */
-    public void ConsultarNome(Utilizador userLogado, Scanner sc) throws SQLException {
+    public List<Utilizador> ConsultaUtilizadores(Utilizador userLogado, String pesquisa, String coisaPesquisada) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return null;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return null;
         }
-        System.out.println("Insira o nome para pesquisar: ");
-        sc.nextLine();
-        String nome = sc.nextLine();
-        Utilizador Ver = dao.ConsultarNomeUtilizador(nome);
-        if (Ver != null) {
-            System.out.println("\n Dados Utilizador");
-            System.out.println("Nome:" + Ver.getNome());
-            System.out.println("Username:" + Ver.getUsername());
-            System.out.println("Email:" + Ver.getEmail());
-        } else {
-            System.out.println("Nao foi posssivel encontrar os dados");
-        }
-
-    }
-
-    /**
-     * Método para consultar os dados de um utilizador através do seu username
-     * <p>
-     *     O método valida primeiro se o utilizador atual tem permissões (é um gestor) e tem sessão iniciada,
-     *     de seguida pede ao gestor o username do utilizador que pretende pesquisar, procura os seus dados e imprime
-     *     as suas informações detalhadas (nome, username e email) na consola caso o utilizador exista
-     * </p>
-     * @param userLogado O objeto {@link Utilizador} representa a conta com sessao iniciada no momento utilizado
-     * para verificar permissões
-     * @param sc O objeto {@link Scanner} é responsável por capturar a informação introduzida na consola e passar
-     * para o método ({@code dao.ConsultarUsername})
-     * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
-     * ({@code adminDao.VerSeGestor}) e ({@code dao.ConsultarUsername}).
-     */
-    public void ConsultarUsername(Utilizador userLogado, Scanner sc) throws SQLException {
-        if (userLogado == null) {
-            System.out.println("Fazer login!!!");
-            return;
-        }
-        if (!adminDao.VerSeGestor(userLogado.getId())) {
-            System.out.println("So gestores podem fazer isto!!!!");
-            return;
-        }
-        System.out.println("Insira o username para pesquisar: ");
-        sc.nextLine();
-        String username = sc.nextLine();
-        Utilizador Ver = dao.ConsultarUsername(username);
-        if (Ver != null) {
-            System.out.println("\n Dados Utilizador");
-            System.out.println("Nome:" + Ver.getNome());
-            System.out.println("Username:" + Ver.getUsername());
-            System.out.println("Email:" + Ver.getEmail());
-        } else {
-            System.out.println("Nao foi posssivel encontrar os dados");
-        }
-
-    }
-
-    /**
-     * Método para consultar os dados de um utilizador através do seu email
-     * <p>
-     *     O método valida primeiro se o utilizador atual tem permissões (é um gestor) e tem sessão iniciada,
-     *     de seguida pede ao gestor o email do utilizador que pretende pesquisar, procura os seus dados e imprime
-     *     as suas informações detalhadas (nome, username e email) na consola caso o utilizador exista
-     * </p>
-     * @param userLogado O objeto {@link Utilizador} representa a conta com sessao iniciada no momento utilizado
-     * para verificar permissões
-     * @param sc O objeto {@link Scanner} é responsável por capturar a informação introduzida na consola e passar
-     * para o método ({@code dao.ConsultarEmailUtilizador})
-     * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
-     * ({@code adminDao.VerSeGestor}) e ({@code dao.ConsultarEmailUtilizador}).
-     */
-    public void ConsultarEmail(Utilizador userLogado, Scanner sc) throws SQLException {
-        if (userLogado == null) {
-            System.out.println("Fazer login!!!");
-            return;
-        }
-        if (!adminDao.VerSeGestor(userLogado.getId())) {
-            System.out.println("So gestores podem fazer isto!!!!");
-            return;
-        }
-        System.out.println("Insira o email para pesquisar: ");
-        sc.nextLine();
-        String email = sc.nextLine();
-        Utilizador Ver = dao.ConsultarEmailUtilizador(email);
-        if (Ver != null) {
-            System.out.println("\n Dados Utilizador");
-            System.out.println("Nome:" + Ver.getNome());
-            System.out.println("Username:" + Ver.getUsername());
-            System.out.println("Email:" + Ver.getEmail());
-        } else {
-            System.out.println("Nao foi posssivel encontrar os dados");
-        }
-
+        return dao.Consultar(pesquisa,coisaPesquisada);
     }
 
     /**

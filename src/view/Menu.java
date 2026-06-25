@@ -154,14 +154,14 @@ public class Menu {
                                             controllerAdmin.verUtilizador(userLogado);
                                             break;
                                         case 14:
-                                            controllerAdmin.ConsultarNome(userLogado, sc);
-                                            break;
+                                            //controllerAdmin.ConsultarNome(userLogado, sc);
+                                            //break;
                                         case 15:
-                                            controllerAdmin.ConsultarUsername(userLogado, sc);
-                                            break;
+                                            //controllerAdmin.ConsultarUsername(userLogado, sc);
+                                            //break;
                                         case 16:
-                                            controllerAdmin.ConsultarEmail(userLogado, sc);
-                                            break;
+                                            //controllerAdmin.ConsultarEmail(userLogado, sc);
+                                            //break;
                                         case 17:
                                             controllerPeca.pecaInferior(userLogado);
                                             break;
