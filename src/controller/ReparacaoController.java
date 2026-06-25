@@ -243,7 +243,7 @@ public class ReparacaoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa ou atualização
      * ({@code FuncionarioDAO.verSeFuncionario}), ({@code reparacaoDAO.verReparacoesPorFinalizarF}) e ({@code reparacaoDAO.FinalizarReparacaoFDAO}).
      */
-    public static boolean FinalizarReparacaoF(int idReparacao, int Estado, Utilizador userLogado) throws SQLException {
+    public static boolean FinalizarReparacaoF(int idReparacao, Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");

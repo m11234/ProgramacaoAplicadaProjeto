@@ -127,6 +127,22 @@ public class MenuFuncionario extends JFrame {
             }
         });
 
+        CriarPedido.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+
+                ReparacaoFinalizar finalizar = null;
+                try {
+                    finalizar = new ReparacaoFinalizar(userLogado);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                PaineldoMeio.add(finalizar, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+            }
+        });
+
         Sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int valor = JOptionPane.showConfirmDialog(
