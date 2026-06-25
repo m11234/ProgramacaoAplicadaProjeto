@@ -261,16 +261,18 @@ public class ReparacaoDAO {
     /**
      * Identifica as reparações em curso há mais de 10 dias sem conclusão.
      * <p>
-     *      O processo começa por executar uma consulta na base de dados para procurar todas as
-     *      reparações cujo tempo decorrido desde a data de início da intervenção seja superior a dez dias
-     *      e que ainda não se encontrem finalizadas (estado diferente de 4). Após a obtenção dos dados,
-     *      o método constrói uma lista com as informações essenciais destas reparações (identificador,
-     *      data de início, equipamento associado e observações) e imprime-a na consola. Esta listagem
-     *      funciona como uma notificação.
+     * O processo começa por executar uma consulta na base de dados para procurar todas as
+     * reparações cujo tempo decorrido desde a data de início da intervenção seja superior a dez dias
+     * e que ainda não se encontrem finalizadas (estado diferente de 4). Após a obtenção dos dados,
+     * o método constrói uma lista com as informações essenciais destas reparações (identificador,
+     * data de início, equipamento associado e observações) e imprime-a na consola. Esta listagem
+     * funciona como uma notificação.
      * </p>
+     *
+     * @return
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
-    public static void notificacaoDezDiasSemFinalizacao(){
+    public static List<Reparacao> notificacaoDezDiasSemFinalizacao(){
         String sql = "Select * from reparacao where (CURRENT_DATE - DataInicio) > 10 and estado != 4";
         List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
@@ -289,6 +291,7 @@ public class ReparacaoDAO {
             throw new RuntimeException(e);
         }
         System.out.println("Lista de reparacoes que passou 10 dias sem ser finalizado: " + listaR);
+        return listaR;
     }
 
     /**

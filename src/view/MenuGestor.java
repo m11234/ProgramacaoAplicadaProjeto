@@ -55,12 +55,12 @@ public class MenuGestor extends JFrame {
         JMenu menuNotificacoes = new JMenu("Notificacoes");
         JMenuItem ContasNovas = new JMenuItem("Pedidos aprovacao contas");
         JMenuItem NovasRepar = new JMenuItem("Reparações novas");
-        JMenuItem AlertasRepar = new JMenuItem("Alertas reparacoes");
         JMenuItem NotificacoesStock = new JMenuItem("Notificacoes stock");
         JMenuItem ApagarContNot = new JMenuItem("Pedidos de apagamento de conta");
 
         JMenu Reparacoes = new JMenu("Reparacoes");
         JMenuItem AprovRepar = new JMenuItem("Aprovar reparacoes");
+        JMenuItem AlertasRepar = new JMenuItem("Alertas reparacoes");
         JMenuItem PesquisarReparID = new JMenuItem("Pesquisar reparacao pelo ID");
 
         JMenu CoisasGestor = new JMenu("Coisas de Gestor");
@@ -84,11 +84,11 @@ public class MenuGestor extends JFrame {
 
         menuNotificacoes.add(ContasNovas);
         menuNotificacoes.add(NovasRepar);
-        menuNotificacoes.add(AlertasRepar);
         menuNotificacoes.add(NotificacoesStock);
         menuNotificacoes.add(ApagarContNot);
 
         Reparacoes.add(AprovRepar);
+        Reparacoes.add(AlertasRepar);
         Reparacoes.add(PesquisarReparID);
 
         CoisasGestor.add(UtilizadoresNum);
@@ -201,6 +201,22 @@ public class MenuGestor extends JFrame {
                 }
             }
         });
+
+        AlertasRepar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    AlertasReparacoes m10Dias = new AlertasReparacoes(userLogado);
+                    PaineldoMeio.add(m10Dias, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+
 
 
         Sair.addActionListener(new ActionListener() {
