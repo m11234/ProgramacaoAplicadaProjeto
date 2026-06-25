@@ -122,6 +122,7 @@ public class AdminDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Utilizador u = new Utilizador();
+                u.setId(rs.getInt("id"));
                 u.setNome(rs.getString("nome"));
                 u.setUsername(rs.getString("username"));
                 listaA.add(u);

@@ -72,7 +72,6 @@ public class MenuGestor extends JFrame {
         JMenuItem UtilizadoresPesq = new JMenuItem("Pesquisar por um utilizador");
         JMenuItem ConsultarDadosU = new JMenuItem("Consultar dados de outra conta");
         JMenuItem AlterarDadosU = new JMenuItem("Atualizar dados de outra conta");
-        JMenuItem AtivarContaU = new JMenuItem("Ativar contas");
         JMenuItem ApagarContaU = new JMenuItem("Apagar contas");
 
         JMenu Equipamentos = new JMenu("Equipamentos");
@@ -283,6 +282,20 @@ public class MenuGestor extends JFrame {
                 PaineldoMeio.add(pq, BorderLayout.CENTER);
                 PaineldoMeio.revalidate();
                 PaineldoMeio.repaint();
+            }
+        });
+
+        UtilizadoresLs.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                VerTodosUtilizadores ver = new VerTodosUtilizadores(userLogado);
+                PaineldoMeio.add(ver, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
