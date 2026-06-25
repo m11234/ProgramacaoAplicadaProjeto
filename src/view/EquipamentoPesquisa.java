@@ -57,7 +57,7 @@ public class EquipamentoPesquisa extends JPanel{
 
                         if (porEncontrar != null) {
                             String[] columnNames = {"idEquipamento","Marca","Modelo","SKU","DataSubmissao", "DataReparacao"};
-                            String[][] data = new String[porEncontrar.size()][4];
+                            String[][] data = new String[porEncontrar.size()][6];
 
                             for(int i = 0; i < porEncontrar.size(); i++) {
                                 Equipamento PorEncontrar = porEncontrar.get(i);

@@ -172,8 +172,8 @@ public class Menu {
                                            // controllerAdmin.ConsultarReparacao(userLogado,sc);
                                             //break;
                                         case 20:
-                                            controllerAdmin.PesquisarEquipamento(userLogado,sc);
-                                            break;
+                                            //&controllerAdmin.PesquisarEquipamento(userLogado,sc);
+                                            //break;
                                         case 21:
                                             //controllerAdmin.NumeroDeUtilizadores(userLogado,sc);
                                             //break;
