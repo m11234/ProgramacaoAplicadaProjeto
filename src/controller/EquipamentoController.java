@@ -25,7 +25,7 @@ public class EquipamentoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa ou registo
      * ({@code ClienteDAO.VerSeCliente}) e ({@code dao3.RegistarEquipamento}).
      */
-    public void criarEquipamento(Scanner sc, Utilizador userLogado) throws SQLException {
+    public static void criarEquipamento(Scanner sc, Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
