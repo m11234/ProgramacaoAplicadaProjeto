@@ -508,28 +508,17 @@ public class AdminController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
      * ({@code adminDao.VerSeGestor}) e ({@code adminDao.verReparacoes}).
      */
-    public void ConsultarReparacao(Utilizador userLogado, Scanner sc) throws SQLException {
+    public List<Reparacao> ConsultarReparacao(Utilizador userLogado, int idR) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return null;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
-        }
-        System.out.println("Insira o numero da reparacao para pesquisar: ");
-        sc.nextLine();
-        int idR = sc.nextInt();
-        Reparacao Ver = adminDao.verReparacoes(idR);
-        if (Ver != null) {
-            System.out.println("\n Dados da Reparacao");
-            System.out.println("Numero: " + Ver.getIdR());
-            System.out.println("Data: " + Ver.getDataInicio());
-            System.out.println("Data fim: " + Ver.getDataFim());
-            System.out.println("Observacao: " + Ver.getObservacao());
-        } else {
-            System.out.println("Nao foi posssivel encontrar os dados");
-        }
+            return null;
+        };
+
+        return adminDao.verReparacoes(idR);
     }
 
     /**
@@ -572,21 +561,22 @@ public class AdminController {
         }
     }
 
-    public void NumeroDeUtilizadores(Utilizador userLogado, Scanner sc) throws SQLException {
+    public int NumeroDeUtilizadores(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return 0;
         }
         if (!adminDao.VerSeGestor(userLogado.getId())) {
             System.out.println("So gestores podem fazer isto!!!!");
-            return;
+            return 0;
         }
         int Utilizadores = ClienteDAO.ContarUtilizadores(userLogado.getId());
         if (Utilizadores == 0) {
             System.out.println("Nao existem utilizadores");
-            return;
+            return 0;
         }
         System.out.println("Numero de Utilizadores: " + Utilizadores);
+        return Utilizadores;
     }
 
     public void reparacoesEmCurso(Utilizador userLogado, Scanner sc) throws SQLException {

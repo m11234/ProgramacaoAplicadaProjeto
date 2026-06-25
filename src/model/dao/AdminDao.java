@@ -147,8 +147,9 @@ public class AdminDao {
      * na base de dados ({@code DBConnection.getconn} e {@code ps.executeQuery}), encapsulando
      * a respetiva {@link SQLException}.
      */
-    public Reparacao verReparacoes(int idR) {
+    public List<Reparacao> verReparacoes(int idR) {
         String sql = "Select * from Reparacao where idR = ?";
+        List<Reparacao> listaR = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idR);
@@ -159,13 +160,14 @@ public class AdminDao {
                 rep.setDataInicio(rs.getDate("DataInicio"));
                 rep.setDataFim(rs.getDate("DataFim"));
                 rep.setObservacao(rs.getString("Observacao"));
-                return rep;
+                listaR.add(rep);
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Lista de Reparacoes: ");
-        return null;
+        System.out.println("Lista de Reparacoes: " + listaR);
+        return listaR;
     }
 
     /**

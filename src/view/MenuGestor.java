@@ -84,7 +84,6 @@ public class MenuGestor extends JFrame {
 
         menuNotificacoes.add(ContasNovas);
         menuNotificacoes.add(NovasRepar);
-        menuNotificacoes.add(NotificacoesStock);
         menuNotificacoes.add(ApagarContNot);
 
         Reparacoes.add(AprovRepar);
@@ -121,8 +120,10 @@ public class MenuGestor extends JFrame {
 
         if (adminController.contadorNotificacoes(userLogado)) {
             menuNotificacoes.setForeground(Color.red);
+            menuNotificacoes.setEnabled(true);
         } else {
             menuNotificacoes.setForeground(Color.black);
+            menuNotificacoes.setEnabled(false);
         }
 
 
@@ -202,6 +203,20 @@ public class MenuGestor extends JFrame {
             }
         });
 
+        AprovRepar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    ReparacoesAprovarA porAceitar = new ReparacoesAprovarA(userLogado);
+                    PaineldoMeio.add(porAceitar, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         AlertasRepar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 PaineldoMeio.removeAll();
@@ -216,8 +231,15 @@ public class MenuGestor extends JFrame {
             }
         });
 
-
-
+        PesquisarReparID.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                ReparacaoPesquisa pq = new ReparacaoPesquisa(userLogado);
+                PaineldoMeio.add(pq, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+            }
+        });
 
         Sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

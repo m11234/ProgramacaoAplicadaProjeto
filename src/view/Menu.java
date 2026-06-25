@@ -166,11 +166,11 @@ public class Menu {
                                             controllerPeca.pecaInferior(userLogado);
                                             break;
                                         case 18:
-                                            controllerReparacao.notificacaoDezDiasSemFinalizacao(userLogado);
-                                            break;
+                                            //controllerReparacao.notificacaoDezDiasSemFinalizacao(userLogado);
+                                            //break;
                                         case 19:
-                                            controllerAdmin.ConsultarReparacao(userLogado,sc);
-                                            break;
+                                           // controllerAdmin.ConsultarReparacao(userLogado,sc);
+                                            //break;
                                         case 20:
                                             controllerAdmin.PesquisarEquipamento(userLogado,sc);
                                             break;
