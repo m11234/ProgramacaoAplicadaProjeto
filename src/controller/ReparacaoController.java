@@ -28,37 +28,24 @@ public class ReparacaoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa ou submissão
      * ({@code ClienteDAO.VerSeCliente}), ({@code equipamentoDAO.verSeEquipPertence}) e ({@code reparacaoDAO.SubmeterREparacao}).
      */
-    public void criarReparacao(Scanner sc, Utilizador userLogado) throws SQLException {
+    public boolean criarReparacao(String obs,int idEquip, Utilizador userLogado) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return false;
         }
         if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
             System.out.println("So clientes podem fazer isto!!!!");
-            return;
+            return false;
         }
-        System.out.print("Inserir id do equipamento a reparar:");
-        int idEquip = sc.nextInt();
-        sc.nextLine();
         if (!equipamentoDAO.verSeEquipPertence(idEquip, userLogado.getId())) {
         System.out.println("O equipamento não pertence a este cliente");
-        return;
+        return false;
         }
-
-        System.out.print("\nBreve descricao do problema");
-        String observacao  = sc.nextLine();
-
         int estado = 1;
+        Reparacao r = new Reparacao(obs,idEquip,estado);
+        reparacaoDAO.SubmeterREparacao(r);
 
-        Reparacao r = new Reparacao(observacao,idEquip,estado);
-        boolean sucesso = reparacaoDAO.SubmeterREparacao(r);
-        if (sucesso) {
-            System.out.println("Pedido submetido");
-        }
-        else {
-            System.out.println("Erro");
-    }
-
+        return true;
     }
 
     /**
@@ -86,6 +73,41 @@ public class ReparacaoController {
 
         return reparacaoDAO.verReparacoesPorAprovar();
     }
+
+    public static List<Reparacao> ReparAtivas(Utilizador userLogado) throws SQLException {
+
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return null;
+        }
+        if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
+            System.out.println("So funcionários podem fazer isto!!!!");
+            return null;
+        }
+        return reparacaoDAO.PesquisarPedidosReparacao(userLogado);
+    }
+
+    public boolean ReparAtivasContar(Utilizador userLogado) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return false;
+        }
+        if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return false;
+        }
+        if (!reparacaoDAO.PesquisarPedidosReparacao(userLogado).isEmpty()) {
+            return true;
+        }
+        if (reparacaoDAO.PesquisarPedidosReparacao(userLogado).isEmpty()) {
+            return false;
+        }
+        if (reparacaoDAO.PesquisarPedidosReparacao(userLogado) == null) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Método para visualizar as reparações pendentes de aprovação associadas a um funcionário
@@ -127,8 +149,6 @@ public class ReparacaoController {
         }
         return reparacaoDAO.verReparacoesPorFinalizarF(userLogado);
     }
-
-
 
     /**
      * Metodo para aprovar uma reparação e associá-la a um funcionário

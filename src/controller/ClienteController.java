@@ -77,69 +77,23 @@ public class ClienteController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa ou submissão
      * ({@code ClienteDAO.VerSeCliente}) e ({@code utilizadoresDAO.ApagarContaUtilizador}).
      */
-    public static void ApagarContaPedido(Utilizador userLogado, Scanner sc) throws SQLException {
+    public boolean ApagarContaPedido(Utilizador userLogado, int id) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!");
         }
-        assert userLogado != null;
+
         if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
             System.out.println("So clientes podem fazer isto!!!!");
-            return;
+            return false;
         }
-        System.out.println("A iniciar pedido para apagar conta para confirmar entrar id para desistir entrar 0");
-        int id = sc.nextInt();
-        if (id == 0) {
-            System.out.println("A abortar pedido para apagar conta");
-        }
+
         boolean sucesso = utilizadoresDAO.ApagarContaUtilizador(userLogado, id);
         if (sucesso) {
             System.out.println("Pedido para apagar conta iniciado com sucesso");
+            return true;
         }
-        else
-        {
-            System.out.println("Erro");
-        }
+        return false;
     }
-
-    /**
-     * Metodo para pesquisar e consultar um pedido de reparação através do seu número
-     * <p>
-     *      O metodo valida primeiro se o utilizador atual tem sessão iniciada e se tem permissões (é um cliente),
-     *      a seguir pede ao utilizador o número (ID) do pedido de reparação que pretende pesquisar, procura os seus dados e imprime
-     *      as suas informações detalhadas (ID, data de início, data de fim e observação) na consola caso o pedido exista.
-     * </p>
-     * @param userLogado O objeto {@link Utilizador} representa a conta com sessao iniciada no momento utilizado
-     * para verificar permissões
-     * @param sc O objeto {@link Scanner} é responsavel por capturar a informação introduzida na consola e passar
-     * para o método ({@code ReparacaoDAO.PesquisarPedidosReparacao})
-     * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
-     * ({@code ClienteDAO.VerSeCliente}) e ({@code ReparacaoDAO.PesquisarPedidosReparacao}).
-     */
-    public static void pesquisarPedidosReparacao(Utilizador userLogado, Scanner sc) throws SQLException {
-        if (userLogado == null) {
-            System.out.println("Fazer login!!");
-            return;
-        }
-        if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
-            System.out.println("So clientes podem fazer isto!!!!");
-            return;
-        }
-        System.out.println("Insira o numero do pedido de reparação: ");
-        sc.nextLine();
-        int idR =  sc.nextInt();
-        Reparacao Ver = ReparacaoDAO.PesquisarPedidosReparacao(idR);
-        if (Ver != null) {
-            System.out.println("\n Dados da Reparação");
-            System.out.println("Id: " + Ver.getIdR());
-            System.out.println("Data inicio: " + Ver.getDataInicio());
-            System.out.println("Data fim: " + Ver.getDataFim());
-            System.out.println("Observação: " + Ver.getObservacao());
-        } else {
-            System.out.println("Nao foi posssivel encontrar os dados");
-        }
-    }
-
-
 
 }
 

@@ -1,5 +1,6 @@
 package view.Cliente;
 
+import controller.ReparacaoController;
 import model.Utilizador;
 import view.Comuns.AlterarDadosContaGeral;
 import view.Comuns.ConsultarDadosContaGeral;
@@ -23,7 +24,7 @@ public class MenuCliente extends JFrame {
 
     private JPanel PaineldoMeio;
     private Utilizador userLogado;
-
+    private ReparacaoController reparacaoController = new ReparacaoController();
 
     /**
      * Construtor da classe que inicializa, configura e monta a interface do menu do cliente
@@ -36,7 +37,7 @@ public class MenuCliente extends JFrame {
      * propagar as informações da conta atualmente "logada" autenficada
      */
 
-    public MenuCliente(Utilizador u) {
+    public MenuCliente(Utilizador u) throws SQLException {
 
         this.userLogado = u;
         setTitle("Menu Cliente");
@@ -54,12 +55,11 @@ public class MenuCliente extends JFrame {
         JMenuItem Sair = new JMenuItem("Sair");
 
         JMenu NoticacoesPedidos = new JMenu("Notificações");
-        JMenuItem ConsultarPedidos = new JMenuItem("Notificações pedidos de reparação");
+        JMenuItem ConsultarPedidos = new JMenuItem("Reparações ativas");
 
         JMenu Pedidos = new JMenu("Pedidos");
         JMenuItem PedidoApagar = new JMenuItem("Iniciar pedido para apagar conta");
         JMenuItem NovasRepar = new JMenuItem("Criar pedido reparacao");
-        JMenuItem CriarPedido = new JMenuItem("Alterar pedido reparacao");
         JMenuItem CriarEquipamento = new JMenuItem("Consultar e adicionar equipamentos");
 
 
@@ -73,7 +73,6 @@ public class MenuCliente extends JFrame {
 
         Pedidos.add(PedidoApagar);
         Pedidos.add(NovasRepar);
-        Pedidos.add(CriarPedido);
         Pedidos.add(CriarEquipamento);
 
 
@@ -91,6 +90,14 @@ public class MenuCliente extends JFrame {
         menuBar.add(labelSemOpcaoEscolhida);
 
         add(PaineldoMeio, BorderLayout.CENTER);
+
+        if (reparacaoController.ReparAtivasContar(userLogado)) {
+            NoticacoesPedidos.setForeground(Color.red);
+            NoticacoesPedidos.setEnabled(true);
+        } else {
+            NoticacoesPedidos.setForeground(Color.black);
+            NoticacoesPedidos.setEnabled(false);
+        }
 
         Logout.addActionListener(new ActionListener() {
             @Override
@@ -111,6 +118,32 @@ public class MenuCliente extends JFrame {
                 PaineldoMeio.add(dados, BorderLayout.CENTER);
                 PaineldoMeio.revalidate();
                 PaineldoMeio.repaint();
+            }
+        });
+
+        PedidoApagar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+
+                PedidoApagarConta apagar = new PedidoApagarConta(userLogado);
+
+                PaineldoMeio.add(apagar, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+            }
+        });
+
+        ConsultarPedidos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    ReparAtivas repars = new ReparAtivas(userLogado);
+                    PaineldoMeio.add(repars, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                }
             }
         });
 
@@ -154,6 +187,7 @@ public class MenuCliente extends JFrame {
                 }
             }
         });
+
 
 
 

@@ -25,6 +25,7 @@ import java.util.List;
 public class EquipamentosCliente extends JPanel {
     private Utilizador userLogado;
     private EquipamentoController equipamentoController = new EquipamentoController();
+    private ReparacaoController reparacaoController = new ReparacaoController();
 
 
     /**
@@ -77,6 +78,9 @@ public class EquipamentosCliente extends JPanel {
             JButton AdicionarEquipamento = new JButton("Adicionar Equipamento");
             equipar.add(AdicionarEquipamento);
 
+            JButton SubmeterEquipamentoReparacao = new JButton("Submeter Reparacao");
+            equipar.add(SubmeterEquipamentoReparacao);
+
             add(scrollPane, BorderLayout.CENTER);
             add(equipar, BorderLayout.NORTH);
 
@@ -95,7 +99,7 @@ public class EquipamentosCliente extends JPanel {
                 JTextField Lote = new JTextField(15);
                 JLabel LoteLabel = new JLabel("Insira aqui o lote");
 
-                JComponent[] inputs = new JComponent[]{
+                  JComponent[] inputs = new JComponent[]{
                         Marca,
                         MarcaLabel,
                         Modelo,
@@ -106,11 +110,13 @@ public class EquipamentosCliente extends JPanel {
                         LoteLabel
                 };
 
+
                 int valor = JOptionPane.showConfirmDialog(
                         EquipamentosCliente.this,
                         inputs,
                         "Adicionar equipamento",
                         JOptionPane.OK_CANCEL_OPTION);
+
 
                 String text = Marca.getText();
                 String text2 = Modelo.getText();
@@ -139,10 +145,64 @@ public class EquipamentosCliente extends JPanel {
                         }
                     }
                 }
-
-
                 }
             });
+
+            SubmeterEquipamentoReparacao.addActionListener(
+                    new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            JTextField obs = new JTextField(15);
+                            JLabel obsLabel = new JLabel("Insira aqui a sua descricao do problema");
+
+                            JTextArea idEquip = new JTextArea();
+                            JLabel idEquipLabel = new JLabel("Insira o id do equipamento a reparar");
+
+                            JComponent[] inputs2 = new JComponent[]{
+                                    obs,
+                                    obsLabel,
+                                    idEquip,
+                                    idEquipLabel,
+                            };
+
+                            int valor2 = JOptionPane.showConfirmDialog(
+                                    EquipamentosCliente.this,
+                                    inputs2,
+                                    "Submeter Reparacao",
+                                    JOptionPane.OK_CANCEL_OPTION
+                            );
+
+                            String text5 = obs.getText();
+                            String text6 = idEquip.getText();
+
+                            if(text5!=null || text6!=null){
+                                String obsI = text5;
+                                String EquipI = text6;
+
+                                if (valor2 == JOptionPane.OK_OPTION) {
+                                    try {
+                                        boolean sucesso = reparacaoController.criarReparacao(obsI, Integer.parseInt(EquipI),userLogado);
+                                        if (sucesso){
+                                            JOptionPane.showMessageDialog(
+                                                    EquipamentosCliente.this,
+                                                    "Reparacao submetida com muito sucesso",
+                                                    "Sucesso" , JOptionPane.INFORMATION_MESSAGE
+                                            );
+                                        }   else {
+                                            JOptionPane.showMessageDialog(EquipamentosCliente.this,
+                                                    "Erro a insirir dados",
+                                                    "Erro" , JOptionPane.ERROR_MESSAGE);
+                                        }
+                                    } catch (SQLException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+                                }
+                            }
+
+
+
+                        }
+                    }
+            );
         }
     }
 }

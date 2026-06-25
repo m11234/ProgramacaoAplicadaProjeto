@@ -58,7 +58,6 @@ public class MenuGestor extends JFrame {
         JMenu menuNotificacoes = new JMenu("Notificacoes");
         JMenuItem ContasNovas = new JMenuItem("Pedidos aprovacao contas");
         JMenuItem NovasRepar = new JMenuItem("Reparações novas");
-        JMenuItem NotificacoesStock = new JMenuItem("Notificacoes stock");
         JMenuItem ApagarContNot = new JMenuItem("Pedidos de apagamento de conta");
 
         JMenu Reparacoes = new JMenu("Reparacoes");
@@ -70,8 +69,6 @@ public class MenuGestor extends JFrame {
         JMenuItem UtilizadoresNum = new JMenuItem("Ver numero de utilizadores");
         JMenuItem UtilizadoresLs = new JMenuItem("Ver lista de utilizadores");
         JMenuItem UtilizadoresPesq = new JMenuItem("Pesquisar por um utilizador");
-        JMenuItem ConsultarDadosU = new JMenuItem("Consultar dados de outra conta");
-        JMenuItem AlterarDadosU = new JMenuItem("Atualizar dados de outra conta");
         JMenuItem ApagarContaU = new JMenuItem("Apagar contas");
 
         JMenu Equipamentos = new JMenu("Equipamentos");
@@ -95,7 +92,6 @@ public class MenuGestor extends JFrame {
         CoisasGestor.add(UtilizadoresNum);
         CoisasGestor.add(UtilizadoresLs);
         CoisasGestor.add(UtilizadoresPesq);
-        CoisasGestor.add(AlterarDadosU);
         // o apagar conta faz sentido estar em dois lugares pois pode ser
         // preciso apagar uma conta a qualquer momento mesmo q nao tenho sido
         //pedido para apagar a mesma

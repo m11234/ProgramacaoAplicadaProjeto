@@ -103,7 +103,7 @@ public class UtilizadoresDAO {
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
     public Utilizador ConsultarDados(Utilizador userLogado) {
-        String sql = "Select nome, username, password , email , estado from utilizador where username = ?";
+        String sql = "Select id,nome, username, password , email , estado from utilizador where username = ?";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -115,6 +115,7 @@ public class UtilizadoresDAO {
 
             if (rs.next()) {
                 Utilizador u = new Utilizador();
+                u.setId(rs.getInt("id"));
                 u.setNome(rs.getString("nome"));
                 u.setUsername(rs.getString("username"));
                 u.setPassword(rs.getString("password"));

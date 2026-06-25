@@ -104,7 +104,25 @@ public class LoginPagina extends JFrame {
                                         if (userLogado != null) {
                                                 dispose();
                                             try {
-                                                if(ClienteDAO.VerSeCliente(userLogado.getId())) {
+                                                if(userLogado.getEstado() == 0) {
+                                                        JOptionPane.showMessageDialog(
+                                                                LoginPagina.this,
+                                                                "A sua conta ainda nao foi aprovada",
+                                                                "Conta nao aprovada",
+                                                                JOptionPane.ERROR_MESSAGE
+                                                        );
+
+                                                }
+                                                if(userLogado.getEstado() == 3 || userLogado.getEstado() == 4) {
+                                                        JOptionPane.showMessageDialog(
+                                                                LoginPagina.this,
+                                                                "A sua conta esta em processo de ser apagada ou apagada",
+                                                                "Conta nao valida",
+                                                                JOptionPane.ERROR_MESSAGE
+                                                        );
+                                                        dispose();
+                                                }
+                                                if(ClienteDAO.VerSeCliente(userLogado.getId()) && userLogado.getEstado() == 1) {
                                                         //trocar depois com o menu do cliente
                                                         MenuCliente paginaCliente = new MenuCliente(userLogado);
                                                         paginaCliente.setVisible(true);
@@ -117,22 +135,6 @@ public class LoginPagina extends JFrame {
                                                         //trocar pelas coisas do menu do funcionario
                                                         MenuFuncionario paginaFuncionario = new MenuFuncionario(userLogado);
                                                         paginaFuncionario.setVisible(true);
-                                                }
-                                                if(userLogado.getEstado() == 0) {
-                                                        JOptionPane.showMessageDialog(
-                                                                LoginPagina.this,
-                                                                "A sua conta ainda nao foi aprovada",
-                                                                "Conta nao aprovada",
-                                                                JOptionPane.ERROR_MESSAGE 
-                                                        );
-                                                }
-                                                if(userLogado.getEstado() == 3 || userLogado.getEstado() == 4) {
-                                                        JOptionPane.showMessageDialog(
-                                                                LoginPagina.this,
-                                                                "A sua conta esta em processo de ser apagada ou apagada",
-                                                                "Conta nao valida",
-                                                                JOptionPane.ERROR_MESSAGE
-                                                        );
                                                 }
                                             } catch (SQLException ex) {
                                                 throw new RuntimeException(ex);

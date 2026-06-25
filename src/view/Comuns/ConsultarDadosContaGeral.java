@@ -59,6 +59,7 @@ public class ConsultarDadosContaGeral extends JPanel {
 
             String[] columnNames = {"Campo", "Informação Pessoal"};
             String[][] data = {
+                    {"id", String.valueOf(dados.getId())},
                     {"Nome", dados.getNome()},
                     {"Username", dados.getUsername()},
                     {"Email", dados.getEmail()},

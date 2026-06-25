@@ -309,11 +309,15 @@ public class ReparacaoDAO {
      * @return Um objeto {@link Reparacao} contendo os dados do pedido se este for encontrado, ou {@code null} caso contrário.
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
-    public static Reparacao PesquisarPedidosReparacao(int idR) {
-        String sql = "SELECT * FROM reparacao WHERE idR=?";
+    public List<Reparacao> PesquisarPedidosReparacao(Utilizador userLogado) {
+        List<Reparacao> listaR = new ArrayList<>();
+        String sql = """
+                SELECT * FROM reparacao r\s
+                INNER JOIN equipamento e ON r.idEquip = e.idEquip\s
+                WHERE e.id = ? AND r.estado != 4""";
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setInt(1, idR);
+            ps.setInt(1, userLogado.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Reparacao re = new Reparacao();
@@ -322,13 +326,14 @@ public class ReparacaoDAO {
                 re.setDataFim(rs.getDate("DataFim"));
                 re.setCusto(rs.getInt("Custo"));
                 re.setObservacao(rs.getString("Observacao"));
-                return re;
+                listaR.add(re);
+                return listaR;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         System.out.println("Pedido: ");
-        return null;
+        return listaR;
 
     }
 

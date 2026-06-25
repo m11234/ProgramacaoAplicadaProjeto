@@ -74,14 +74,14 @@ public class Menu {
                                             //controllerEquipamento.criarEquipamento(sc, userLogado);
                                            // break;
                                         case 4:
-                                            controllerReparacao.criarReparacao(sc, userLogado);
-                                            break;
+                                            //controllerReparacao.criarReparacao(sc, userLogado);
+                                            //break;
                                         case 5:
-                                            ClienteController.ApagarContaPedido(userLogado,sc);
-                                            break;
+                                            //ClienteController.ApagarContaPedido(userLogado,sc);
+                                            //break;
                                         case 6:
-                                            ClienteController.pesquisarPedidosReparacao(userLogado,sc);
-                                            break;
+                                            //ClienteController.pesquisarPedidosReparacao(userLogado,sc);
+                                            //break;
                                     } }while (true);
                             }
                             if (adminDAO.VerSeGestor(userLogado.getId())){
@@ -142,8 +142,8 @@ public class Menu {
                                             controllerAdmin.atualizarDadosGestor(sc,userLogado);
                                             break;
                                         case 10:
-                                            controllerReparacao.verReparacoesPorAprovar(userLogado);
-                                            break;
+                                           // controllerReparacao.verReparacoesPorAprovar(userLogado);
+                                            //break;
                                         case 11:
                                            // controllerReparacao.aceitarReparacao(sc, userLogado);
                                             //break;
