@@ -12,9 +12,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+
+
+/**
+ * Classe responsável por criar a interface gráfica para a gestão de equipamentos do cliente
+ * <p>
+ * Esta classe estende {@link JPanel} e disponibiliza ao utilizador uma tabela contendo todos os seus equipamentos
+ * registados no sistema, permitindo também a adição de novos dispositivos através de um formulário interativo.
+ * </p>
+ */
+
 public class EquipamentosCliente extends JPanel {
     private Utilizador userLogado;
     private EquipamentoController equipamentoController = new EquipamentoController();
+
+
+    /**
+     * Construtor da classe que inicializa a interface e carrega a listagem de equipamentos do cliente
+     *     <p>
+     *     O construtor define as propriedades visuais do painel e invoca o método ({@code equipamentoController.verEquipamentos})
+     *     para preencher uma {@link JTable} com os detalhes dos dispositivos do utilizador. Adicionalmente, configura um
+     *     event listener ({@link ActionListener}) no botão ({@code AdicionarEquipamento}), que gera um input
+     *     para capturar os dados do novo dispositivo (marca, modelo, SKU e lote) e efetuar a submissão na base
+     *     de dados através do método ({@code equipamentoController.criarEquipamento}).
+     *     </p>
+     * @param u
+     * @throws SQLException
+     */
+
 
     public EquipamentosCliente(Utilizador u) throws SQLException {
         this.userLogado = u;
