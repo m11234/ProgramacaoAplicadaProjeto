@@ -207,8 +207,8 @@ public class Menu {
                                             controllerTestes.submeterTesteF(sc,userLogado);
                                             break;
                                         case 4:
-                                            controllerReparacao.FinalizarReparacaoF(sc,userLogado);
-                                            break;
+                                            //controllerReparacao.FinalizarReparacaoF(sc,userLogado);
+                                            //break;
                                         case 5:
                                             controllerPeca.inserirPecaUsada(sc,userLogado);
                                             break;

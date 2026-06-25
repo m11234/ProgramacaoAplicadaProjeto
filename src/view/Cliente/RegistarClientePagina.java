@@ -143,6 +143,7 @@ public class RegistarClientePagina extends JFrame {
                     } if (clienteCriado != null) {
                         dispose();
                         JOptionPane.showMessageDialog(RegistarClientePagina.this, "Cliente criado com sucesso podera fazer login quando a sua conta for ativada");
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(
                                 RegistarClientePagina.this,

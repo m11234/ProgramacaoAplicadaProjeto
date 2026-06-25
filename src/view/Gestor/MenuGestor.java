@@ -98,7 +98,9 @@ public class MenuGestor extends JFrame {
         CoisasGestor.add(UtilizadoresPesq);
         CoisasGestor.add(ConsultarDadosU);
         CoisasGestor.add(AlterarDadosU);
-        CoisasGestor.add(AtivarContaU);
+        // o apagar conta faz sentido estar em dois lugares pois pode ser
+        // preciso apagar uma conta a qualquer momento mesmo q nao tenho sido
+        //pedido para apagar a mesma
         CoisasGestor.add(ApagarContaU);
 
         Equipamentos.add(PesquisarEquipamento);
@@ -179,6 +181,22 @@ public class MenuGestor extends JFrame {
         });
 
         ApagarContNot.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    ApagarContas porApagar = new ApagarContas(userLogado);
+                    PaineldoMeio.add(porApagar, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+        // o apagar conta faz sentido estar em dois menus pode ser
+        // preciso apagar uma conta a qualquer momento mesmo q nao tenho sido
+        //pedido para apagar a mesma
+        ApagarContaU.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 PaineldoMeio.removeAll();
                 try {
