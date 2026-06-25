@@ -535,7 +535,7 @@ public class AdminController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa
      * ({@code adminDao.VerSeGestor}) e ({@code adminDao.perquisarEquipamento}).
      */
-    public void PesquisarEquipamento(Utilizador userLogado, Scanner sc) throws SQLException {
+    /*public void PesquisarEquipamento(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
             return;
@@ -559,6 +559,18 @@ public class AdminController {
         } else {
             System.out.println("Nao foi posssivel encontrar os dados");
         }
+    } */
+
+    public List<Equipamento> PesquisarEquipamento(Utilizador userLogado, int idEquip) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return null;
+        }
+        if (!adminDao.VerSeGestor(userLogado.getId())) {
+            System.out.println("So gestores podem fazer isto!!!!");
+            return null;
+        };
+        return adminDao.perquisarEquipamento(idEquip);
     }
 
     public int NumeroDeUtilizadores(Utilizador userLogado) throws SQLException {
