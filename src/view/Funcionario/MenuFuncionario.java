@@ -1,7 +1,10 @@
-package view;
+package view.Funcionario;
 
 import controller.FuncionarioController;
 import model.Utilizador;
+import view.Comuns.AlterarDadosContaGeral;
+import view.Comuns.ConsultarDadosContaGeral;
+import view.Comuns.LoginPagina;
 
 import javax.swing.*;
 import java.awt.*;

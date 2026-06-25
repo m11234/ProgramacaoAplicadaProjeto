@@ -1,4 +1,4 @@
-package view;
+package view.Comuns;
 
 import model.Utilizador;
 import controller.UtilizadorController;

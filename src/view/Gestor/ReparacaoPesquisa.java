@@ -1,9 +1,7 @@
-package view;
-//slwslw
+package view.Gestor;
+
 import controller.AdminController;
-import controller.EquipamentoController;
-import jdk.jshell.execution.Util;
-import model.Equipamento;
+import controller.ReparacaoController;
 import model.Reparacao;
 import model.Utilizador;
 
@@ -14,59 +12,57 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
-public class EquipamentoPesquisa extends JPanel{
+public class ReparacaoPesquisa extends JPanel {
     private Utilizador userLogado;
-    private EquipamentoController equipamentoController = new EquipamentoController();
+    private ReparacaoController reparacaoController = new ReparacaoController();
     private AdminController adminController = new AdminController();
     private JTextField pesquisa = new JTextField(15);
     private JButton pesquisar = new JButton("Pesquisar");
-
-    public EquipamentoPesquisa(Utilizador u) {
+    
+    public ReparacaoPesquisa(Utilizador u) {
         this.userLogado = u;
-
+        
         setLayout(new BorderLayout());
         setBackground(Color.white);
-
-        JLabel title = new JLabel("Pesquisar por uma equipamento");
+        
+        JLabel title = new JLabel("Pesquisar por uma reparacao");
         title.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(title, BorderLayout.NORTH);
-
+        
         JPanel Pesquisa = new JPanel();
         Pesquisa.setBackground(Color.white);
-
+        
         Pesquisa.add(pesquisa);
         Pesquisa.add(pesquisar);
 
         add(Pesquisa, BorderLayout.CENTER);
-
+        
         pesquisar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String pesquisado = pesquisa.getText();
-
+                
                 if (pesquisado.isEmpty()) {
                     JOptionPane.showMessageDialog(
-                            EquipamentoPesquisa.this,
-                            "Por favor insira um id de um equipamento para pesquisar",
+                            ReparacaoPesquisa.this,
+                            "Por favor insira um id de uma reparacao para pesquisar",
                             "Erro",
                             JOptionPane.ERROR_MESSAGE
                     );
                 } else {
                     try {
                         int idPesquisado = Integer.parseInt(pesquisado);
-                        List<Equipamento> porEncontrar = adminController.PesquisarEquipamento(userLogado,idPesquisado);
-
+                        List<Reparacao> porEncontrar = adminController.ConsultarReparacao(userLogado,idPesquisado);
+                        
                         if (porEncontrar != null) {
-                            String[] columnNames = {"idEquipamento","Marca","Modelo","SKU","DataSubmissao", "DataReparacao"};
-                            String[][] data = new String[porEncontrar.size()][6];
+                            String[] columnNames = {"idReparacai","data inicio","ide","obs"};
+                            String[][] data = new String[porEncontrar.size()][4];
 
                             for(int i = 0; i < porEncontrar.size(); i++) {
-                                Equipamento PorEncontrar = porEncontrar.get(i);
-                                data[i][0] = String.valueOf(PorEncontrar.getIdEquipamento());
-                                data[i][1] = String.valueOf(PorEncontrar.getMarca());
-                                data[i][2] = String.valueOf(PorEncontrar.getModelo());
-                                data[i][3] = String.valueOf(PorEncontrar.getSKU());
-                                data[i][4] = String.valueOf(PorEncontrar.getDataSubmissao());
-                                data[i][5] = String.valueOf(PorEncontrar.getDataReparacao());
+                                Reparacao PorEncontrar = porEncontrar.get(i);
+                                data[i][0] = String.valueOf(PorEncontrar.getIdR());
+                                data[i][1] = String.valueOf(PorEncontrar.getDataInicio());
+                                data[i][2] = String.valueOf(PorEncontrar.getIdEquip());
+                                data[i][3] = String.valueOf(PorEncontrar.getObservacao());
                             }
                             JTable table = new JTable(data, columnNames);
                             JScrollPane scrollPane = new JScrollPane(table);
@@ -84,5 +80,6 @@ public class EquipamentoPesquisa extends JPanel{
             }
         });
     }
-
+    
+    
 }

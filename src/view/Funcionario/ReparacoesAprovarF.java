@@ -1,6 +1,5 @@
-package view;
+package view.Funcionario;
 
-import controller.AdminController;
 import controller.ReparacaoController;
 import model.Reparacao;
 import model.Utilizador;

@@ -1,6 +1,6 @@
 package controller;
 
-import view.LoginPagina;
+import view.Comuns.LoginPagina;
 
 import javax.swing.*;
 

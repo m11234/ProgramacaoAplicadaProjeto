@@ -1,4 +1,4 @@
-package view;
+package view.Comuns;
 
 import controller.UtilizadorController;
 import model.Utilizador;
@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 
 import static controller.UtilizadorController.EMAIL_PATTERN;
 

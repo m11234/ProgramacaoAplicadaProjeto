@@ -1,14 +1,15 @@
-package view;
+package view.Cliente;
 
 import controller.ClienteController;
 import model.Cliente;
 import model.Utilizador;
+import view.Comuns.ConsultarDadosContaGeral;
+import view.Comuns.RegistarPagina;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 /**
  * Classe responsável por criar a interface gráfica para a conclusão do registo com perfil de Cliente

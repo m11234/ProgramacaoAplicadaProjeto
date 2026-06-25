@@ -1,4 +1,4 @@
-package view;
+package view.Gestor;
 
 import controller.ReparacaoController;
 import model.Reparacao;

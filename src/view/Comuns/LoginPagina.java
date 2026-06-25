@@ -1,16 +1,14 @@
-package view;
+package view.Comuns;
 
 import controller.UtilizadorController;
-import model.Funcionario;
 import model.Utilizador;
 import model.dao.AdminDao;
 import model.dao.ClienteDAO;
 import model.dao.FuncionarioDAO;
-import model.dao.UtilizadoresDAO;
-import view.RegistarPagina;
-import view.Menu;
-import view.MenuCliente;
-import view.MenuFuncionario;
+import view.Funcionario.MenuFuncionario;
+import view.Gestor.MenuGestor;
+import view.Cliente.MenuCliente;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

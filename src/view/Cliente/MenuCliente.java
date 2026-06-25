@@ -1,6 +1,9 @@
-package view;
+package view.Cliente;
 
 import model.Utilizador;
+import view.Comuns.AlterarDadosContaGeral;
+import view.Comuns.ConsultarDadosContaGeral;
+import view.Comuns.LoginPagina;
 
 import javax.swing.*;
 import java.awt.*;

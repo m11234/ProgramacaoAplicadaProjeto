@@ -1,6 +1,8 @@
-package view;
+package view.Comuns;
 
 import model.Utilizador;
+import view.Funcionario.RegistarFuncionarioPagina;
+import view.Cliente.RegistarClientePagina;
 
 import javax.swing.*;
 import java.awt.*;

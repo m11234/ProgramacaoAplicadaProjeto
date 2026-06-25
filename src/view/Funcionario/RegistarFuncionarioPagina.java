@@ -1,8 +1,10 @@
-package view;
+package view.Funcionario;
 
 import controller.FuncionarioController;
 import model.Funcionario;
 import model.Utilizador;
+import view.Comuns.ConsultarDadosContaGeral;
+import view.Comuns.RegistarPagina;
 
 import javax.swing.*;
 import java.awt.*;

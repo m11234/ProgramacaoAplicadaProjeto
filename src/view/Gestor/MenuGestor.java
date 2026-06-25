@@ -1,7 +1,10 @@
-package view;
+package view.Gestor;
 
 import controller.AdminController;
 import model.Utilizador;
+import view.Comuns.AlterarDadosContaGeral;
+import view.Comuns.ConsultarDadosContaGeral;
+import view.Comuns.LoginPagina;
 
 import javax.swing.*;
 import java.awt.*;
