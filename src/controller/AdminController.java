@@ -561,7 +561,7 @@ public class AdminController {
         }
     }
 
-    public int NumeroDeUtilizadores(Utilizador userLogado, Scanner sc) throws SQLException {
+    public int NumeroDeUtilizadores(Utilizador userLogado) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
             return 0;

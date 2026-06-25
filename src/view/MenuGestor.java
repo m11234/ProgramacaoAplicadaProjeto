@@ -241,6 +241,20 @@ public class MenuGestor extends JFrame {
             }
         });
 
+        UtilizadoresNum.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                try {
+                    NumeroUtilizadores num = new NumeroUtilizadores(userLogado);
+                    PaineldoMeio.add(num, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
         Sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int valor = JOptionPane.showConfirmDialog(
