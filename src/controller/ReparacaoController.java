@@ -243,15 +243,15 @@ public class ReparacaoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa ou atualização
      * ({@code FuncionarioDAO.verSeFuncionario}), ({@code reparacaoDAO.verReparacoesPorFinalizarF}) e ({@code reparacaoDAO.FinalizarReparacaoFDAO}).
      */
-    public void FinalizarReparacaoF(int idReparacao, int Estado, Utilizador userLogado) throws SQLException {
+    public static boolean FinalizarReparacaoF(int idReparacao, int Estado, Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return false;
         }
         if (!FuncionarioDAO.verSeFuncionario(userLogado.getId())) {
             System.out.println("So funcionarios podem fazer isto!!!!");
-            return;
+            return false;
         }
 
         int idFuncionario = userLogado.getId();
@@ -260,7 +260,7 @@ public class ReparacaoController {
 
         if (listaPorFinalizar == null || listaPorFinalizar.isEmpty()) {
             System.out.println("Não tem reparações pendentes por finalizar neste momento.");
-            return;
+            return false;
         }
 
         for (Reparacao rep : listaPorFinalizar) {
@@ -280,6 +280,7 @@ public class ReparacaoController {
         else {
             System.out.println("Erro a aprovar reparacao");
         }
+        return sucesso;
     }
 
     /**
