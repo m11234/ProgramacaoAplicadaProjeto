@@ -5,10 +5,11 @@ import model.dao.ClienteDAO;
 import model.dao.EquipamentoDAO;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class EquipamentoController {
-    private final EquipamentoDAO dao3 = new EquipamentoDAO();
+    private final EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
 
     /**
      * Metodo para criar e registar um novo equipamento
@@ -25,38 +26,23 @@ public class EquipamentoController {
      * @throws SQLException Se existir algum erro na comunicação com a base de dados seja durante o query de pesquisa ou registo
      * ({@code ClienteDAO.VerSeCliente}) e ({@code dao3.RegistarEquipamento}).
      */
-    public static void criarEquipamento(Scanner sc, Utilizador userLogado) throws SQLException {
+    public static boolean criarEquipamento(String marca, String modelo, String sku, String lote, Utilizador userLogado) throws SQLException {
 
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
-            return;
+            return false;
         }
         if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
             System.out.println("So clientes podem fazer isto!!!!");
-            return;
+            return false;
         }
-
-        System.out.println("\nRegistar Equipamento:");
-
-        System.out.println("Digite o marca do equipamento:");
-        sc.nextLine();
-        String marca = sc.nextLine();
-
-        System.out.println("Digite o modelo do equipamento:");
-        String modelo = sc.nextLine();
-
-        System.out.println("Digite o SKU do equipamento:");
-        String sku = sc.nextLine();
-
-        System.out.println("Digite o lote do equipamento:");
-        String lote = sc.nextLine();
 
         Date DataSubmissao = new Date();
 
         int id = userLogado.getId();
 
         Equipamento e = new Equipamento(marca,modelo,sku,lote,DataSubmissao,id);
-        boolean sucesso = dao3.RegistarEquipamento(e);
+        boolean sucesso = EquipamentoDAO.RegistarEquipamento(e);
 
         if (sucesso) {
             System.out.println("Equipamento registado com sucesso!!!");
@@ -64,8 +50,18 @@ public class EquipamentoController {
         else {
             System.out.println("Erro!!!");
         }
-
-
+        return true;
+    }
+    public List<Equipamento> verEquipamentos(Utilizador userLogado) throws SQLException {
+        if (userLogado == null) {
+            System.out.println("Fazer login!!!");
+            return null;
+        }
+        if (!ClienteDAO.VerSeCliente(userLogado.getId())) {
+            System.out.println("So clientes podem fazer isto!!!!");
+            return null;
+        }
+        return equipamentoDAO.VerEquipamento(userLogado.getId());
     }
 
 

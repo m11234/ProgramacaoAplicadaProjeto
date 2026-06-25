@@ -4,6 +4,8 @@ import model.Equipamento;
 import model.db.DBConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EquipamentoDAO {
 
@@ -22,7 +24,8 @@ public class EquipamentoDAO {
      * @throws RuntimeException Se ocorrer um erro de SQL durante a execução da instrução,
      * encapsulando a {@link SQLException} original.
      */
-    public boolean RegistarEquipamento (Equipamento e){
+    public static boolean RegistarEquipamento(Equipamento e){
+
         String sql = "Insert into equipamento (Marca, Modelo, SKU, Lote, DataSubmissao, id) values (?,?,?,?,?,?)";
 
         try (Connection conn = DBConnection.getconn();
@@ -77,4 +80,28 @@ public class EquipamentoDAO {
         return existeAndPertence;
     }
 
+    public List<Equipamento> VerEquipamento(int id) {
+        String sql = "Select * from equipamento where id = ?";
+        List<Equipamento> equipamentos = new ArrayList<>();
+
+        try (Connection conn = DBConnection.getconn();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Equipamento e = new Equipamento();
+                e.setIdEquipamento(rs.getInt("idEquip"));
+                e.setMarca(rs.getString("Marca"));
+                e.setModelo(rs.getString("Modelo"));
+                e.setSKU(rs.getString("SKU"));
+                e.setLote(rs.getString("Lote"));
+                e.setDataSubmissao(rs.getDate("DataSubmissao"));
+                equipamentos.add(e);
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return equipamentos;
+    }
 }

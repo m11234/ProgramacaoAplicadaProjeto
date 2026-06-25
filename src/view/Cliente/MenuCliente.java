@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.SQLException;
 
 
 /**
@@ -60,7 +60,7 @@ public class MenuCliente extends JFrame {
         JMenuItem PedidoApagar = new JMenuItem("Iniciar pedido para apagar conta");
         JMenuItem NovasRepar = new JMenuItem("Criar pedido reparacao");
         JMenuItem CriarPedido = new JMenuItem("Alterar pedido reparacao");
-        JMenuItem CriarEquipamento = new JMenuItem("Criar equipamento");
+        JMenuItem CriarEquipamento = new JMenuItem("Consultar e adicionar equipamentos");
 
 
         menuConta.add(ConsultarMeusDados);
@@ -123,6 +123,21 @@ public class MenuCliente extends JFrame {
                 PaineldoMeio.add(alterar, BorderLayout.CENTER);
                 PaineldoMeio.revalidate();
                 PaineldoMeio.repaint();
+            }
+        });
+
+        CriarEquipamento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("carregado");
+                PaineldoMeio.removeAll();
+                try {
+                    EquipamentosCliente equipamento = new EquipamentosCliente(userLogado);
+                    PaineldoMeio.add(equipamento, BorderLayout.CENTER);
+                    PaineldoMeio.revalidate();
+                    PaineldoMeio.repaint();
+                }  catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 

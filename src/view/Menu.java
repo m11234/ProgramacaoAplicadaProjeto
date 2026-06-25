@@ -71,8 +71,8 @@ public class Menu {
                                             controller.ConsultarDados(userLogado);
                                             break;
                                         case 3:
-                                            controllerEquipamento.criarEquipamento(sc, userLogado);
-                                            break;
+                                            //controllerEquipamento.criarEquipamento(sc, userLogado);
+                                           // break;
                                         case 4:
                                             controllerReparacao.criarReparacao(sc, userLogado);
                                             break;
