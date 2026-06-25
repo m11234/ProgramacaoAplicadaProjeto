@@ -255,6 +255,16 @@ public class MenuGestor extends JFrame {
             }
         });
 
+        PesquisarEquipamento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PaineldoMeio.removeAll();
+                EquipamentoPesquisa pq =  new EquipamentoPesquisa(userLogado);
+                PaineldoMeio.add(pq, BorderLayout.CENTER);
+                PaineldoMeio.revalidate();
+                PaineldoMeio.repaint();
+            }
+        });
+
         Sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int valor = JOptionPane.showConfirmDialog(

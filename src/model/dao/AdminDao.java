@@ -183,8 +183,9 @@ public class AdminDao {
      * @throws RuntimeException Se ocorrer um erro na comunicação com a base de dados durante a execução do
      * comando SQL, encapsulando a respetiva {@link SQLException}.
      */
-    public Equipamento perquisarEquipamento(int idEquip) {
+    public List<Equipamento> perquisarEquipamento(int idEquip) {
         String sql = "Select * from equipamento where idEquip = ? order by id";
+        List <Equipamento> listaE = new ArrayList<>();
         try (Connection conn = DBConnection.getconn();
             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idEquip);
@@ -198,13 +199,13 @@ public class AdminDao {
                 eq.setLote(rs.getString("Lote"));
                 eq.setDataReparacao(rs.getDate("dataSubmissao"));
                 eq.setDataSubmissao(rs.getDate("dataReparacao"));
-                return eq;
+                listaE.add(eq);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         System.out.println("Equipamento: ");
-        return null;
+        return listaE;
     }
     public int notificacoes() {
         int counterFinal = 0;
