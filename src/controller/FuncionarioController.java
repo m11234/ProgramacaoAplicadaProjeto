@@ -73,6 +73,18 @@ public class FuncionarioController {
         return f;
     }
 
+
+    /**
+     * Método static para verificar e contabilizar a presença de notificações ou tarefas pendentes associadas ao funcionário
+     * <p>
+     * O método valida a sessão do utilizador e confirma o seu perfil de acesso invocando ({@code FuncionarioDAO.verSeFuncionario}).
+     * Sendo um método utilitário partilhado e invocado diretamente por contextos statics de interface ou menus sem necessidade
+     * de instanciação do controller, este método recorre à operação ({@code FuncionarioDAO.notificacoes}) para ler a base de dados.
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} que representa a conta do funcionário autenticado no sistema.
+     * @return Um valor booleano equivalente a verdadeiro se existirem alertas ou reparações pendentes de validação, ou falso caso contrário.
+     */
+
     //juro q n sei porque mas tive de meter static para funcionar
     public static Boolean contadorNotificacoes(Utilizador userLogado) {
         if (userLogado == null) {

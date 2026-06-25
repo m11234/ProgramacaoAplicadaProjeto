@@ -333,6 +333,16 @@ public class ReparacaoDAO {
     }
 
 
+    /**
+     * Método estático responsável por obter e contabilizar a quantidade de reparações ativas em curso no sistema
+     * <p>
+     * O método executa uma consulta agregada na base de dados aplicando o filtro condicional onde o estado é
+     *  igual a 3 (equivalente ao estado operacional de intervenção técnica ativa ou em curso).
+     * </p>
+     * @return O número inteiro correspondente ao totalizador de processos técnicos ativos encontrados.
+     * @throws SQLException Se ocorrer alguma falha estrutural ou erro de comunicação durante a execução da consulta SQL.
+     */
+
     public static int contarReparacoes() throws SQLException {
         String sql = "Select count(*) from reparacao where estado = 3";
         int reparacaoAtivas=0;

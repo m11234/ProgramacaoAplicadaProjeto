@@ -71,6 +71,21 @@ public class ClienteDAO {
         return ClienteSer;
     }
 
+
+    /**
+     * Método estático para contabilizar o número total de utilizadores registados no sistema
+     * <p>
+     * O método efetua uma consulta de agregação utilizando a instrução SQL {@code SELECT COUNT(*)}
+     * na tabela geral de utilizadores. Ele extrai o somatório total de registos, processa o resultado
+     * através de um ecrã de leitura ({@link ResultSet}) e armazena o valor consolidado numa variável de retorno.
+     * </p>
+     * @param Id O identificador numérico do utilizador que solicita a contagem (parâmetro disponível na assinatura,
+     * embora o fluxo interno execute uma contagem irrestrita na tabela).
+     * @return O número inteiro correspondente ao total de utilizadores contabilizados na tabela.
+     * @throws SQLException Se ocorrer alguma falha de comunicação, interrupção de canal ou erro sintático
+     * na execução da consulta com a base de dados.
+     */
+
     public static int ContarUtilizadores(int Id ) throws SQLException {
         String sql = "Select count(*) from utilizador";
         int Nutilizadores = 0;

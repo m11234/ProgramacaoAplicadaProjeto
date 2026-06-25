@@ -548,6 +548,20 @@ public class AdminController {
         return adminDao.perquisarEquipamento(idEquip);
     }
 
+
+    /**
+     * Método para obter e contabilizar o número total de utilizadores
+     * <p>
+     * O método valida a sessão e as permissões de acesso do gestor ativo. De seguida, invoca a base de dados
+     * através do método ({@code ClienteDAO.ContarUtilizadores}) para contar o volume de registos existentes,
+     * apresentando o somatório final no número de utilizadores existentes no sistema.
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} que representa a conta do gestor autenticado no momento,
+     * utilizado para validação de segurança.
+     * @return O número inteiro correspondente ao total de utilizadores registados na base de dados.
+     * @throws SQLException Se ocorrer um erro durante a execução da consulta de contagem na base de dados.
+     */
+
     public int NumeroDeUtilizadores(Utilizador userLogado) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
@@ -566,6 +580,20 @@ public class AdminController {
         return Utilizadores;
     }
 
+
+
+    /**
+     * Método para contabilizar e apresentar o número total de pedidos de reparação atualmente em curso
+     * <p>
+     * O método valida se o utilizador logado tem perfil de administrador e invoca a rotina da base de dados
+     * ({@code ReparacaoDAO.contarReparacoes}) para mostrar quantos processos de reparação ativos existem na aplicação,
+     * imprimindo o resultado.
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} que representa a conta do gestor autenticado, usado para controlo de acesso.
+     * @param sc O objeto {@link Scanner} destinado à leitura eventual de dados na consola (não consumido neste fluxo).
+     * @throws SQLException Se existir alguma falha na transmissão da query ou falha de ligação com a base de dados.
+     */
+
     public void reparacoesEmCurso(Utilizador userLogado, Scanner sc) throws SQLException {
         if (userLogado == null) {
             System.out.println("Fazer login!!!");
@@ -582,6 +610,20 @@ public class AdminController {
         }
         System.out.println("Numero de Reparacoes: " + numRaparacoesEmCurso);
     }
+
+
+
+    /**
+     * Método para verificar a presença de alertas ou notificações ativas na aplicação do administrador
+     * <p>
+     * O método avalia o estado de autenticação do gestor e consulta a base de dados utilizando o método
+     * ({@code adminDao.notificacoes}). Se a quantidade de alertas registados for estritamente superior a 0,
+     * informa o gestor da existência de pendências (notificações).
+     * </p>
+     * @param userLogado O objeto {@link Utilizador} representativo do administrador em sessão ativa.
+     * @return Um valor booleano equivalente a verdadeiro se existirem notificações por processar ou falso caso contrário.
+     * @throws SQLException Se ocorrer algum erro técnico na leitura da contagem de notificações da base de dados.
+     */
 
     public Boolean contadorNotificacoes(Utilizador userLogado) throws SQLException {
         if (userLogado == null) {

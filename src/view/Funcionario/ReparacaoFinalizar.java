@@ -11,11 +11,31 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Classe responsável por criar o painel de interface gráfica para a conclusão de reparações por parte do funcionário
+ * <p>
+ * Esta classe estende {@link JPanel} e disponibiliza uma área de trabalho visual contendo uma tabela com as
+ * reparações em curso atribuídas ao funcionário, dessa forma permitindo-lhe selecionar e finalizar intervenções técnicas específicas.
+ * </p>
+ */
+
 public class ReparacaoFinalizar extends JPanel {
     private Utilizador userLogado;
     private ReparacaoController reparacaoController =  new ReparacaoController();
     int Estado;
 
+    /**
+     * Construtor da classe que inicia a interface e carrega a listagem de reparações em curso
+     * <p>
+     * O construtor define os parâmetros visuais do painel e invoca o método ({@code ReparacaoController.verReparacoesPorFinalizarF})
+     * para preencher uma {@link JTable} com os dados das reparações ativas. Configura também um event listener
+     * ({@link ActionListener}) no botão de ação, dessa forma é gerado um input que pede o id e executa a atualização de estado na base de
+     * dados através do método ({@code ReparacaoController.FinalizarReparacaoF}).
+     * </p>
+     * @param u O objeto {@link Utilizador} que representa a conta do funcionário autenticado no sistema, utilizado para
+     * filtrar as reparações em aberto sob a sua responsabilidade direta.
+     * @throws SQLException Se ocorrer algum erro técnico ou falha de comunicação na consulta realizada com a base de dados.
+     */
 
     public ReparacaoFinalizar(Utilizador u) throws SQLException {
         this.userLogado = u;

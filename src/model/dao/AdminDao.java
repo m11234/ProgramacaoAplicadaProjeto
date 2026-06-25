@@ -209,6 +209,22 @@ public class AdminDao {
         System.out.println("Equipamento: ");
         return listaE;
     }
+
+
+
+    /**
+     * Método para fazer o somatório total de notificações pendentes no sistema do administrador
+     * <p>
+     * O método realiza uma operação aritmética baseada em 3 subconsultas estruturadas na base de dados.
+     * Ele agrupa e soma o volume total de reparações no estado 2 (aguardando atribuição), contas de utilizadores
+     * no estado 0 (pendentes de ativação inicial) e contas de utilizadores no estado 3 (com processos de
+     * apagamento em curso), devolvendo o valor consolidado.
+     * </p>
+     * @return O número inteiro totalizador de alertas e notificações encontrados para o painel de gestão.
+     * @throws RuntimeException Se ocorrer uma quebra de ligação ou erro sintático na base de dados,
+     * capturando a exceção original do tipo {@link SQLException}.
+     */
+
     public int notificacoes() {
         int counterFinal = 0;
 
@@ -230,4 +246,5 @@ public class AdminDao {
         }
 
         return counterFinal;
-    }}
+    }
+}

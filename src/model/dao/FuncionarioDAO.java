@@ -74,6 +74,21 @@ public class FuncionarioDAO {
         return existeFuncionario;
     }
 
+
+    /**
+     * Método estático para contabilizar o número de notificações de reparações atribuídas a um funcionário específico
+     * <p>
+     * O método executa uma consulta de contagem na tabela de reparações filtrando os registos onde o estado é
+     * igual a 2 (representando reparações pendentes ou sob uma condição específica de fluxo) e o campo do
+     * funcionário associado corresponde ao identificador numérico obtido a partir do objeto {@link Utilizador}.
+     * </p>
+     * @param userlogado O objeto {@link Utilizador} que representa a conta do funcionário para o qual as
+     * notificações serão contabilizadas.
+     * @return O número inteiro totalizador de registos de reparação que satisfazem as condições da pesquisa.
+     * @throws RuntimeException Se ocorrer um erro na comunicação ou execução do comando SQL com a base de dados,
+     * capturando a exceção original do tipo {@link SQLException}.
+     */
+
     public static int notificacoes(Utilizador userlogado) {
         int counterFinal = 0;
 
