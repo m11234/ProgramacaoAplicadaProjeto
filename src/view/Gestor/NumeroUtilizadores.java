@@ -19,14 +19,14 @@ public class NumeroUtilizadores extends JPanel {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
-        JLabel title = new JLabel("Numero de utilizadores");
+        JLabel title = new JLabel();
         title.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(title, BorderLayout.NORTH);
 
         int numeroUtilizadores = adminController.NumeroDeUtilizadores(userLogado);
 
         if (numeroUtilizadores > 0) {
-            JLabel numeroUtilizadore = new JLabel("Numero de utilizadores" + numeroUtilizadores);
+            JLabel numeroUtilizadore = new JLabel("Numero de utilizadores: " + numeroUtilizadores);
             add(numeroUtilizadore, BorderLayout.WEST);
         } else  {
             JLabel numeroUtilizadore = new JLabel("Não existem utlizadores");
