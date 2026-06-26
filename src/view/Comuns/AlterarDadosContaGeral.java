@@ -66,6 +66,8 @@ public class AlterarDadosContaGeral extends JPanel {
         painelBotoes.setBackground(Color.WHITE);
         painelBotoes.add(botaoGuardar);
         botaoGuardar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        botaoGuardar.setToolTipText("Clique aqui para confirmar as mudanças dos seus dados");
+
 
         add(title, BorderLayout.NORTH);
         add(PainelPrincipal, BorderLayout.CENTER);

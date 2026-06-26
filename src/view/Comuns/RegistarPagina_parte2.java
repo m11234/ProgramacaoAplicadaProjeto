@@ -40,10 +40,12 @@ public class RegistarPagina_parte2 extends JFrame {
         setTitle("Escolher tipo de conta:");
         ClienteButao.add(btnCliente);
         btnCliente.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCliente.setToolTipText("Clique aqui para se registar como cliente");
 
         JPanel FuncionarioButao = new JPanel(new FlowLayout());
         FuncionarioButao.add(btnFuncionario);
         btnFuncionario.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnFuncionario.setToolTipText("Clique aqui para se registar como funcionario");
 
         Container contentor = getContentPane();
         contentor.setLayout(new BorderLayout());

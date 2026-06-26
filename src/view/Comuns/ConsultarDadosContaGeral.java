@@ -44,8 +44,9 @@ public class ConsultarDadosContaGeral extends JPanel {
 
         String caminho ;
 
-        if (dados.getNome().isEmpty()) {
-            caminho = "CoisasFeitas/meow_meow/IMG_0373.jpg";
+        //tinha dados.getNome mesmo burro
+        if (dados.getFoto() == null) {
+            caminho = "CoisasFeitas/meow_meow/image0_Original.jpg";
         } else {
             caminho = dados.getFoto();
         }
@@ -56,6 +57,13 @@ public class ConsultarDadosContaGeral extends JPanel {
         //consultada no dia 23/06/2026
 
         Image image = Toolkit.getDefaultToolkit().getImage(caminho);
+
+        // Solucao adaptada do artigo "How Can I Resize an Image Using Java?, secção 2.2" do Baeldung
+        // https://www.baeldung.com/java-resize-image
+        //consultado no dia 26/06/2026
+
+        Image imagePequena = image.getScaledInstance(150,200,Image.SCALE_DEFAULT);
+
 
             String[] columnNames = {"Campo", "Informação Pessoal"};
             String[][] data = {
@@ -69,9 +77,8 @@ public class ConsultarDadosContaGeral extends JPanel {
             table.setRowHeight(30);
             table.setEnabled(false);
 
-            JLabel myLabel = new JLabel(new ImageIcon(image));
+            JLabel myLabel = new JLabel(new ImageIcon(imagePequena));
             myLabel.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 0));
-
 
             JScrollPane scrollPane = new JScrollPane(table);
             scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 50, 50, 50));

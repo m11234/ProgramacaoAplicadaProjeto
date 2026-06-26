@@ -76,9 +76,13 @@ public class EquipamentosCliente extends JPanel {
             equipar.setBackground(Color.white);
 
             JButton AdicionarEquipamento = new JButton("Adicionar Equipamento");
+            AdicionarEquipamento.setToolTipText("Clique aqui para adicionar um equipamento");
+            AdicionarEquipamento.setCursor(new Cursor(Cursor.HAND_CURSOR));
             equipar.add(AdicionarEquipamento);
 
-            JButton SubmeterEquipamentoReparacao = new JButton("Submeter Reparacao");
+            JButton SubmeterEquipamentoReparacao = new JButton("Pedido Reparacao");
+            SubmeterEquipamentoReparacao.setToolTipText("Clique aqui para iniciar uma reparacao");
+            SubmeterEquipamentoReparacao.setCursor(new Cursor(Cursor.HAND_CURSOR));
             equipar.add(SubmeterEquipamentoReparacao);
 
             add(scrollPane, BorderLayout.CENTER);
@@ -88,15 +92,19 @@ public class EquipamentosCliente extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                 //marca
                 JTextField Marca = new JTextField(15);
+                Marca.setToolTipText("Marca do equipamento");
                 JLabel MarcaLabel = new JLabel("Insira aqui a marca do equipamento");
 
                 JTextField Modelo = new JTextField(15);
+                Modelo.setToolTipText("Modelo do equipamento");
                 JLabel ModeloLabel = new JLabel("Insira aqui o modelo do equipamento");
 
                 JTextField Sku = new JTextField(15);
+                Sku.setToolTipText("SKU do equipamento");
                 JLabel SkuLabel = new JLabel("Insira aqui o sku");
 
                 JTextField Lote = new JTextField(15);
+                Lote.setToolTipText("Lote do equipamento");
                 JLabel LoteLabel = new JLabel("Insira aqui o lote");
 
                   JComponent[] inputs = new JComponent[]{
@@ -152,9 +160,11 @@ public class EquipamentosCliente extends JPanel {
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             JTextField obs = new JTextField(15);
+                            obs.setToolTipText("Breve descrição do problema do equipamento");
                             JLabel obsLabel = new JLabel("Insira aqui a sua descricao do problema");
 
                             JTextArea idEquip = new JTextArea();
+                            idEquip.setToolTipText("ID do equipamento que deseja submeter para reparacao pode consultar na tabela o id do mesmo");
                             JLabel idEquipLabel = new JLabel("Insira o id do equipamento a reparar");
 
                             JComponent[] inputs2 = new JComponent[]{

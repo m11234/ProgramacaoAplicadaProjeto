@@ -49,18 +49,46 @@ public class MenuCliente extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu menuConta = new JMenu("Conta");
+        menuConta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        menuConta.setToolTipText("Menu Conta");
+
         JMenuItem ConsultarMeusDados = new JMenuItem("Consultar Dados Conta");
+        ConsultarMeusDados.setToolTipText("Consultar Dados Conta");
+        ConsultarMeusDados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem AlterarDados = new JMenuItem("Alterar Dados Conta");
+        AlterarDados.setToolTipText("Alterar Dados Conta");
+        AlterarDados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem Logout = new JMenuItem("Logout");
+        Logout.setToolTipText("Terminar sessão");
+        Logout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem Sair = new JMenuItem("Sair");
+        Sair.setToolTipText("Sair do programa");
+        Sair.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         JMenu NoticacoesPedidos = new JMenu("Notificações");
+        NoticacoesPedidos.setToolTipText("Ver notificações");
+        NoticacoesPedidos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem ConsultarPedidos = new JMenuItem("Reparações ativas");
+        ConsultarPedidos.setToolTipText("Ver estado das reparações ativas dos seus equipamentnos");
+        ConsultarPedidos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
 
         JMenu Pedidos = new JMenu("Pedidos");
         JMenuItem PedidoApagar = new JMenuItem("Iniciar pedido para apagar conta");
-        JMenuItem NovasRepar = new JMenuItem("Criar pedido reparacao");
+        PedidoApagar.setToolTipText("Iniciar pedido para apagar a sua conta");
+        PedidoApagar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        JMenu Equipamentos = new JMenu("Equipamentos");
+        Equipamentos.setToolTipText("Gerir os seus equipamentos e iniciar reparações");
+        Equipamentos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem CriarEquipamento = new JMenuItem("Consultar e adicionar equipamentos");
+        CriarEquipamento.setToolTipText("Gerir os seus equipamentos e iniciar reparações");
+        CriarEquipamento.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 
         menuConta.add(ConsultarMeusDados);
@@ -71,14 +99,16 @@ public class MenuCliente extends JFrame {
 
         NoticacoesPedidos.add(ConsultarPedidos);
 
+
         Pedidos.add(PedidoApagar);
-        Pedidos.add(NovasRepar);
-        Pedidos.add(CriarEquipamento);
+
+        Equipamentos.add(CriarEquipamento);
 
 
         menuBar.add(menuConta);
         menuBar.add(NoticacoesPedidos);
         menuBar.add(Pedidos);
+        menuBar.add(Equipamentos);
         setJMenuBar(menuBar);
 
         PaineldoMeio = new JPanel();

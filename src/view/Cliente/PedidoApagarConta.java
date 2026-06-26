@@ -29,7 +29,11 @@ public class PedidoApagarConta extends JPanel {
         Apagar.setBackground(Color.white);
 
         Apagar.add(ApagarContaConfirmacao);
+        ApagarContaConfirmacao.setToolTipText("Insira o id da sua conta para confirmar que deseja apagar");
+
         Apagar.add(ApagarConta);
+        ApagarConta.setToolTipText("Clique aqui para apagar a sua conta");
+        ApagarConta.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         add(Apagar, BorderLayout.CENTER);
 

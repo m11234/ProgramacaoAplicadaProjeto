@@ -75,6 +75,7 @@ public class LoginPagina extends JFrame {
                 JPanel painelBotoes = new JPanel(new FlowLayout());
                 painelBotoes.add(loginButao);
                 loginButao.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                loginButao.setToolTipText("Clique no botão para fazer login");
 
                 Container contentor = getContentPane();
                 contentor.setLayout(new BorderLayout());

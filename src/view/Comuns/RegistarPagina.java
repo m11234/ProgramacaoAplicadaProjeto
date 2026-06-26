@@ -103,7 +103,10 @@ public class RegistarPagina extends JFrame {
         JPanel painelBotoes = new JPanel(new FlowLayout());
         painelBotoes.add(Prosseguir);
         Prosseguir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        Prosseguir.setToolTipText("Prosseguir para a proxima fase do registo");
+
         btnProcurarFoto.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnProcurarFoto.setToolTipText("Procurar foto");
 
         Container contentor = getContentPane();
         contentor.setLayout(new BorderLayout());

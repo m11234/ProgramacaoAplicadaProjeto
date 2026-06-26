@@ -6,8 +6,12 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 
-// Solução adaptada do Mkyong: "JavaMail API – Sending email via Gmail SMTP example"
-// Fonte: https://mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/
+/**
+ * Classe para enviar emails
+ * <p>
+ * Aqui seguimos uma implementacao abaixo referenciada para implementar o envio de emails apos uma criacao conta
+ * </p>
+ */
 
 public class EmailService {
 
@@ -16,7 +20,21 @@ public class EmailService {
 
     private static final String sender = "";
 
+    /**
+     * Aqui no metodo para enviar emails ele recebe os parametro abaixo mencionados e da return de true para confirmar
+     * ao controller do registar conta que foi enviado o email do brevo
+     * @param emailDestino
+     * @param usernameDestino
+     * @return true or false
+     */
+
     public static boolean enviarEmailConfirmacao(String emailDestino, String usernameDestino) {
+
+        /*
+        Nota: Envio de email via protocolo de transferência.
+        Solução adaptada da solucao do Mkyong "JavaMail API – Sending email via Gmail SMTP example".
+        Fonte: https://mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/
+        */
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp-relay.brevo.com");
