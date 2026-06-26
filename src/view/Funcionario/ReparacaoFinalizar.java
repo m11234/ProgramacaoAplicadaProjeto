@@ -68,6 +68,8 @@ public class ReparacaoFinalizar extends JPanel {
             Finalizar.setBackground(Color.WHITE);
 
             JButton ButaoFinalizar = new JButton("Finalizar Reparação");
+            ButaoFinalizar.setToolTipText("Confirmar a finalização de uma reparação");
+            ButaoFinalizar.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Finalizar.add(ButaoFinalizar, BorderLayout.SOUTH);
 
             add(scrollPane, BorderLayout.CENTER);

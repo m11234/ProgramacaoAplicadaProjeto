@@ -83,8 +83,11 @@ public class RegistarFuncionarioPagina extends JFrame {
         JPanel painelBotoes = new JPanel(new FlowLayout());
         painelBotoes.add(voltar);
         voltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        voltar.setToolTipText("Abortar registo");
+
         painelBotoes.add(registar);
         registar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        registar.setToolTipText("Confirmar registo");
 
         Container contentor = getContentPane();
         contentor.setLayout(new BorderLayout());

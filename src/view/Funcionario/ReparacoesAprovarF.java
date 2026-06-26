@@ -63,6 +63,8 @@ public class ReparacoesAprovarF extends JPanel {
             Ativar.setBackground(Color.WHITE);
 
             JButton ButaoAtivar = new JButton("Aceitar/Rejeitar reparação");
+            ButaoAtivar.setToolTipText("Aceitar ou rejeitar uma reparação");
+            ButaoAtivar.setToolTipText("Aceitar ou rejeitar uma reparaão");
             Ativar.add(ButaoAtivar, BorderLayout.SOUTH);
 
             add(scrollPane, BorderLayout.CENTER);
@@ -121,7 +123,6 @@ public class ReparacoesAprovarF extends JPanel {
             });
 
     }
-
 
 }}
 

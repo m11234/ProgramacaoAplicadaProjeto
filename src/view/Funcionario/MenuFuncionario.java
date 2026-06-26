@@ -45,18 +45,45 @@ public class MenuFuncionario extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu menuConta = new JMenu("Conta");
+        menuConta.setToolTipText("Clique aqui para aceder ao submenu conta");
+        menuConta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem ConsultarMeusDados = new JMenuItem("Consultar Dados Conta");
+        ConsultarMeusDados.setToolTipText("Clique aqui para aceder ao seus dados");
+        ConsultarMeusDados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem AlterarDados = new JMenuItem("Alterar Dados Conta");
+        AlterarDados.setToolTipText("Clique aqui para alterar os seus dados");
+        AlterarDados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem Logout = new JMenuItem("Logout");
+        Logout.setToolTipText("Clique aqui para sair da sua conta");
+        Logout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem Sair = new JMenuItem("Sair");
+        Sair.setToolTipText("Clique aqui para sair do programa");
+        Sair.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
 
         JMenu NoticacoesPedidos = new JMenu("Notificações");
+        NoticacoesPedidos.setToolTipText("Ver as notificacoes");
+        NoticacoesPedidos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem ConsultarPedidos = new JMenuItem("Notificações de reparações por aprovar");
+        ConsultarPedidos.setToolTipText("Ver as reparacoes por aprovar");
+        ConsultarPedidos.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         JMenu Reparacoes = new JMenu("Reparações");
-        JMenuItem PedidoApagar = new JMenuItem("Aprovar ou rejeitar reparações");
-        JMenuItem CriarPedido = new JMenuItem("Finalizar reparações");
+        Reparacoes.setToolTipText("Menu das reparacoes");
+        Reparacoes.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+        JMenuItem PedidoApagar = new JMenuItem("Aprovar ou rejeitar reparações");
+        PedidoApagar.setToolTipText("Aprovar ou rejeitar reparações");
+        PedidoApagar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        JMenuItem CriarPedido = new JMenuItem("Finalizar reparações");
+        CriarPedido.setToolTipText("Dar uma reparação por terminada");
+        CriarPedido.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         menuConta.add(ConsultarMeusDados);
         menuConta.add(AlterarDados);
