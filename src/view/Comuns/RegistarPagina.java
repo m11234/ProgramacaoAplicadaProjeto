@@ -81,6 +81,12 @@ public class RegistarPagina extends JFrame {
         foto.setFileSelectionMode(JFileChooser.FILES_ONLY);
         foto.setAcceptAllFileFilterUsed(false);
 
+        //A logica para ir buscar o ficheiro e guardar o caminho foi adaptada da solucao
+        // do pdf 6.3 pagina 11 do Professor Marco Veloso
+
+        // solucao adaptada do powerpoint 6.3 pagina 33
+        // solucao do Professor Marco Veloso
+        //consultada no dia 23/06/2026
         btnProcurarFoto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (foto.showOpenDialog(RegistarPagina.this) == JFileChooser.APPROVE_OPTION) {
