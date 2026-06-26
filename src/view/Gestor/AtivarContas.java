@@ -67,6 +67,8 @@ public class AtivarContas extends JPanel {
             Ativar.setBackground(Color.WHITE);
 
             JButton ButaoAtivar = new JButton("Ativar Conta");
+            ButaoAtivar.setToolTipText("Ativar ou rejeitar uma conta");
+            ButaoAtivar.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Ativar.add(ButaoAtivar, BorderLayout.SOUTH);
 
             add(scrollPane, BorderLayout.CENTER);

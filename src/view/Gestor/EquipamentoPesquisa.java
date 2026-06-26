@@ -33,8 +33,11 @@ public class EquipamentoPesquisa extends JPanel{
         Pesquisa.setBackground(Color.white);
 
         Pesquisa.add(pesquisa);
+        pesquisa.setToolTipText("Pesquisar por um equipamento");
         Pesquisa.add(pesquisar);
 
+        pesquisar.setToolTipText("Pesquisar por um equipamento");
+        pesquisar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         add(Pesquisa, BorderLayout.CENTER);
 
         pesquisar.addActionListener(new ActionListener() {

@@ -35,10 +35,23 @@ public class PesquisarUtilizadores extends JPanel {
         JPanel Pesquisa = new JPanel();
         Pesquisa.setBackground(Color.white);
 
+        pesquisa.setToolTipText("Escreva aqui o que deseja pesquisar");
         Pesquisa.add(pesquisa);
+
+        pesquisar.setToolTipText("Clique aqui para fazer a sua pesquisa");
+        pesquisar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Pesquisa.add(pesquisar);
+
+        nome.setToolTipText("Pesquisar pelo nome");
+        nome.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Pesquisa.add(nome);
+
+        email.setToolTipText("Pesquisar pelo email");
+        email.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Pesquisa.add(email);
+
+        username.setToolTipText("Pesquisar pelo username");
+        username.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Pesquisa.add(username);
 
         button.add(nome);

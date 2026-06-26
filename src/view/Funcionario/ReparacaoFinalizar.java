@@ -81,6 +81,9 @@ public class ReparacaoFinalizar extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     JTextField myText1 = new JTextField(10);
                     JLabel myLabel1 = new JLabel("Insira o ID da reparacao que pretender finalizar");
+                    myLabel1.setToolTipText("Insira o ID da reparacao que pretender finalizar");
+                    myLabel1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
                     JComponent[] inputs = new JComponent[]
                             {
                                     myLabel1,

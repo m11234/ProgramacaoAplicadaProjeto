@@ -49,10 +49,24 @@ public class MenuGestor extends JFrame {
 
         //feito a parte geral dos menus
         JMenu menuConta = new JMenu("Conta");
+        menuConta.setToolTipText("Menu da conta");
+        menuConta.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem ConsultarMeusDados = new JMenuItem("Consultar Dados Conta");
+        ConsultarMeusDados.setToolTipText("Consultar Dados Conta");
+        ConsultarMeusDados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem AlterarDados = new JMenuItem("Alterar Dados Conta");
+        AlterarDados.setToolTipText("Alterar Dados Conta");
+        AlterarDados.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem Logout = new JMenuItem("Logout");
+        Logout.setToolTipText("Sair da conta");
+        Logout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         JMenuItem Sair = new JMenuItem("Sair");
+        Sair.setToolTipText("Sair do programa");
+        Sair.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 
         JMenu menuNotificacoes = new JMenu("Notificacoes");

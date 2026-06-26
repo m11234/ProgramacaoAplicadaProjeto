@@ -57,6 +57,8 @@ public class ApagarContas extends JPanel {
             Apagar.setBackground(Color.WHITE);
 
             JButton ButaoApagar = new JButton("Apagar");
+            ButaoApagar.setToolTipText("Clique aqui para apagar uma conta");
+            ButaoApagar.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Apagar.add(ButaoApagar, BorderLayout.SOUTH);
 
             add(scrollPane, BorderLayout.CENTER);

@@ -59,13 +59,15 @@ public class ReparacoesAprovarA extends JPanel {
             Aceitar.setBackground(Color.white);
 
             JButton ButaoAceitar = new JButton("Aceitar");
+            ButaoAceitar.setToolTipText("Clique aqui para aceitar ou rejeitar uma reparação");
+            ButaoAceitar.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Aceitar.add(ButaoAceitar, BorderLayout.SOUTH);
 
             add(scrollPane, BorderLayout.CENTER);
             add(Aceitar, BorderLayout.NORTH);
 
             /*
-              Nota: Aceitar ou rejeitar reparacoes.
+              Aceitar ou rejeitar reparacoes.
               Solução adaptada dos slides 16 e 17 do powerpoint 6.3 do Professor Marco Veloso.
               Consulta relizada: 24 de Junho de 2026.
              */
@@ -75,9 +77,11 @@ public class ReparacoesAprovarA extends JPanel {
                     //id da reparacao
                     JTextField idR = new JTextField(10);
                     JLabel idRLabel = new JLabel("Insira aqui o id da reparacao para aceitar/rejeitar");
+                    idR.setToolTipText("Insira o id da reparacao que deseja aceitar/rejeitar");
                     //id do funcionario
                     JTextField idF = new JTextField(10);
                     JLabel idFLabel = new JLabel("Insira aqui o id do funcionaria a associar com a reparacao");
+                    idF.setToolTipText("Insirar o id do funcionaria a associar com a reparacao");
 
                     JComponent[] inputs = new JComponent[]
                             {

@@ -31,8 +31,12 @@ public class ReparacaoPesquisa extends JPanel {
         
         JPanel Pesquisa = new JPanel();
         Pesquisa.setBackground(Color.white);
-        
+
+        pesquisa.setToolTipText("Escreva aqui o que deseja pesquisar");
         Pesquisa.add(pesquisa);
+
+        pesquisar.setToolTipText("Clique aqui para fazer a sua pesquisa");
+        pesquisar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Pesquisa.add(pesquisar);
 
         add(Pesquisa, BorderLayout.CENTER);
