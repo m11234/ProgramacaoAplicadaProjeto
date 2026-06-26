@@ -34,7 +34,7 @@ public class UtilizadorController {
      * ({@code dao.RegistarUtilizador}), autenticação automática ({@code dao.Login}) ou nos registos de perfil
      * ({@code criarFuncionario} ou {@code criarCliente}).
      */
-    public Utilizador registar(String nome, String username, String password, String email, String foto) throws SQLException {
+    public Utilizador registar(String nome, String username, String password, String email, String fotoText) throws SQLException {
 
         boolean emailValido = false;
 
@@ -56,14 +56,14 @@ public class UtilizadorController {
             }
         }
 
-        Utilizador u = new Utilizador(nome, username, password, email, foto);
+        Utilizador u = new Utilizador(nome, username, password, email, fotoText);
 
         boolean sucesso = dao.RegistarUtilizador(u);
 
         if (sucesso) {
             System.out.println("Dados inseridos com sucesso");;
             Utilizador temp = new Utilizador(username, password);
-            //Na entrega final tiras este comentario!!!!!!!!!!!!!!!!!!!!!!!!!
+            //Na entrega final tirar este comentario!!!!!!!!!!!!!!!!!!!!!!!!!
            // controller.EmailService.enviarEmailConfirmacao(email,nome);
             return dao.Login(temp);
 
@@ -225,8 +225,29 @@ public class UtilizadorController {
      * @param logado O objeto {@link Utilizador} que representa a sessão atual, servindo de base para
      * identificar o registo a ser alterado e manter os dados que não serão modificados
      */
-    public boolean atualizarDados(Utilizador logado, Utilizador dadosNovos) {
-        return dao.AtualizarDados(logado, dadosNovos);
+    public boolean atualizarDados(Utilizador logado, String password,String email, String foto) {
+        boolean emailValido = false;
+
+        /*
+          Logica de validacao de enderecos de email em Java.
+          Solucao adaptada de: Nicolas Rio
+          Fonte: https://www.abstractapi.com/guides/api-functions/email-validation-in-java
+          Acedido em: Dezasseis de Abril de dois mil e vinte e seis.
+         */
+        while (!emailValido) {
+            System.out.print("Email: ");
+            String emailValidado = email;
+
+            if (EMAIL_PATTERN.matcher(emailValidado).matches()) {
+                emailValido = true;
+            } else {
+                System.out.println("Erro: O email deve apresentar um formato válido e obrigatório ([designação] @ [entidade] . [domínio]).");
+                return false;
+            }
+        }
+
+        System.out.println(foto);
+        return dao.AtualizarDados(logado, password,email,foto);
     }}
 
 

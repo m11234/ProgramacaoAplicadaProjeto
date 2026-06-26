@@ -11,6 +11,7 @@ public class Utilizador {
     private String novoEmail;
     private int id;
     private String foto;
+    private String fotoText;
 
     /**
      * Metodo para formatar a visualizacao da peca.
@@ -35,13 +36,7 @@ public class Utilizador {
         this.password = password;
         this.email = email;
         this.foto = foto;
-    }
 
-    public Utilizador(String nome, String username, String password, String email) {
-        this.nome = nome;
-        this.username = username;
-        this.password = password;
-        this.email = email;
     }
 
     /**

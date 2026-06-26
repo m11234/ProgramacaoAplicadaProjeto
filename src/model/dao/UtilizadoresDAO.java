@@ -103,7 +103,7 @@ public class UtilizadoresDAO {
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
     public Utilizador ConsultarDados(Utilizador userLogado) {
-        String sql = "Select id,nome, username, password , email , estado from utilizador where username = ?";
+        String sql = "Select id,nome, username, password , email , estado, foto from utilizador where username = ?";
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -121,6 +121,7 @@ public class UtilizadoresDAO {
                 u.setPassword(rs.getString("password"));
                 u.setEmail(rs.getString("email"));
                 u.setEstado(rs.getInt("estado"));
+                u.setFoto(rs.getString("foto"));
                 return u;
 
             }
@@ -233,19 +234,20 @@ public class UtilizadoresDAO {
      * @throws SecurityException Se o utilizador tentar modificar os dados de uma conta diferente da sua.
      * @throws RuntimeException Se ocorrer algum erro na manipulação da base de dados envia {@link SQLException}.
      */
-    public boolean AtualizarDados(Utilizador userLogado, Utilizador dadosNovos) {
-        if (!userLogado.getUsername().equals(dadosNovos.getUsername())) {
+    public boolean AtualizarDados(Utilizador userLogado, String password, String email, String foto) {
+        if (!userLogado.getUsername().equals(userLogado.getUsername())) {
             throw new SecurityException("Ação proibida!!");
         }
-        String sql = "UPDATE utilizador SET password = ?, email = ?  WHERE username = ?";
+        String sql = "UPDATE utilizador SET password = ?, email = ?, foto = ?  WHERE username = ?";
 
 
         try (Connection conn = DBConnection.getconn();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1,dadosNovos.getPassword());
-            ps.setString(2,dadosNovos.getEmail());
-            ps.setString(3,dadosNovos.getUsername());
+            ps.setString(1,password);
+            ps.setString(2,email);
+            ps.setString(3,foto);
+            ps.setString(4,userLogado.getUsername());
             ps.executeUpdate();
 
         } catch (SQLException e) {

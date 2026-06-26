@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.sql.SQLException;
 
 /**
@@ -29,7 +30,7 @@ public class RegistarPagina extends JFrame {
     private JButton Prosseguir = new JButton("Prosseguir");
     private  UtilizadorController controller = new UtilizadorController();
     private Utilizador registado = null;
-
+    private String fotoInputada = "";
     /**
      * Construtor da classe que inicializa, configura e monta o formulário inicial de registo de conta
      * <p>
@@ -85,6 +86,8 @@ public class RegistarPagina extends JFrame {
                 if (foto.showOpenDialog(RegistarPagina.this) == JFileChooser.APPROVE_OPTION) {
                     System.out.println("Current Dir.: " + foto.getCurrentDirectory());
                     System.out.println("Selected File:" + foto.getSelectedFile());
+                    File fotoEscolhida = foto.getSelectedFile();
+                    fotoInputada = fotoEscolhida.getAbsolutePath();
                 } else {
                     System.out.println("No selection");
                 }
@@ -121,11 +124,8 @@ public class RegistarPagina extends JFrame {
                 String emailText = email.getText();
                 String passText = pass.getText();
                 String confirmPassText = confirmPass.getText();
+                String fotoText = fotoInputada;
 
-                String fotoText = "";
-                if (foto.getSelectedFile() != null) {
-                    fotoText = foto.getSelectedFile().getAbsolutePath();
-                }
 
                 if (nomeText.isEmpty() || usernameText.isEmpty() || emailText.isEmpty() || passText.isEmpty() || confirmPassText.isEmpty() || fotoText.isEmpty()) {
                     JOptionPane.showMessageDialog(
