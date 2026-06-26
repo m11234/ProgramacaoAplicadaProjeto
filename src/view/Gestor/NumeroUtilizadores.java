@@ -13,6 +13,11 @@ public class NumeroUtilizadores extends JPanel {
     private ReparacaoController reparacaoController =  new ReparacaoController();
     private AdminController adminController =  new AdminController();
 
+    /**
+     * Devolve ao gestor o numero de utilizadores na base de dados
+     * @param u
+     * @throws SQLException
+     */
     public NumeroUtilizadores(Utilizador u) throws SQLException {
         this.userLogado = u;
 

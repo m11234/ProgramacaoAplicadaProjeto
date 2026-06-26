@@ -19,6 +19,10 @@ public class EquipamentoPesquisa extends JPanel{
     private JTextField pesquisa = new JTextField(15);
     private JButton pesquisar = new JButton("Pesquisar");
 
+    /**
+     * Permite pesquisar por um equipamento pelo seu id
+     * @param u
+     */
     public EquipamentoPesquisa(Utilizador u) {
         this.userLogado = u;
 

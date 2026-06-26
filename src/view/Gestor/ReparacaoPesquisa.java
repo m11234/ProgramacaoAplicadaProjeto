@@ -18,7 +18,11 @@ public class ReparacaoPesquisa extends JPanel {
     private AdminController adminController = new AdminController();
     private JTextField pesquisa = new JTextField(15);
     private JButton pesquisar = new JButton("Pesquisar");
-    
+
+    /**
+     * Permite ao gestor pesquisar uma reparação pelo id da mesma inserido no JTextField pesquisa
+     * @param u
+     */
     public ReparacaoPesquisa(Utilizador u) {
         this.userLogado = u;
         

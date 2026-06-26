@@ -9,10 +9,17 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
+
 public class AlertasReparacoes extends JPanel {
     private Utilizador userLogado;
     private ReparacaoController reparacaoController =  new ReparacaoController();
 
+    /**
+     * Envia uma notificacao ao gestor se uma reparacao estiver a demorar mais de
+     * 10 dias
+     * @param u
+     * @throws SQLException
+     */
     public AlertasReparacoes(Utilizador u) throws SQLException {
         this.userLogado = u;
 

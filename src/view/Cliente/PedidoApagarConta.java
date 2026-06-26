@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * View para apagar um conta recebe o utilizador "logado" para depois verificar permissões
+ */
 public class PedidoApagarConta extends JPanel {
     private Utilizador userLogado;
     private ClienteController clienteController = new ClienteController();

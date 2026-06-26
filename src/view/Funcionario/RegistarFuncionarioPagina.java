@@ -32,15 +32,8 @@ public class RegistarFuncionarioPagina extends JFrame {
 
 
     /**
-     * Construtor da classe que inicializa, configura e monta a interface do menu do funcionário
-     * <p>
-     * O construtor define os parâmetros visuais da janela, centraliza a interface no ecrã e monta a barra de menus
-     * ({@link JMenuBar}). Configura ainda os ouvintes de eventos ({@link ActionListener}) para os itens do menu,
-     * permitindo que o funcionário navegue entre as opções ao limpar o contentor central ({@code PaineldoMeio}) e
-     * injetar dinamicamente os novos painéis, como o ecrã de aprovação de reparações ({@link ConsultarDadosContaGeral}).
-     * </p>
-     * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
-     * validar permissões e filtrar as reparações que lhe estão diretamente atribuídas.
+     *
+     * @param u
      */
 
     public RegistarFuncionarioPagina(Utilizador u) {

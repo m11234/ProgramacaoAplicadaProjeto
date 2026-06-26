@@ -15,6 +15,11 @@ public class VerTodosUtilizadores extends JPanel {
     private UtilizadorController utilizadorController = new UtilizadorController();
     private AdminController adminController = new AdminController();
 
+    /**
+     * Devolve ao gestor uma tabela com os dados de todos os utlizadores
+     * @param u
+     * @throws SQLException
+     */
     public VerTodosUtilizadores(Utilizador u) throws SQLException {
         this.userLogado = u;
 

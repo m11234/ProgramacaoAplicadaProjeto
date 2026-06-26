@@ -15,6 +15,12 @@ public class ReparAtivas extends JPanel {
     private ReparacaoController reparacaoController =  new ReparacaoController();
     private Reparacao reparacao;
 
+    /**
+     * Recebe o utilizador logado para verificar permissoes e assim conseguir ver as reparacoes
+     * ativas de um cliente
+     * @param u
+     * @throws SQLException
+     */
     public ReparAtivas(Utilizador u) throws SQLException {
         this.userLogado = u;
 

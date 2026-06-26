@@ -15,9 +15,8 @@ import java.sql.SQLException;
 /**
  * Classe responsável por criar a interface do menu principal para os utilizadores com perfil de Gestor
  * <p>
- * Esta classe estende {@link JFrame} e centraliza todas as operações administrativas avançadas do sistema.
- * Disponibiliza uma barra de menus complexa estruturada para a gestão global de contas de utilizadores,
- * consulta de notificações de stock, monitorização de alertas e administração de reparações e equipamentos.
+ * Esta classe estende {@link JFrame}.
+ * Disponibiliza uma barra de menus.
  * </p>
  */
 public class MenuGestor extends JFrame {
@@ -27,15 +26,9 @@ public class MenuGestor extends JFrame {
     private AdminController adminController = new AdminController();
 
     /**
-     * Construtor da classe que inicializa, configura e monta a interface do menu do funcionário
-     * <p>
-     * O construtor define os parâmetros visuais da janela, centraliza a interface no ecrã e monta a barra de menus
-     * ({@link JMenuBar}). Configura ainda os ouvintes de eventos ({@link ActionListener}) para os itens do menu,
-     * permitindo que o funcionário navegue entre as opções ao limpar o contentor central ({@code PaineldoMeio}) e
-     * injetar dinamicamente os novos painéis, como o ecrã de aprovação de reparações ({@link ReparacoesAprovarA}).
-     * </p>
-     * @param u O objeto {@link Utilizador} que representa o funcionário com sessão iniciada no momento, utilizado para
-     * validar permissões e filtrar as reparações que lhe estão diretamente atribuídas.
+     * Desenhar o JFrame do menu do gestor
+     * @param u
+     * @throws SQLException
      */
     public MenuGestor(Utilizador u) throws SQLException {
         this.userLogado = u;

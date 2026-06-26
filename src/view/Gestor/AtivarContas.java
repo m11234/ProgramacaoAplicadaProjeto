@@ -32,7 +32,7 @@ public class AtivarContas extends JPanel {
      * posteriormente, invoca o método ({@code adminController.ativarConta}) para efetivar a ativação na base de dados.
      * </p>
      * @param u O objeto {@link Utilizador} que representa o administrador com sessão iniciada, utilizado para
-     * verificar e confirmar os privilégios administrativos necessários para listar e ativar contas.
+     * verificar e confirmar as permissões necessários para listar e ativar contas.
      * @throws SQLException Se ocorrer alguma falha de comunicação ou erro na consulta com a base de dados
      * ao invocar o método ({@code adminController.verContasPorAtivar}).
      */

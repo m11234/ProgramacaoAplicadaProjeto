@@ -156,6 +156,7 @@ public class EquipamentosCliente extends JPanel {
                 }
             });
 
+
             SubmeterEquipamentoReparacao.addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
