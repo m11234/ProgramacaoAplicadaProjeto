@@ -45,7 +45,7 @@ public class ConsultarDadosContaGeral extends JPanel {
         String caminho ;
 
         //ja esta a dar tinha dados.getNome mesmo burro
-        if (dados.getFoto() == null) {
+        if (dados.getFoto() == null || dados.getFoto().equals("")) {
             caminho = "CoisasFeitas/meow_meow/image0_Original.jpg";
         } else {
             caminho = dados.getFoto();

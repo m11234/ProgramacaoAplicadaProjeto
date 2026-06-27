@@ -64,7 +64,7 @@ public class UtilizadorController {
             System.out.println("Dados inseridos com sucesso");;
             Utilizador temp = new Utilizador(username, password);
             //Na entrega final tirar este comentario!!!!!!!!!!!!!!!!!!!!!!!!!
-           // controller.EmailService.enviarEmailConfirmacao(email,nome);
+            controller.EmailService.enviarEmailConfirmacao(email,nome);
             return dao.Login(temp);
 
             }
