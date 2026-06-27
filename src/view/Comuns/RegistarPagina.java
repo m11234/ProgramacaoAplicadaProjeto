@@ -133,7 +133,7 @@ public class RegistarPagina extends JFrame {
                 String fotoText = fotoInputada;
 
 
-                if (nomeText.isEmpty() || usernameText.isEmpty() || emailText.isEmpty() || passText.isEmpty() || confirmPassText.isEmpty() || fotoText.isEmpty()) {
+                if (nomeText.isEmpty() || usernameText.isEmpty() || emailText.isEmpty() || passText.isEmpty() || confirmPassText.isEmpty() ) {
                     JOptionPane.showMessageDialog(
                             RegistarPagina.this ,
                             "Por favor preencha todos os campos.",
